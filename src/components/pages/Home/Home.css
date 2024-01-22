@@ -1,0 +1,44 @@
+
+.appointment-btn{
+	height: 10vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+.logos{
+   height: 30vh;
+}
+.footer{
+	padding: 3rem 10rem;
+	text-align: left;
+	line-height: 2rem;
+	background-color: aliceblue;
+}
+.footer h3{
+	font-weight: lighter;
+}
+
+.logoContent{
+	height: 5vh;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: left;
+	z-index: 1;
+	color: black;
+}
+@media screen and (max-width: 480px) {
+	.logoContent{
+		top: 110%
+	}
+	.footer{
+		padding: 3rem 5rem;
+	}
+}
+
+.banner-home{
+	display: flex;
+	position: absolute;
+	top: 253px
+}

@@ -1,0 +1,30 @@
+.doctor-page{
+    display: flex;
+    background-color: aliceblue;
+    width: 100%;
+    height: 100vh;
+}
+.appointment-list {
+    height: 100%;
+    width: 60%;
+    padding: 5rem;
+}
+.doctor-detailsform{
+    height: 100%;   
+    padding: 5rem;
+
+    
+}
+.list-content {
+    padding: 10rem 10rem;
+    height: 500px;
+    width: 900px;
+    border: 1px solid black;
+}
+
+.form-content{
+   padding: 2rem;
+   width: auto;
+   background-color: white;
+   box-shadow: 0px 7px 26px 11px rgba(0,0,0,0.1);
+}

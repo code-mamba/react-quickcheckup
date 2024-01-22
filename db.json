@@ -1,0 +1,155 @@
+{
+  "users": [
+    {
+      "id": "1000",
+      "username": "Dhanush",
+      "email": "dhanushbaskaran2000@gmail.com",
+      "dob": "2000-08-30",
+      "password": "Admin123",
+      "contact": "9840058940",
+      "userrole": "Admin"
+    },
+    {
+      "id": "1001",
+      "username": "Dhanushbaskaran",
+      "email": "dhanushbaskaran2000@gmail.com",
+      "dob": "2000-08-30",
+      "contact": "9840058940",
+      "userrole": "Patient"
+    },
+    {
+      "id": "1002",
+      "username": "MadhanKumar",
+      "password": "Patient123",
+      "email": "madee2000@gmail.com",
+      "dob": "2001-02-27",
+      "contact": "9840414243",
+      "userrole": "Patient"
+    },
+    {
+      "username": "Dr Dinesh P",
+      "email": "dinesh87@gmail.com",
+      "dob": "1987-01-17",
+      "contact": "8907656789",
+      "from": "09:00",
+      "to": "17:00",
+      "specialist": "Cardiology",
+      "userrole": "Doctor",
+      "id": "383a"
+    },
+    {
+      "username": "Dr DanyRaj",
+      "email": "dany87@gmail.com",
+      "dob": "1987-01-17",
+      "contact": "8907656780",
+      "from": "10:00",
+      "to": "17:00",
+      "password": "Doctor123",
+      "specialist": "cardiac specialist",
+      "userrole": "Doctor",
+      "id": "384b"
+    },
+    {
+      "id": "ef29",
+      "username": "Dinesh",
+      "email": "dinesh2000@gmail.com",
+      "dob": "",
+      "contact": "",
+      "userrole": "Patient"
+    },
+    {
+      "id": "a4d0",
+      "username": "Dinesh",
+      "email": "dinesh2000@gmail.com",
+      "dob": "",
+      "contact": "",
+      "userrole": "Patient"
+    },
+    {
+      "id": "2149",
+      "username": "PrashanthBaskaran",
+      "email": "prashanthbaskaran007@gmail.com",
+      "password": "Patient123",
+      "dob": "1997-01-09",
+      "contact": "9940136415",
+      "gender": "Female",
+      "userrole": "Patient",
+      "address": "Ekkattuthangal",
+      "bloodgroup": "A+"
+    },
+    {
+      "id": "af95",
+      "username": "Subash",
+      "email": "subash2001@gmail.com",
+      "password": "Patient123",
+      "dob": "2001-11-10",
+      "contact": "987654321",
+      "gender": "Male",
+      "userrole": "Patient",
+      "address": "Ekkattuthangal",
+      "bloodgroup": "A-"
+    },
+    {
+      "id": "5687",
+      "username": "MadhanKumar",
+      "email": "madee2000@gmail.com",
+      "password": "Patient123",
+      "dob": "2024-01-22",
+      "contact": "9879048909",
+      "gender": "Male",
+      "userrole": "Patient",
+      "address": "fever",
+      "bloodgroup": "A+"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "f612",
+      "patientname": "MadhanKumar",
+      "age": "22",
+      "appointmentdate": "2001-02-27",
+      "reason": "Fever",
+      "doctorid": "383a",
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "scheduledTime": "",
+      "": "12:00"
+    },
+    {
+      "id": "d614",
+      "patientname": "MadhanKumar",
+      "age": "22",
+      "appointmentdate": "2024-01-20",
+      "reason": "Fever",
+      "doctorid": "383a",
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "scheduledTime": "",
+      "": "11:00"
+    },
+    {
+      "id": "e57e",
+      "patientname": "MadhanKumar",
+      "age": "22",
+      "appointmentdate": "2024-01-20",
+      "reason": "Fever",
+      "doctorid": "383a",
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "scheduledTime": "",
+      "": "11:00"
+    },
+    {
+      "id": "9213",
+      "patientname": "MadhanKumar",
+      "age": "22",
+      "appointmentdate": "2024-01-23",
+      "reason": "Cold",
+      "doctorid": "384b",
+      "startTime": "10:00",
+      "endTime": "17:00",
+      "scheduledTime": "12:00",
+      "vaccinated": "yes"
+    }
+  ]
+}

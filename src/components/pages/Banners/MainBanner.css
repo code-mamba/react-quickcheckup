@@ -1,0 +1,43 @@
+.main-banner{
+	background: url("../../../assets/images/new.jpg");
+	height: 70vh;
+	background-size: cover;
+	background-position: center;
+	filter: brightness(65%);
+	object-fit: contain;
+	display: flex;
+
+}
+.banner-content {
+	text-align: left;
+	z-index: 1;
+	color: #fff; /* Text color */
+	padding: 20px;
+
+	
+  }
+  .banner-content h1 {
+	font-size: 2.5em; /* Adjust the font size as needed */
+	margin-bottom: 10px;
+  }
+  .banner-content h2{
+	font-size: large;
+  }
+  
+  @media screen and (max-width: 768px) {
+	.main-banner{
+		height: 85vh;
+	}
+	.banner-content{
+		top:45%
+	}
+  }
+  @media screen and (max-width: 480px) {
+	.main-banner{
+		height: 90vh;
+	}
+	.banner-content{
+		top: 50%;
+		left:38%
+	}
+  }

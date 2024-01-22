@@ -26,6 +26,51 @@ export const fetchAppointmentsById = createAsyncThunk(
         }
     }
 )
+export const fetchAppointmentsByPatientId  = createAsyncThunk(
+    "appointments/fetchAppointmentsByPatientId",
+    async (patientId) => {
+        try{
+            const appointments = await service.get(`appointments?patientid=${patientId}`)
+            return appointments
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+)
+
+
+export const approveAppointment = createAsyncThunk(
+    "appointments/approveAppointment",
+    async(appointmentId) => {
+        try{
+            const updatedAppointment = await service.patch("appointments", appointmentId,{
+                status: 'Approved',
+            })
+            return updatedAppointment
+        }
+        catch(e){
+            console.error(e);
+            throw e
+        }
+    }
+)
+
+export const declineAppointment = createAsyncThunk(
+    "appointments/declineAppointment",
+    async(appointmentId) =>{
+        try{
+            const updatedAppointment = await service.patch("appointments",appointmentId,{
+                status: 'Declined'
+            })
+            return updatedAppointment
+        }
+        catch(e){
+            console.error(e)
+            throw(e)
+        }
+    }
+)
 
 const appointmentSlice = createSlice({
     name: "appointments",
@@ -33,7 +78,9 @@ const appointmentSlice = createSlice({
         appointments:null,
         error: null
     },
-
+    selectors:{
+        getMyAppointments:(state)=>state.appointments.appointments
+    },
     extraReducers:(builder) =>{
         builder.addCase(addAppointment.rejected,(state,{error})=>({
             ...state,
@@ -41,6 +88,7 @@ const appointmentSlice = createSlice({
         }));
         builder.addCase(addAppointment.fulfilled,(state,{payload})=>({
             ...state,
+            appointments: payload,
             error: null,
         }))
         builder.addCase(fetchAppointmentsById.rejected, (state, { error }) => ({
@@ -52,6 +100,35 @@ const appointmentSlice = createSlice({
             appointments: payload,
             error: null,
           }));
+          builder.addCase(approveAppointment.rejected, (state, { error }) => ({
+            ...state,
+            error: error.message,
+          }));
+          builder.addCase(approveAppointment.fulfilled, (state, { payload }) => ({
+            ...state,
+            // Update the appointments array with the approved appointment
+            appointments: payload,
+            error: null,
+          }));
+          builder.addCase(declineAppointment.fulfilled, (state, { payload }) => ({
+            ...state,
+            // Update the appointments array with the approved appointment
+            appointments: payload,
+            error: null,
+          }));
+          builder.addCase(declineAppointment.rejected, (state, { error }) => ({
+            ...state,
+            error: error.message,
+          }));
+          builder.addCase(fetchAppointmentsByPatientId.fulfilled, (state,{payload})=>({
+            ...state,
+            appointments: payload,
+            error: null
+          }))
+          builder.addCase(fetchAppointmentsByPatientId.rejected,(state,{error})=>({
+            ...state,
+            error:error.message,
+          }))
 
     }
 })

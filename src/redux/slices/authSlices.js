@@ -11,14 +11,6 @@ export const doAuth = createAsyncThunk(
 
       if (Array.isArray(fetchedusers)) {
         const authenticatedUser = fetchedusers.find((user) => {
-          // if (loginType === PATIENT) {
-          //   return (
-          //     user.username === credentials.username &&
-          //     user.email === credentials.email &&
-          //     user.dob === credentials.dob &&
-          //     user.contact === credentials.contact
-          //   );
-          // }
 
           return (
             user.password === credentials.password &&
@@ -27,6 +19,7 @@ export const doAuth = createAsyncThunk(
         });
   
         if (authenticatedUser) {
+          console.log(authenticatedUser)
           return authenticatedUser;
         } else {
           return null;

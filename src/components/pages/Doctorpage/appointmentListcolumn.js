@@ -27,5 +27,6 @@ export const PATIENTS_APPOINTMENTS =[
     {
         Header: 'Vaccinated',
         accessor: 'vaccinated'
-    }
+    },
+    
 ]

@@ -49,6 +49,13 @@ class Service {
     }
     return this.request(url,method,data)
   }
+  patch(url, id, data){
+    const method = "PATCH";
+    if(id){
+      url = `${url}/${id}`
+    }
+    return this.request(url, method, data)
+  }
 }
 const service = new Service();
 export default service;

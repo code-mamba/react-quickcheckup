@@ -22,7 +22,6 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values)
     login(values,isAuthenticated,userData)
     
   };

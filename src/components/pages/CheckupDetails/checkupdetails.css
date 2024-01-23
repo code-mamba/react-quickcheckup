@@ -1,0 +1,17 @@
+.checkupdetails{
+
+    border: 1px solid purple;
+    
+}
+.checkuplists{
+    margin-bottom: 1rem;
+    color: purple;
+    display: flex;
+}
+.heading{
+    color: black;
+}
+.value{
+    padding-left: 1rem;
+    width: 300px;
+}

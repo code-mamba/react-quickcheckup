@@ -243,13 +243,6 @@ export const DOCTOR_DETAILS =[
     type: "time",
     label: "To",
   },
-  {
-    id: 3,
-    name: "specialist",
-    type: "text",
-    placeholder: "speciality",
-    label: "Your speciality",
-  },
 ]
 
 export const EDIT_PATIENT =[
@@ -272,7 +265,58 @@ export const EDIT_PATIENT =[
     label: 'userName'
   }
 ]
+export const CHECKUP_INPUTS = [
+  {
+    id:1,
+    name: "bodytemperature",
+    type: "number",
+    step: '0.1',
+    label: 'Body temperature',
+    required: true
+  },
+  {
+    id:2,
+    name: 'systolicpressure',
+    type: 'range',
+    min:'0',
+    max: '250',
+    label: 'Systolic Pressure',
+    required: true
+  },
+  {
+    id:3,
+    name: 'diastolicpressure',
+    label: 'Diastolic Pressure',
+    type:'range',
+    min:'0',
+    max:'250',
+    required: true,
+  },
+  {
+    id:4,
+    type: 'number',
+    label: "Sugar Level",
+    name: 'sugarlevel',
+    min:'0',
+    required: true
 
+  },
+  {
+    id:5,
+    type: 'textarea',
+    label: 'Doctor Advice',
+    name: 'doctoradvice',
+    required: true,
+    rows: "10"
+  },
+  {
+    id:6,
+    type: 'textarea',
+    label:'Medical Prescription',
+    name: 'medicalprescription',
+    rows:"10"
+  }
+]
 
 export const PATIENT = "Patient"
 export const DOCTOR = "Doctor"

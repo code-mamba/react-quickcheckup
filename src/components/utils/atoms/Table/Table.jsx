@@ -14,7 +14,7 @@ const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = table
 
 
   return (
-    <table {...getTableProps()}>
+    <table  {...getTableProps()}>
       <thead>
         {
           headerGroups.map((headerGroup)=>(
@@ -47,20 +47,12 @@ const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = table
                       )
                     })
                   }
-                  {props.customActions ?(
-                    <td>
-                      {props.customActions.map((action, index)=>(
-                        <button key={index} onClick={()=>action.onClick(row.values.id)}>{action.label}</button>
-                      ))}
-                    </td>
-                  ):null}
+
               </tr>
             )
           })
         }
-        <tr>
-          <td></td>
-        </tr>
+ 
       </tbody>
     </table>
   );

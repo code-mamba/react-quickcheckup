@@ -50,11 +50,21 @@ export const FormInput = (props) => {
       </div>
     );
   };
-
+const renderTextAreaInput =() =>{
+  return(
+    <div className="formInput">
+      <label>{props.label}</label>
+      <textarea {...inputProps} onChange={onChange} onBlur={(e=> setFocused(true))} focused={focused.toString()}></textarea>
+      <span>{props.errorMessage}</span>
+    </div>
+  )
+} 
   return props.type === "radio"
     ? renderRadioButtons()
     : props.type === "select"
     ? renderSelect()
+    :props.type === 'textarea'
+    ?renderTextAreaInput()
     : renderInput();
 };
 export default FormInput;

@@ -8,12 +8,17 @@ import {
   declineAppointment,
 } from "src/redux/slices/appointmentSlice";
 import "./doctorpage.css";
-import { useEffect } from "react";
-import { fetchAppointmentsById } from "src/redux/slices/appointmentSlice";
+import { useEffect, useState } from "react";
+import { fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
+import { formatTime } from "src/utils/time";
+import { Popup } from "src/components/utils/atoms/Popup/Popup";
+import { CheckupForm } from "../CheckupForm/CheckupForm";
 export const Doctorpage = () => {
   const user = useSelector(authSelector.getUserData);
   const doctorId = user.id;
   const dispatch = useDispatch();
+  const [isCheckupFormOpen, setCheckupFormOpen] = useState(false);
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState('')
   const { appointments } = useSelector(appointmentSelector);
 
   const PATIENTS_APPOINTMENTS = [
@@ -40,6 +45,7 @@ export const Doctorpage = () => {
     {
       Header: "Requested Time",
       accessor: "scheduledTime",
+      Cell: ({value})=>formatTime(value)
     },
     {
       Header: "Vaccinated",
@@ -49,10 +55,21 @@ export const Doctorpage = () => {
       Header: "Status",
       accessor: "status",
     },
+    
+    {
+      Header: 'Checkup details',
+      Cell:({row}) =>(
+        <div>
+          <button onClick={()=> handleCheckupForm(row.original.id) }>checkup</button>
+        </div>
+      )
+      
+    },
     {
       Header: "Actions",
+      
       Cell: ({ row }) => (
-        <div>
+        <div className="botton-container">
           <button onClick={() => handleApprove(row.original.id)}>
             Approve
           </button>
@@ -63,22 +80,29 @@ export const Doctorpage = () => {
       ),
     },
   ];
+  const handleCheckupForm = (appointmentId) =>{
+    setSelectedAppointmentId(appointmentId)
+    setCheckupFormOpen(true)
 
+  }
+  const closeCheckupForm = () => {
+    setCheckupFormOpen(false);
+  };
+  
   const handleApprove = (appointmentId) => {
     dispatch(approveAppointment(appointmentId));
-    dispatch(fetchAppointmentsById(doctorId));
+    dispatch(fetchAppointmentsByDoctorId(doctorId));
   };
 
   const handleDecline = (appointmentId) => {
     dispatch(declineAppointment(appointmentId));
-    dispatch(fetchAppointmentsById(doctorId));
+    dispatch(fetchAppointmentsByDoctorId(doctorId));
   };
 
   useEffect(() => {
-    dispatch(fetchAppointmentsById(doctorId));
+    dispatch(fetchAppointmentsByDoctorId(doctorId));
   }, []);
 
-  console.log("appointments", appointments);
   return (
     <div className="doctor-page">
       <div className="appointment-list">
@@ -93,6 +117,8 @@ export const Doctorpage = () => {
           <DoctorForm />
         </div>
       </div>
+      {isCheckupFormOpen && <Popup isOpen={isCheckupFormOpen} onClose={closeCheckupForm} children={<CheckupForm appointmentId={selectedAppointmentId}/>} />}
+
     </div>
   );
 };

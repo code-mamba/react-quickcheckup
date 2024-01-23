@@ -42,7 +42,7 @@ export const Navbar = () => {
         <NavLink style={navLinkStyles} to="/appointment">Appointment</NavLink>
       )}
       {isAuthenticated && userRole === DOCTOR &&(
-        <NavLink style={navLinkStyles} to="/doctorpage">Doctor Page</NavLink>
+        <NavLink style={navLinkStyles} to="/doctorpage">My Appointments</NavLink>
       )}
 
       {isAuthenticated && <NavLink style={navLinkStyles} onClick={handleLogout} to="#">Logout</NavLink>}

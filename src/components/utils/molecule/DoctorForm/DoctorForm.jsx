@@ -16,7 +16,6 @@ export const DoctorForm = () =>{
         contact: `${user.contact}`,
         from: "",
         to: "",
-        specialist:"",
         userrole: `${user.userrole}`
     })
 

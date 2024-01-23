@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { appointmentSelector } from "src/redux/slices/appointmentSlice";
@@ -10,10 +10,14 @@ import { fetchAppointmentsByPatientId } from "src/redux/slices/appointmentSlice"
 import "./appointment.css";
 import { Table } from "src/components/utils/atoms/Table/Table";
 import { AppointmentForm } from "./AppointmentForm";
+import { Popup } from "src/components/utils/atoms/Popup/Popup";
+import { CheckupDetails } from "../CheckupDetails/CheckupDetails";
 
 export const AppointmentPage = () => {
   const user = useSelector(authSelector.getUserData);
   const { appointments } = useSelector(appointmentSelector);
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState("");
+  const [checkupDetail, setCheckupDetails] = useState(false);
 
   const APPOINTMENTS = [
     {
@@ -41,8 +45,22 @@ export const AppointmentPage = () => {
       Header: "Status",
       accessor: "status",
     },
+    {
+      Header: "Checkup Details",
+      Cell: ({ row }) => (
+        <div>
+          <button onClick={() => handleCheckup(row.original.id)}>
+            Check up details
+          </button>
+        </div>
+      ),
+    },
   ];
 
+  const handleCheckup = (appointmentId) => {
+    setSelectedAppointmentId(appointmentId);
+    setCheckupDetails(true);
+  };
   useEffect(() => {
     dispatch(fetchAppointmentsByPatientId(user.id));
   }, [dispatch, user.id]);
@@ -68,8 +86,12 @@ export const AppointmentPage = () => {
             <AppointmentForm />
           </div>
         </div>
+        <Popup
+          isOpen={checkupDetail}
+          onClose={() => setCheckupDetails(false)}
+          children={<CheckupDetails appointmentId={selectedAppointmentId}/>}
+        />
       </div>
-      <div className="appointment-content"></div>
     </>
   );
 };

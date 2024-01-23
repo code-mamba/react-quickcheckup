@@ -11,8 +11,23 @@ export const addAppointment = createAsyncThunk("appintments.addAppointment", asy
     }
 })
 
-export const fetchAppointmentsById = createAsyncThunk(
-    "appointments/fetchAppointmentsById",
+export const fetchAppointmentById = createAsyncThunk(
+    "appointments/fetchAppointmentById",
+    async (appointmentId) =>{
+        try{
+            const appointment = service.get("appointments", appointmentId)
+            return appointment
+        }
+        catch(e){
+            console.log(e)
+
+        }
+    }
+)
+
+
+export const fetchAppointmentsByDoctorId = createAsyncThunk(
+    "appointments/fetchAppointmentsByDoctorId",
     async (doctorId)=>{
         try{
             console.log('from redux', doctorId)
@@ -91,11 +106,11 @@ const appointmentSlice = createSlice({
             appointments: payload,
             error: null,
         }))
-        builder.addCase(fetchAppointmentsById.rejected, (state, { error }) => ({
+        builder.addCase(fetchAppointmentsByDoctorId.rejected, (state, { error }) => ({
             ...state,
             error: error.message,
           }));
-          builder.addCase(fetchAppointmentsById.fulfilled, (state, { payload }) => ({
+          builder.addCase(fetchAppointmentsByDoctorId.fulfilled, (state, { payload }) => ({
             ...state,
             appointments: payload,
             error: null,
@@ -129,6 +144,7 @@ const appointmentSlice = createSlice({
             ...state,
             error:error.message,
           }))
+          
 
     }
 })

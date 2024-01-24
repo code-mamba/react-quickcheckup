@@ -1,4 +1,5 @@
-import axios from "axios";
+
+import axios from 'src/utils/axiosConfig'
 
 class Service {
   constructor() {
@@ -18,7 +19,8 @@ class Service {
         url,
         data: data ? { ...data } : undefined,
       });
-      return response.data;
+      // console.log("fromget",response)
+      return response;
     } catch (error) {
       throw error.response ? error.response.data : error.message;
     }

@@ -64,6 +64,8 @@ export const AppointmentForm = () =>{
     }
   },[values.doctorid])
     return(
+      <div>
+      {Doctors && (
         <form onSubmit={handleSubmit}>
             <FormInput
               label="Name"
@@ -96,6 +98,8 @@ export const AppointmentForm = () =>{
             <FormInput type='radio' label="is Vaccinated" name="vaccinated" options={[{value:"yes", label:"Yes"},{value:"no", label:"No"}]} onChange={onChange} />
             <Button label="Appointment Now" type="default"  />
           </form>
+      )}
+        </div>
     )
   
 }

@@ -30,9 +30,7 @@ export const fetchAppointmentsByDoctorId = createAsyncThunk(
     "appointments/fetchAppointmentsByDoctorId",
     async (doctorId)=>{
         try{
-            console.log('from redux', doctorId)
             const appointments = await service.get(`appointments?doctorid=${doctorId}`)
-            console.log('Appointments',appointments)
             return appointments
         }
         catch(e){

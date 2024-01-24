@@ -1,15 +1,10 @@
-import { Button } from "src/components/utils/atoms/Button/Button";
 import { MainBanner } from "../Banners/MainBanner";
-import { useNavigate } from "react-router-dom";
 import "./Home.css";
-import { Login } from "../Login/Login";
-export const Home = () => {
-  const navigate = useNavigate();
 
-  const onClick = () => {
-    
-    navigate("/login");
-  };
+export const Home = () => {
+
+
+ 
 
   return (
     <>

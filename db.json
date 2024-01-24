@@ -101,6 +101,18 @@
       "userrole": "Patient",
       "address": "fever",
       "bloodgroup": "A+"
+    },
+    {
+      "id": "58ad",
+      "username": "ArthiMeganathan",
+      "email": "arthi2000@gmail.com",
+      "password": "Patient123",
+      "dob": "2001-08-23",
+      "contact": "9876543456",
+      "gender": "Female",
+      "userrole": "Patient",
+      "address": "cuddalore",
+      "bloodgroup": "AB+"
     }
   ],
   "appointments": [
@@ -125,6 +137,57 @@
         "doctoradvice": "Play games and get relax",
         "medicalprescription": "Bp tablet dose1 per day after food"
       }
+    },
+    {
+      "id": "f56d",
+      "patientname": "MadhanKumar",
+      "age": "22",
+      "patientid": "1002",
+      "appointmentdate": "2024-01-25",
+      "reason": "Cold",
+      "doctorid": "383a",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "scheduledTime": "10:30",
+      "vaccinated": "yes",
+      "status": "Approved"
+    },
+    {
+      "id": "bcf7",
+      "patientname": "ArthiMeganathan",
+      "age": "22",
+      "patientid": "58ad",
+      "appointmentdate": "2024-01-25",
+      "reason": "Fever",
+      "doctorid": "383a",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "scheduledTime": "10:45",
+      "vaccinated": "yes",
+      "status": "Checked",
+      "checkupstatus": {
+        "bodytemperature": "97.8",
+        "systolicpressure": "90",
+        "diastolicpressure": "86",
+        "sugarlevel": "157",
+        "doctoradvice": "Take medicines as prescribed.\nDo exercise as suggested.\nFollow diet as planned for you.",
+        "medicalprescription": "kkmas 1dose bf food"
+      },
+      "doctorname": "Dr Dinesh P"
+    },
+    {
+      "id": "19ad",
+      "patientname": "ArthiMeganathan",
+      "age": "22",
+      "patientid": "58ad",
+      "appointmentdate": "2024-01-26",
+      "reason": "Headache",
+      "doctorid": "383a",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "scheduledTime": "14:00",
+      "vaccinated": "yes",
+      "status": "Approved"
     }
   ]
 }

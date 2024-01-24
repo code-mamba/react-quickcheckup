@@ -27,7 +27,7 @@ export const CheckupDetails = (props) => {
         {error ? (
           <p>Error fetching data: {error.message}</p>
         ) : (
-          appointment && (
+          appointment && appointment.checkupstatus ? (
             <>
               <ul>
                 {Object.entries(appointment.checkupstatus).map(([key, value]) => (
@@ -40,6 +40,8 @@ export const CheckupDetails = (props) => {
                 ))}
               </ul>
             </>
+          ):(
+            <div className="no-data-found">No data found</div>
           )
         )}
       </div>

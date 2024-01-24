@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Card } from "src/components/utils/atoms/Card/Card";
 import { Popup } from "src/components/utils/atoms/Popup/Popup";
 import { Table } from "src/components/utils/atoms/Table/Table";
 import { Edit } from "./edit";
 
 import {
   fetchUsers,
-  fetchUserById,
 } from "src/redux/slices/userSlice";
 
 import { dispatch } from "src/redux/store/store";
@@ -29,23 +27,11 @@ export const UserList = () => {
     setPopupOpen(false);
   };
 
-
-  const edit = (userId) => {
-    console.log('Dispatched')
-    dispatch(fetchUserById(userId));
-    setPopupOpen(true) 
-  };
-
-
-const customActions = [
-  {label: "Edit", onClick:edit},
-  { label: "Approve", onClick: (rowId) => console.log(`Approve row with ID: ${rowId}`) }
-]
-
+  console.log(users)
   return (
     <>
       <div className="container">
-        <Table COLUMNS ={USERS_COLUMNS} DATA={users} customActions={customActions} />
+      {users && <Table COLUMNS ={USERS_COLUMNS} DATA={users} />} 
         <Popup isOpen={isPopupOpen} onClose={closePopup} children={<Edit/>}/>
       </div>
     </>

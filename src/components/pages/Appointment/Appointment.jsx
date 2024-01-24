@@ -50,11 +50,12 @@ export const AppointmentPage = () => {
       Cell: ({ row }) => (
         <div>
           <button onClick={() => handleCheckup(row.original.id)}>
-            Check up details
+           Check up details
           </button>
         </div>
       ),
     },
+
   ];
 
   const handleCheckup = (appointmentId) => {

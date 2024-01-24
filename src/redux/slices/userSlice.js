@@ -4,6 +4,7 @@ import service from "src/services/service";
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   try {
     const fetchallusers = await service.get("users");
+
     return fetchallusers;
   } catch (e) {
     console.log(e);
@@ -15,7 +16,9 @@ export const fetchUserById = createAsyncThunk(
   async (userId) => {
     try {
       const user = await service.get("users", userId);
+
       return user;
+
     } catch (e) {
       console.log(e);
     }

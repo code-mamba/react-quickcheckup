@@ -22,7 +22,7 @@ export const doAuth = createAsyncThunk(
           console.log(authenticatedUser)
           return authenticatedUser;
         } else {
-          return null;
+           console.log('Unable to login')
         }
       }
     } catch (e) {
@@ -44,8 +44,13 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     logout: (state) => {
-      state.user = null;
-      state.isAuthenticated = false;
+      return{
+        ...state,
+        user: null,
+        isAuthenticated:false,
+        error:null
+      }
+  
     },
   },
   selectors: {
@@ -55,13 +60,17 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(doAuth.fulfilled, (state, { payload }) => {
-      localStorage.setItem("user", JSON.stringify(payload));
-      return {
-        ...state,
-        error: null,
-        isAuthenticated: true,
-        user: payload,
-      };
+      console.log(payload)
+      if(payload != null){
+        localStorage.setItem("user", JSON.stringify(payload));
+        return {
+          ...state,
+          error: null,
+          isAuthenticated: true,
+          user: payload,
+        };
+      }
+
     });
     builder.addCase(doAuth.rejected, (state, { payload }) => ({
       ...state,

@@ -1,31 +1,27 @@
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table } from "src/components/utils/atoms/Table/Table";
-import { DoctorForm } from "src/components/utils/molecule/DoctorForm/DoctorForm";
-import { authSelector } from "src/redux/slices/authSlices";
-import { appointmentSelector } from "src/redux/slices/appointmentSlice";
-import {
-  approveAppointment,
-  declineAppointment,
-} from "src/redux/slices/appointmentSlice";
-import "./doctorpage.css";
-import { useEffect, useState } from "react";
-import { fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
-import { formatTime } from "src/utils/time";
 import { Popup } from "src/components/utils/atoms/Popup/Popup";
+import { DoctorForm } from "src/components/utils/molecule/DoctorForm/DoctorForm";
 import { CheckupForm } from "../CheckupForm/CheckupForm";
+import { Medicalhistory } from "../MedicalHistory/MedicalHistory";
+import { authSelector } from "src/redux/slices/authSlices";
+import { appointmentSelector, fetchAppointmentsByDoctorId, approveAppointment, declineAppointment } from "src/redux/slices/appointmentSlice";
+import { formatTime } from "src/utils/time";
+import "./doctorpage.css";
+
 export const Doctorpage = () => {
   const user = useSelector(authSelector.getUserData);
   const doctorId = user.id;
+  const doctorName = user.username
   const dispatch = useDispatch();
   const [isCheckupFormOpen, setCheckupFormOpen] = useState(false);
-  const [selectedAppointmentId, setSelectedAppointmentId] = useState('')
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState("");
+  const [isMedicalHistoryOpen, setIsMedicalHistoryOpen] = useState(false);
   const { appointments } = useSelector(appointmentSelector);
+  const [selectedPatientId, setSelectedPatientId] = useState('')
 
   const PATIENTS_APPOINTMENTS = [
-    {
-      Header: "Appointment ID",
-      accessor: "id",
-    },
     {
       Header: "Patient Name",
       accessor: "patientname",
@@ -45,7 +41,7 @@ export const Doctorpage = () => {
     {
       Header: "Requested Time",
       accessor: "scheduledTime",
-      Cell: ({value})=>formatTime(value)
+      Cell: ({ value }) => formatTime(value),
     },
     {
       Header: "Vaccinated",
@@ -55,19 +51,27 @@ export const Doctorpage = () => {
       Header: "Status",
       accessor: "status",
     },
-    
     {
-      Header: 'Checkup details',
-      Cell:({row}) =>(
+      Header: "Patient's Medical History",
+      Cell: ({ row:{original} }) => (
+        <button onClick={() => handleMedicalHistory(original.patientid)}>
+          Check Medical history
+        </button>
+      ),
+    },
+    {
+      Header: "Checkup details",
+      Cell: ({ row:{original} }) => (
         <div>
-          <button onClick={()=> handleCheckupForm(row.original.id) }>checkup</button>
+          <button onClick={() => handleCheckupForm(original.id)}>
+            checkup
+          </button>
         </div>
-      )
-      
+      ),
     },
     {
       Header: "Actions",
-      
+
       Cell: ({ row }) => (
         <div className="botton-container">
           <button onClick={() => handleApprove(row.original.id)}>
@@ -80,23 +84,26 @@ export const Doctorpage = () => {
       ),
     },
   ];
-  const handleCheckupForm = (appointmentId) =>{
-    setSelectedAppointmentId(appointmentId)
-    setCheckupFormOpen(true)
-
-  }
+  const handleCheckupForm = (appointmentId) => {
+    setSelectedAppointmentId(appointmentId);
+    setCheckupFormOpen(true);
+  };
   const closeCheckupForm = () => {
     setCheckupFormOpen(false);
   };
-  
-  const handleApprove = (appointmentId) => {
-    dispatch(approveAppointment(appointmentId));
-    dispatch(fetchAppointmentsByDoctorId(doctorId));
-  };
 
-  const handleDecline = (appointmentId) => {
-    dispatch(declineAppointment(appointmentId));
-    dispatch(fetchAppointmentsByDoctorId(doctorId));
+  const handleApprove = (appointmentId) => handleAction(appointmentId, 'approve');
+  const handleDecline = (appointmentId) => handleAction(appointmentId, 'decline');
+
+  const handleAction = (appointmentId, actionType) =>{
+    const action = actionType === 'approve'? approveAppointment:declineAppointment
+    dispatch(action(appointmentId));
+    dispatch(fetchAppointmentsByDoctorId(doctorId))
+  }
+
+  const handleMedicalHistory = (patientId) => {
+    setIsMedicalHistoryOpen(true);
+    setSelectedPatientId(patientId);
   };
 
   useEffect(() => {
@@ -117,8 +124,18 @@ export const Doctorpage = () => {
           <DoctorForm />
         </div>
       </div>
-      {isCheckupFormOpen && <Popup isOpen={isCheckupFormOpen} onClose={closeCheckupForm} children={<CheckupForm appointmentId={selectedAppointmentId}/>} />}
-
+      {isCheckupFormOpen && (
+        <Popup
+          isOpen={isCheckupFormOpen}
+          onClose={closeCheckupForm}
+          children={<CheckupForm appointmentId={selectedAppointmentId} doctorName={doctorName} />}
+        />
+      )}
+      <Popup
+        isOpen={isMedicalHistoryOpen}
+        onClose={() => setIsMedicalHistoryOpen(false)}
+        children={<Medicalhistory patientId={selectedPatientId} />}
+      />
     </div>
   );
 };

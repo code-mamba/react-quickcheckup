@@ -53,6 +53,8 @@ class Service {
   }
   patch(url, id, data){
     const method = "PATCH";
+    console.log("patching")
+    console.log(url,id,data)
     if(id){
       url = `${url}/${id}`
     }

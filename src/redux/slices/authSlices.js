@@ -8,7 +8,6 @@ export const doAuth = createAsyncThunk(
 
     try {
       const fetchedusers = await service.get("users");
-
       if (Array.isArray(fetchedusers)) {
         const authenticatedUser = fetchedusers.find((user) => {
 
@@ -19,7 +18,6 @@ export const doAuth = createAsyncThunk(
         });
   
         if (authenticatedUser) {
-          console.log(authenticatedUser)
           return authenticatedUser;
         } else {
            console.log('Unable to login')
@@ -60,7 +58,6 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(doAuth.fulfilled, (state, { payload }) => {
-      console.log(payload)
       if(payload != null){
         localStorage.setItem("user", JSON.stringify(payload));
         return {

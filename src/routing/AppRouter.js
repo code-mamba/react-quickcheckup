@@ -9,7 +9,7 @@ import { authSelector } from "src/redux/slices/authSlices";
 import { useSelector } from "react-redux";
 import { CreateUser } from "src/components/pages/CreateUser/CreateUser";
 import { ADMIN, DOCTOR, PATIENT } from "src/components/Constant/constant";
-import { Doctorpage } from "src/components/pages/Doctorpage/Doctorpage";
+import { DoctorDashboard } from "src/components/pages/Doctorpage/DoctorDashboard";
 
 export const AppRouter = () =>{
 	const isAuthenticated = useSelector(authSelector.isAuthenticated);
@@ -20,7 +20,7 @@ export const AppRouter = () =>{
 			{isAuthenticated && userRole === ADMIN && <Route path="/userslist" element={<UserList/>}/>}
 			{isAuthenticated && userRole === PATIENT && <Route path="/appointment" element ={<AppointmentPage/>}/>}
 			{isAuthenticated && userRole === ADMIN && <Route path="/createuser" element={<CreateUser/>}/>}
-			{isAuthenticated && userRole === DOCTOR && <Route path="/doctorpage" element={<Doctorpage/>}/>}
+			{isAuthenticated && userRole === DOCTOR && <Route path="/doctorDashboard" element={<DoctorDashboard/>}/>}
 			<Route path="/login" element={
 			<React.Suspense fallback="Loading">
 			<Login/>

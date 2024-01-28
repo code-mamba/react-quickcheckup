@@ -1,7 +1,6 @@
 import "./App.css";
-import { Navbar } from "./components/utils/molecule/Navbar/Navbar";
+import { Navbar } from "src/components/utils/molecule/index";
 import { AppRouter } from "./routing/AppRouter";
-import { dispatch } from "./redux/store/store";
 import { useEffect } from "react";
 import { setUser } from "./redux/slices/authSlices";
 import { useDispatch } from "react-redux";

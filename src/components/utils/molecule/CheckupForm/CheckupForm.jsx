@@ -4,7 +4,9 @@ import { Button } from "src/components/utils/atoms/Button/Button";
 import FormInput from "src/components/utils/atoms/FormInput/FormInput";
 import service from "src/services/service";
 import "./checkupform.css";
+import { fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
 import { calculateBodyTemperature, calculateBp } from "src/utils/checkupfunctionalities";
+import { dispatch } from "src/redux/store/store";
 export const CheckupForm = (props) => {
   const [values, setValues] = useState({
     bodytemperature: "",
@@ -26,7 +28,7 @@ export const CheckupForm = (props) => {
         {
           checkupstatus: values,
           status: "Checked",
-          doctorname: props.doctorName
+          doctorname: props.doctorName,
         }
       );
 
@@ -34,6 +36,7 @@ export const CheckupForm = (props) => {
     } catch (error) {
       console.error("Error:", error);
     }
+    dispatch(fetchAppointmentsByDoctorId(props.doctorId))
   };
   const onChange = (e) => {
     setValues((value) => ({

@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-import { Button } from "src/components/utils/atoms/Button/Button";
-import { FormInput } from "src/components/utils/atoms/FormInput/FormInput";
-import { Select } from "src/components/utils/atoms/Select/Select";
+import { Button, FormInput, Select } from "src/components/utils/atoms/index";
 
 import { addUser } from "src/redux/slices/userSlice";
 import { dispatch } from "src/redux/store/store";
@@ -29,32 +27,30 @@ export const CreateUser = () => {
       gender: "",
       userrole: PATIENT,
       address: "",
-      bloodgroup:""
+      bloodgroup: "",
     },
-    [DOCTOR]:{
+    [DOCTOR]: {
       username: "",
       email: "",
       password: DOCTOR_DEFAULT_PWD,
       contact: "",
-      specialist: ""
-    }
+      specialist: "",
+    },
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userData = userType === PATIENT ? values[PATIENT] : values[DOCTOR]
-    dispatch(addUser(userData))
+    const userData = userType === PATIENT ? values[PATIENT] : values[DOCTOR];
+    dispatch(addUser(userData));
     console.log(userData);
-    // dispatch(addUser(values))
   };
-  const onChange = (e) =>{
-    setValues((value)=>({
+  const onChange = (e) => {
+    setValues((value) => ({
       ...value,
-      [userType]:{...value[userType], [e.target.name]: e.target.value}
-    }))
-  }
+      [userType]: { ...value[userType], [e.target.name]: e.target.value },
+    }));
+  };
   const selectChange = (e) => {
-    const selectedValue = e.target.value;
-    setUserType(selectedValue);
+    setUserType(e.target.value);
   };
 
   console.log(userType);
@@ -82,7 +78,12 @@ export const CreateUser = () => {
 
           {userType === DOCTOR &&
             DOCTOR_CREATION_FIELDS.map((input) => (
-              <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
+              <FormInput
+                key={input.id}
+                {...input}
+                value={values[input.name]}
+                onChange={onChange}
+              />
             ))}
           <Button onChange={handleSubmit} type="small" label="Add User" />
         </form>

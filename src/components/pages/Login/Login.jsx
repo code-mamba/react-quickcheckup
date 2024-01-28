@@ -10,19 +10,30 @@ import {
   LOGIN_INPUT,
 } from "src/components/Constant/constant";
 import "./login.css";
+import Snackbar from "src/components/utils/atoms/Snackbar/Snackbar";
 
 export const Login = () => {
   const isAuthenticated = useSelector(authSelector.isAuthenticated);
   let userData = useSelector(authSelector.getUserData);
+  const [snackbarMessage, setSnackbarMessage] = useState()
   const [values, setValues] = useState({
     email: "",
-    password: ""
+    password: "",
+   
 
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(values,isAuthenticated,userData)
+    try{
+      const authMessage = await login(values,isAuthenticated,userData);
+    console.log(authMessage);
+    setSnackbarMessage(authMessage)
+    }
+    catch (error) {
+      setSnackbarMessage("Login failed");
+    }
+    
     
   };
 
@@ -43,6 +54,7 @@ export const Login = () => {
 
         <Button type="default" label="Submit" />
       </form>
+      {snackbarMessage && (<Snackbar message={snackbarMessage} onClose={()=>setSnackbarMessage(null)}></Snackbar>)}
     </div>
   );
 };

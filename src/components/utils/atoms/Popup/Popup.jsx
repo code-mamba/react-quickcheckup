@@ -12,7 +12,4 @@ export const Popup = (props) =>{
     </div>
         )
     }
-    
- 
-
 } 

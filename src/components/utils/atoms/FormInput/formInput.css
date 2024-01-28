@@ -4,6 +4,11 @@
 	width: 280px;
 }
 
+input[type='range']{
+	margin: 0;
+	padding: 0;
+}
+
 input{
 	padding: 0.938rem;
 	margin:  0.938rem 0rem;
@@ -29,4 +34,8 @@ textarea{
 	margin:  0.938rem 0rem;
 	border-radius: 5px;
 	border: 1px solid grey;
+}
+.rangeImage{
+	display: flex;
+  flex-direction: column;
 }

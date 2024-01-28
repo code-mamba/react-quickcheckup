@@ -1,0 +1,33 @@
+.sidebar {
+  
+    background-color: white;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top:0;
+    right:0;
+    transition: width 0.5s;
+
+  }
+  
+  .collapsed {
+    width: 50px;
+    background-color: transparent;
+    
+  }
+  .sidebar-content{
+    padding:5rem;
+    transition: padding 0.5s;
+  }
+  
+  .toggle-btn {
+    top: 50%;
+    position: fixed;
+    background: #d0e0f5;
+    border: none;
+    color: black;
+    cursor: pointer;
+    font-size: 2em;
+    padding: 10px;
+    margin-bottom: 10px;
+  }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import LoadingIndicator from 'src/components/utils/atoms/LoadinIndicator/LoadingIndicator';
+import LoadingIndicator from 'src/components/utils/atoms/LoadingIndicator/LoadingIndicator';
 import ReactDOM  from 'react-dom';
 
 

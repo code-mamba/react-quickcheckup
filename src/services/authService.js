@@ -2,7 +2,7 @@ import { doAuth } from "src/redux/slices/authSlices"
 import { dispatch } from "src/redux/store/store"
 
 
-export const login = (values, isAuthenticated, userData, loginType) =>{
+export const login = (values, isAuthenticated, userData) =>{
     dispatch(doAuth(values))
     if(isAuthenticated){
         localStorage.setItem("user", JSON.stringify(userData));

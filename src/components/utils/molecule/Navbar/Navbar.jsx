@@ -24,7 +24,7 @@ export const Navbar = () => {
 
   return (
     <nav>
-     {!isAuthenticated | userRole === PATIENT && <NavLink style={navLinkStyles} to="/">
+     {!isAuthenticated || userRole === PATIENT && <NavLink style={navLinkStyles} to="/">
         Home
       </NavLink>} 
 
@@ -42,10 +42,10 @@ export const Navbar = () => {
         <NavLink style={navLinkStyles} to="/appointment">Appointment</NavLink>
       )}
       {isAuthenticated && userRole === DOCTOR &&(
-        <NavLink style={navLinkStyles} to="/doctorpage">My Appointments</NavLink>
+        <NavLink style={navLinkStyles} to="/doctorDashboard">My Appointments</NavLink>
       )}
 
-      {isAuthenticated && <NavLink style={navLinkStyles} onClick={handleLogout} to="#">Logout</NavLink>}
+      {isAuthenticated && <NavLink style={navLinkStyles} onClick={handleLogout} to="">Logout</NavLink>}
     </nav>
   );
 };

@@ -30,8 +30,8 @@ export const DoctorForm = () =>{
     return(
         <>
         <div className="doctorform">
+            <h1>Update Timing</h1>
             <form onSubmit={handleSubmit}>
-
                 <FormInput label="Doctor Name" value={user.username} disabled/>
                 {DOCTOR_DETAILS.map((input)=>(
                     <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange}/>

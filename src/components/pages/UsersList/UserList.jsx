@@ -31,7 +31,7 @@ export const UserList = () => {
   return (
     <>
       <div className="container">
-      {users && <Table COLUMNS ={USERS_COLUMNS} DATA={users} />} 
+      {users && <Table columns ={USERS_COLUMNS} data={users} />} 
         <Popup isOpen={isPopupOpen} onClose={closePopup} children={<Edit/>}/>
       </div>
     </>

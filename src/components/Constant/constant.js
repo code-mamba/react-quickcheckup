@@ -197,13 +197,20 @@ export const CREATE_USER_INPUT = [
   },
 ];
 
-export const APPOINTMENT_FIELDS = (user, doctors, min, max) => [
+export const APPOINTMENT_FIELDS = (user,age, doctors, min, max) => [
   {
     id: 1,
     name: user.username,
     value:user.username,
     label: "Name",
     disabled: true,
+  },
+  {
+    id:2,
+    name:age,
+    value:age,
+    label:"Age",
+    disabled: true
   },
   {
     id: 2,
@@ -224,7 +231,7 @@ export const APPOINTMENT_FIELDS = (user, doctors, min, max) => [
   },
   {
     id: 4,
-    label:"select doctor",
+    label:"Select Doctor",
     name: "doctorid",
     type: "select",
     options: doctors,
@@ -328,7 +335,6 @@ export const CHECKUP_INPUTS = [
     label: "Sugar Level",
     name: "sugarlevel",
     min: "0",
-    required: true,
   },
   {
     id: 5,

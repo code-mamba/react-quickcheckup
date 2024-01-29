@@ -203,7 +203,17 @@
       "endTime": "17:00",
       "scheduledTime": "12:00",
       "vaccinated": "yes",
-      "status": "pending"
+      "status": "Declined",
+      "declinedreason": "declined ..",
+      "checkupstatus": {
+        "bodytemperature": "100",
+        "systolicpressure": "127",
+        "diastolicpressure": "103",
+        "sugarlevel": "100",
+        "doctoradvice": "Drink water frequently",
+        "medicalprescription": "Crocine 1 bf food "
+      },
+      "doctorname": "Dr DanyRaj"
     },
     {
       "id": "83b9",
@@ -264,12 +274,11 @@
       "declinedreason": "",
       "checkupstatus": {
         "bodytemperature": "100",
-        "systolicpressure": "",
-        "diastolicpressure": "",
+        "systolicpressure": "120",
+        "diastolicpressure": "130",
         "sugarlevel": "100",
-        "doctoradvice": "aalcks a ao;mcla",
-        "medicalprescription": "zskcl zkcazcs;",
-        "": "130"
+        "doctoradvice": "Do exercise as suggested.Follow diet as planned for you.",
+        "medicalprescription": "zskcl zkcazcs;"
       },
       "doctorname": "Dr Dinesh P"
     },
@@ -311,6 +320,34 @@
         "medicalprescription": "zsczlkc zclk"
       },
       "doctorname": "Dr Dinesh P"
+    },
+    {
+      "id": "e1fb",
+      "patientname": "MadhanKumar",
+      "age": "22",
+      "patientid": "1002",
+      "appointmentdate": "2024-01-29",
+      "reason": "Fever",
+      "doctorid": "383a",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "scheduledTime": "14:00",
+      "vaccinated": "yes",
+      "status": "pending"
+    },
+    {
+      "id": "4012",
+      "patientname": "MadhanKumar",
+      "age": "22",
+      "patientid": "1002",
+      "appointmentdate": "2024-01-29",
+      "reason": "Fever",
+      "doctorid": "383a",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "scheduledTime": "15:00",
+      "vaccinated": "no",
+      "status": "pending"
     }
   ]
 }

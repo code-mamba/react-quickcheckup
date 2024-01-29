@@ -53,16 +53,18 @@ instance.interceptors.response.use(
         hideLoadingIndicator()
         switch(error.response?.status){
             case 400:
+                return Promise.reject({ message: 'Bad Request' });
             case 404:
+                return Promise.reject({ message: 'Not Found' });
             case 409:
                 return Promise.reject(error.response?.data)
             case 401:
-                return Promise.reject(error)
+                return Promise.reject({ message: 'Conflict' });
             case 500:
             case 502:
                 return Promise.reject("Something went wrong. Please Try again")
             default:
-                return Promise.reject(error.response?.data)
+              
         }
         
     }

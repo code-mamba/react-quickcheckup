@@ -67,6 +67,8 @@ export const DoctorDashboard = () => {
     dispatch(fetchAppointmentsByDoctorId(doctorId));
   }, []);
 
+  console.log("doctor check",appointments)
+
   return (
     <div className="doctor-page">
       <div className="appointment-list">

@@ -19,24 +19,6 @@
 	font-weight: lighter;
 }
 
-.logoContent{
-	height: 5vh;
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	text-align: left;
-	z-index: 1;
-	color: black;
-}
-@media screen and (max-width: 480px) {
-	.logoContent{
-		top: 110%
-	}
-	.footer{
-		padding: 3rem 5rem;
-	}
-}
-
 .banner-home{
 	display: flex;
 	position: absolute;

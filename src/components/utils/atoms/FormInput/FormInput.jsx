@@ -144,6 +144,7 @@ export const FormInput = (props) => {
           focused={focused.toString()}
           required={required}
         />
+        <span>{props.errorMessage}</span>
       </div>
     );
   };

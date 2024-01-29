@@ -10,16 +10,19 @@ import { userSelector } from "src/redux/slices/userSlice";
 import { calculateAge } from "src/utils/calculateAge";
 import { APPOINTMENT_FIELDS } from "src/components/Constant/constant";
 import { dispatch } from "src/redux/store/store";
-import { formatTime } from "src/utils/time";
 
 import { checkAppointmentConflicts } from "src/utils/appointmentUtils";
+import "./appointmentform.css";
+import { TimeRange } from "./TimeRange/TimeRange";
+import Snackbar from "../../atoms/Snackbar/Snackbar";
 
 export const AppointmentForm = () => {
   const user = useSelector(authSelector.getUserData);
   const age = calculateAge(user.dob);
   const Doctors = useSelector(userSelector.getDoctors);
 
-  const [isConflict, setConflict] = useState('')
+  const [isConflict, setConflict] = useState("");
+  const [snackbarMessage, setSnackbarMessage] = useState("")
 
   const [values, setValues] = useState({
     patientname: `${user.username}`,
@@ -51,12 +54,11 @@ export const AppointmentForm = () => {
         setConflict("conflict found! Please choose diferent time or date");
       } else {
         dispatch(addAppointment(values));
+        setSnackbarMessage("Appointment Requested")
       }
-      
     } catch (error) {
-      console.log(error);
+      setSnackbarMessage("Unable to request Aappointment")
     }
-
   };
 
   useEffect(() => {
@@ -78,23 +80,24 @@ export const AppointmentForm = () => {
     <div>
       {Doctors && (
         <form onSubmit={handleSubmit}>
-          {APPOINTMENT_FIELDS(user,Doctors, values.startTime, values.endTime).map((input)=>(
+          <h1>Book Appointment</h1>
+          {APPOINTMENT_FIELDS(
+            user,
+            age,
+            Doctors,
+            values.startTime,
+            values.endTime
+          ).map((input) => (
             <FormInput key={input.id} {...input} onChange={onChange} />
           ))}
-  
           {values.startTime && (
-            <div className="availableTime">
-              <strong>Available Time </strong>
-              <p>
-                Start Time {formatTime(values.startTime)} - End Time{" "}
-                {formatTime(values.endTime)}
-              </p>
-            </div>
+            <TimeRange startTime={values.startTime} endTime={values.endTime} />
           )}
-          {isConflict && <p>{isConflict}</p>}
+          {isConflict && <p className="conflict">{isConflict}</p>}
           <Button label="Request Appointment" type="default" />
         </form>
       )}
+      {snackbarMessage &&(<Snackbar message={snackbarMessage} onClose={()=>setSnackbarMessage("")}/>)}
     </div>
   );
 };

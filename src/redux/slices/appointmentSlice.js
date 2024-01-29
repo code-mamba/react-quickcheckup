@@ -137,8 +137,6 @@ const appointmentSlice = createSlice({
 
     builder.addCase(declineAppointment.fulfilled, (state, { payload }) => ({
       ...state,
-      // Update the appointments array with the approved appointment
-    
       error: null,
     }));
     builder.addCase(declineAppointment.rejected, (state, { error }) => ({

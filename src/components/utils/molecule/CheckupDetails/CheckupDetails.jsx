@@ -1,48 +1,39 @@
 import React, { useEffect, useState } from "react";
+import {Table} from "src/components/utils/atoms/index"
 import service from "src/services/service";
+import { CHECKUPDETAILSCOLUMN } from "./checkupDetailsColumn";
+
 import "./checkupdetails.css";
 
 export const CheckupDetails = (props) => {
-  const [appointment, setAppointment] = useState(null);
+  const [appointment, setAppointment] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await service.get("appointments", props.appointmentId);
-        setAppointment(result);
+        if(result && result.checkupstatus){
+          setAppointment([result.checkupstatus]);
+        }
+        else{
+          setAppointment([])
+        }
+        
       } catch (e) {
+        console.log(e)
         setError(e);
       }
     };
 
     fetchData();
   }, [props.appointmentId]);
-
   return (
-    <div className="checkupdetails">
-      <div className="checkupdetails-content">
-        <h1>Checkup detail</h1>
-        {error ? (
-          <p>Error fetching data: {error.message}</p>
-        ) : (
-          appointment && appointment.checkupstatus ? (
-            <>
-              <ul>
-                {Object.entries(appointment.checkupstatus).map(([key, value]) => (
-                    <div className="checkuplists" key={key}>
-                        <div className="heading">{key}:</div>
-                        <div className="value">{value}</div>
-                    </div>
-    
-                ))}
-              </ul>
-            </>
-          ):(
-            <div className="no-data-found">No data found</div>
-          )
-        )}
-      </div>
-    </div>
-  );
-};
+    appointment &&(
+      <>
+      <h1>Check up Detail</h1>
+        <Table columns={CHECKUPDETAILSCOLUMN} data={appointment}/>
+      </>)
+    )
+}
+

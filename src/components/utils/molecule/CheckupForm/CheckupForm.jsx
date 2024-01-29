@@ -8,7 +8,8 @@ import { fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
 import { calculateBodyTemperature, calculateBp } from "src/utils/checkupfunctionalities";
 import { dispatch } from "src/redux/store/store";
 export const CheckupForm = (props) => {
-  const [values, setValues] = useState({
+  
+const [values, setValues] = useState({
     bodytemperature: "",
     systolicpressure: "",
     diastolicpressure: "",
@@ -21,7 +22,6 @@ export const CheckupForm = (props) => {
     e.preventDefault();
 
     try {
-      console.log("Form values:", values);
       const updatedCheckup = await service.patch(
         "appointments",
         props.appointmentId,
@@ -31,8 +31,6 @@ export const CheckupForm = (props) => {
           doctorname: props.doctorName,
         }
       );
-
-      console.log("Updated checkup:", updatedCheckup);
     } catch (error) {
       console.error("Error:", error);
     }

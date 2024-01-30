@@ -46,12 +46,16 @@ export const FormInput = (props) => {
         <label>{label}</label>
         <div>
           <select name={name} onChange={onChange} required={required}>
+          <option value="" disabled selected>
+            Select Here
+          </option>
             {options.map((option) => (
               <option key={option.id} value={option[valuekey]}>
                 {option[labelkey]}
               </option>
             ))}
           </select>
+          <span>{props.errorMessage}</span>
         </div>
       </>
     );
@@ -127,6 +131,7 @@ export const FormInput = (props) => {
           focused={focused.toString()}
           required={required}
         />
+        <span>{props.errorMessage}</span>
       </div>
     );
   };

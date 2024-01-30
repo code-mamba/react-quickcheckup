@@ -5,6 +5,7 @@ import {
   Table,
   Popup,
   CollapsedSidebar,
+  Button,
 } from "src/components/utils/atoms/index";
 import {
   AppointmentForm,
@@ -25,10 +26,15 @@ export const AppointmentPage = () => {
   const appointments = useSelector(appointmentSelector.getMyAppointments);
   const [selectedAppointmentId, setSelectedAppointmentId] = useState("");
   const [checkupDetail, setCheckupDetails] = useState(false);
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
 
   const handleCheckup = (appointmentId) => {
     setSelectedAppointmentId(appointmentId);
     setCheckupDetails(true);
+  };
+  const handleAppointment = () => {
+  
+    setAppointmentOpen(true);
   };
   useEffect(() => {
     dispatch(fetchAppointmentsByPatientId(user.id));
@@ -40,18 +46,31 @@ export const AppointmentPage = () => {
         <div className="inner">
           {appointments && appointments.length > 0 ? (
             <>
-              <h1>Your Appointments</h1>
-              <Table
-                columns={APPOINTMENTS(handleCheckup)}
-                data={appointments}
-              />
+              <div>
+                <div className="appointmentheader">
+                  <h1>Your Appointments</h1>
+                  <Button
+                    type="small"
+                    label="Book Appointment"
+                    onClick={handleAppointment}
+                  />
+                </div>
+
+                <Table
+                  columns={APPOINTMENTS(handleCheckup)}
+                  data={appointments}
+                />
+              </div>
             </>
           ) : (
             <p>No appointments available</p>
           )}
-          <CollapsedSidebar>
-            <AppointmentForm />
-          </CollapsedSidebar>
+          <Popup
+            isOpen={appointmentOpen}
+            onClose={() => setAppointmentOpen(false)}
+            children={<AppointmentForm onClose={()=>setAppointmentOpen(false)}/>}
+          />
+
           <Popup
             isOpen={checkupDetail}
             onClose={() => setCheckupDetails(false)}
@@ -62,4 +81,3 @@ export const AppointmentPage = () => {
     </>
   );
 };
-

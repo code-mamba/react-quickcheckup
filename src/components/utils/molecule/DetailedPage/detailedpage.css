@@ -1,0 +1,22 @@
+.detailedpage-content{
+    position: relative;
+    padding: 1rem;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+
+}
+.detailedpage{
+    margin-bottom: 5rem;
+    padding: 10rem;
+}
+
+.detailedepage-values{
+    align-items: center;    
+    width: 700px
+}
+.label{
+    color: brown;
+    width: 500px;
+}

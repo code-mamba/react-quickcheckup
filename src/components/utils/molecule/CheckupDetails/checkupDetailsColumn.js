@@ -15,12 +15,5 @@ export const CHECKUPDETAILSCOLUMN =[
         Header: "Sugar Level",
         accessor: "sugarlevel"
     },
-    {
-        Header: "Doctor Advice",
-        accessor: "doctoradvice"
-    },
-    {
-        Header: "Medical Prescription",
-        accessor: "medicalprescription"
-    }
+   
 ]

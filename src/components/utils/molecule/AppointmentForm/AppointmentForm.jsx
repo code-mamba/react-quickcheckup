@@ -16,7 +16,7 @@ import "./appointmentform.css";
 import { TimeRange } from "./TimeRange/TimeRange";
 import Snackbar from "../../atoms/Snackbar/Snackbar";
 
-export const AppointmentForm = () => {
+export const AppointmentForm = (props) => {
   const user = useSelector(authSelector.getUserData);
   const age = calculateAge(user.dob);
   const Doctors = useSelector(userSelector.getDoctors);
@@ -27,10 +27,14 @@ export const AppointmentForm = () => {
   const [values, setValues] = useState({
     patientname: `${user.username}`,
     age: `${age}`,
+    gender: `${user.gender}`,
+    bloodgroup: `${user.bloodgroup}`,
     patientid: `${user.id}`,
     appointmentdate: "",
     reason: "",
     doctorid: "",
+    doctorname:"",
+    specialist: "",
     startTime: "",
     endTime: "",
     scheduledTime: "",
@@ -40,6 +44,7 @@ export const AppointmentForm = () => {
 
   const onChange = (e) => {
     setValues((value) => ({ ...value, [e.target.name]: e.target.value }));
+    setConflict("")
   };
 
   const handleSubmit = async (e) => {
@@ -48,17 +53,19 @@ export const AppointmentForm = () => {
       const hasConflict = await checkAppointmentConflicts(
         values.doctorid,
         values.appointmentdate,
-        values.scheduledTime
+        values.scheduledTime,
       );
       if (hasConflict) {
         setConflict("conflict found! Please choose diferent time or date");
       } else {
         dispatch(addAppointment(values));
         setSnackbarMessage("Appointment Requested")
+        props.onClose()
       }
     } catch (error) {
       setSnackbarMessage("Unable to request Aappointment")
     }
+    
   };
 
   useEffect(() => {
@@ -69,8 +76,10 @@ export const AppointmentForm = () => {
       if (selectedDoctor) {
         setValues({
           ...values,
+          doctorname: selectedDoctor.username,
           startTime: selectedDoctor.from,
           endTime: selectedDoctor.to,
+          specialist:selectedDoctor.specialist
         });
       }
     }
@@ -79,8 +88,10 @@ export const AppointmentForm = () => {
   return (
     <div>
       {Doctors && (
+        
         <form onSubmit={handleSubmit}>
           <h1>Book Appointment</h1>
+          <div className="grid-container">
           {APPOINTMENT_FIELDS(
             user,
             age,
@@ -88,14 +99,19 @@ export const AppointmentForm = () => {
             values.startTime,
             values.endTime
           ).map((input) => (
+            <div className="grid-item">
             <FormInput key={input.id} {...input} onChange={onChange} />
+            </div>
           ))}
           {values.startTime && (
             <TimeRange startTime={values.startTime} endTime={values.endTime} />
           )}
           {isConflict && <p className="conflict">{isConflict}</p>}
+          </div>
           <Button label="Request Appointment" type="default" />
+          
         </form>
+        
       )}
       {snackbarMessage &&(<Snackbar message={snackbarMessage} onClose={()=>setSnackbarMessage("")}/>)}
     </div>

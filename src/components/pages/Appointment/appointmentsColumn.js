@@ -1,16 +1,11 @@
 import { formatTime } from "src/utils/time"
+import { useNavigate } from "react-router-dom"
+import { PATIENTAPPOINTMENTINFO } from "src/components/Constant/constant"
 export const APPOINTMENTS = (handleCheckup) =>[
-    {
-        Header: "Appointment Id",
-        accessor: "id",
-      },
+
       {
-        Header: "Patient Name",
-        accessor: "patientname",
-      },
-      {
-        Header: "Reason",
-        accessor: "reason",
+        Header: "Doctor Name",
+        accessor: "doctorname",
       },
       {
         Header: "Appointment Date",
@@ -26,9 +21,15 @@ export const APPOINTMENTS = (handleCheckup) =>[
         accessor: "status",
       },
       {
-        Header: "Reason for Declined",
-        accessor: "declinedreason",
-        Cell:({value}) => value? value: "----"
+        Header:"View Appointment Detail",
+        Cell:({row}) =>{
+          const navigate = useNavigate()
+          return(
+            <div>
+              <button onClick={()=>navigate('/detailedpage', {state:{appointmentData:row.original, columns:PATIENTAPPOINTMENTINFO}})}>More details</button>
+            </div>
+          )
+        }
       },
       {
         Header: "Checkup Details",

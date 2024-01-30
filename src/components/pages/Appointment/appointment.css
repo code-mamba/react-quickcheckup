@@ -9,6 +9,11 @@
 .inner{
     position: absolute;
     top: 20%;
-    left:15%
+    left:20%;
+    display: flex
+}
+.appointmentheader{
+    display: flex;
+    gap: 35rem
 }
 

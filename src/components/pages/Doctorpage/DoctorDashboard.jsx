@@ -94,6 +94,7 @@ export const DoctorDashboard = () => {
           appointmentId={state.selectedAppointmentId}
           doctorName={doctorName}
           doctorId={doctorId}
+          onClose={()=>setState({...state,isCheckupFormOpen:false})}
         />
       </Popup>
       <Popup

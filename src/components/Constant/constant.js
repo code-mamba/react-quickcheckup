@@ -203,7 +203,7 @@ export const APPOINTMENT_FIELDS = (user,age, doctors, min, max) => [
     name: user.username,
     value:user.username,
     label: "Name",
-    disabled: true,
+    disabled: true, 
   },
   {
     id:2,
@@ -213,7 +213,7 @@ export const APPOINTMENT_FIELDS = (user,age, doctors, min, max) => [
     disabled: true
   },
   {
-    id: 2,
+    id: 3,
     name: "appointmentdate",
     type: "date",
     min: new Date().toISOString().split("T")[0],
@@ -222,7 +222,7 @@ export const APPOINTMENT_FIELDS = (user,age, doctors, min, max) => [
     required: true,
   },
   {
-    id: 3,
+    id: 4,
     name: "reason",
     type: "textarea",
     label: "Reason for appointment",
@@ -240,7 +240,7 @@ export const APPOINTMENT_FIELDS = (user,age, doctors, min, max) => [
     required: true
   },
   {
-    id: 5,
+    id: 6,
     label: "schedule Time",
     type: "time",
     name: "scheduledTime",
@@ -250,7 +250,7 @@ export const APPOINTMENT_FIELDS = (user,age, doctors, min, max) => [
     required: true
   },
   {
-    id: 6,
+    id: 7,
     label: "Did You take corona vaccination?",
     type: "radio",
     name: "vaccinated",
@@ -352,6 +352,35 @@ export const CHECKUP_INPUTS = [
     rows: "10",
   },
 ];
+
+export const DETAILEDAPPOINTMENT = [
+  {
+    id:1,
+    label: "Patient Name",
+    value: "appointment.username"
+  }
+]
+
+export const PATIENTAPPOINTMENTINFO = [
+  {label: "Appointment Id", key: "id"},
+  { label: "Name", key: "patientname" },
+  { label: "Age", key: "age" },
+  {label: "Gender", key: "gender"},
+  {label: "Blood Group", key:"bloodgroup"},
+  { label: "Is Corona Vaccinated", key: "vaccinated" },
+  { label: "Reason", key: "reason" },
+  { label: "Doctor Name", key: "doctorname" },
+  {label: "Specialist", key:"specialist"},
+  { label: "Appointment Date", key: "appointmentdate" },
+  { label: "Scheduled Time", key: "scheduledTime" }, 
+  { label: "Appointment Status", key: "status" },
+  { label: "Appointment Declined Reason", key: "declinedreason"},
+  { label: "Body Temperature", key: "checkupstatus.bodytemperature" },
+  { label: "Systolic Pressure", key: "checkupstatus.systolicpressure" },
+  { label: "Diastolic Pressure", key: "checkupstatus.diastolicpressure" },
+  { label: "Doctor Advice", key: "checkupstatus.doctoradvice" },
+  { label: "Medical Prescription", key: "checkupstatus.medicalprescription" },
+]
 
 export const PATIENT = "Patient";
 export const DOCTOR = "Doctor";

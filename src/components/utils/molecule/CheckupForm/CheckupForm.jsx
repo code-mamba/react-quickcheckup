@@ -35,6 +35,7 @@ const [values, setValues] = useState({
       console.error("Error:", error);
     }
     dispatch(fetchAppointmentsByDoctorId(props.doctorId))
+    props.onClose()
   };
   const onChange = (e) => {
     setValues((value) => ({

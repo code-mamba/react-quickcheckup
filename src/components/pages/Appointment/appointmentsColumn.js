@@ -26,7 +26,7 @@ export const APPOINTMENTS = (handleCheckup) =>[
           const navigate = useNavigate()
           return(
             <div>
-              <button onClick={()=>navigate('/detailedpage', {state:{appointmentData:row.original, columns:PATIENTAPPOINTMENTINFO}})}>More details</button>
+              <button onClick={()=>navigate('/detailedpage', {state:{appointmentData:[row.original], columns:PATIENTAPPOINTMENTINFO}})}>More details</button>
             </div>
           )
         }

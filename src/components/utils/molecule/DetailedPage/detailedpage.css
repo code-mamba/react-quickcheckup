@@ -1,7 +1,7 @@
 .detailedpage-content{
     position: relative;
     padding: 1rem;
-    font-size: 25px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     background-color: white;
@@ -9,7 +9,7 @@
 }
 .detailedpage{
     margin-bottom: 5rem;
-    padding: 10rem;
+    padding: 5rem;
 }
 
 .detailedepage-values{
@@ -19,4 +19,20 @@
 .label{
     color: brown;
     width: 500px;
+}
+.prev-button{
+    position: absolute;
+    top: 70%;
+    left: 0;
+    font-size: 80px;
+    width: 100px;
+    background: rgba(0, 0, 0, 0.3);
+}
+.next-button{
+    position: absolute;
+    top: 70%;
+    right: 0;
+    font-size: 80px;
+    width: 100px;
+    background: rgba(0, 0, 0, 0.3);
 }

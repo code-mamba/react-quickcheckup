@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { PATIENTAPPOINTMENTINFO } from "src/components/Constant/constant";
 import {
   Table,
   Popup,
@@ -22,12 +23,15 @@ import {
 import { dispatch } from "src/redux/store/store";
 import { PATIENTS_APPOINTMENTS } from "./patientsAppointmentColumn";
 import "./doctordashboard.css";
+import service from "src/services/service";
+import { useNavigate } from "react-router-dom";
 
 export const DoctorDashboard = () => {
   const user = useSelector(authSelector.getUserData);
   const doctorId = user?.id;
   const doctorName = user?.username;
   const appointments = useSelector(appointmentSelector.getMyAppointments);
+  const navigate = useNavigate()
 
   const [state, setState] = useState({
     isCheckupFormOpen: false,
@@ -57,17 +61,28 @@ export const DoctorDashboard = () => {
       selectedAppointmentId: appointmentId,
     });
 
-  const handleMedicalHistory = (patientId) =>
-    setState({
-      ...state,
-      isMedicalHistoryOpen: true,
-      selectedPatientId: patientId,
-    });
+    const handleMedicalHistory = async (patientId) => {
+      try {
+        const allAppointments = await service.get(`appointments?patientid=${patientId}`)
+        const checkedAppointment = await allAppointments.filter((appointment)=>appointment.status === "Checked")
+        if(checkedAppointment.length>0){
+          navigate('/detailedpage',{
+            state:{
+              appointmentData: checkedAppointment,
+              columns: PATIENTAPPOINTMENTINFO,
+              header: "Patient's Medical History"
+
+            }
+          })
+        }
+      }
+      catch(error){
+        console.error("Error fetching data:", error);
+      }
+    }
   useEffect(() => {
     dispatch(fetchAppointmentsByDoctorId(doctorId));
   }, []);
-
-  console.log("doctor check",appointments)
 
   return (
     <div className="doctor-page">

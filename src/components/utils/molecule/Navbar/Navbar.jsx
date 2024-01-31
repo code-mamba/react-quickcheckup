@@ -26,7 +26,7 @@ export const Navbar = () => {
 
   return (
     <nav>
-     {!isAuthenticated || userRole === PATIENT && <NavLink style={navLinkStyles} to="/">
+     {!isAuthenticated && <NavLink style={navLinkStyles} to="/">
         Home
       </NavLink>} 
 

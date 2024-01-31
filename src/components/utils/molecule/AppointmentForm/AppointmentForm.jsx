@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { FormInput } from "src/components/utils/atoms/FormInput/FormInput";
 import { Button } from "src/components/utils/atoms/Button/Button";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import {storage} from "src/utils/firebase"
 
 import { addAppointment } from "src/redux/slices/appointmentSlice";
 import { authSelector } from "src/redux/slices/authSlices";
@@ -23,6 +25,7 @@ export const AppointmentForm = (props) => {
 
   const [isConflict, setConflict] = useState("");
   const [snackbarMessage, setSnackbarMessage] = useState("")
+  const [progresspercent, setProgresspercent] = useState(0);
 
   const [values, setValues] = useState({
     patientname: `${user.username}`,
@@ -37,6 +40,7 @@ export const AppointmentForm = (props) => {
     specialist: "",
     startTime: "",
     endTime: "",
+    imgUrl: "",
     scheduledTime: "",
     vaccinated: "",
     status: "pending",
@@ -46,7 +50,31 @@ export const AppointmentForm = (props) => {
     setValues((value) => ({ ...value, [e.target.name]: e.target.value }));
     setConflict("")
   };
+  const fileUpload = async(e) =>{
+    console.log("changing")
+    e.preventDefault();
 
+      const file = e.target.files[0]
+      if(!file) return;
+      const storageRef = ref(storage, `file/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef,file);
+
+      uploadTask.on('state_changed', (snapshot)=>{
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        setProgresspercent(progress);
+      },
+      (error)=>{
+        alert(error);
+      },
+      ()=>{
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl)=>{
+          setValues((value)=>({...value,imgUrl:downloadUrl}))
+          console.log(values)
+        })
+      })
+    
+
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -97,7 +125,8 @@ export const AppointmentForm = (props) => {
             age,
             Doctors,
             values.startTime,
-            values.endTime
+            values.endTime,
+            fileUpload
           ).map((input) => (
             <div className="grid-item">
             <FormInput key={input.id} {...input} onChange={onChange} />
@@ -108,6 +137,7 @@ export const AppointmentForm = (props) => {
           )}
           {isConflict && <p className="conflict">{isConflict}</p>}
           </div>
+          <FormInput type="file" onChange={(e)=>fileUpload(e)}/>
           <Button label="Request Appointment" type="default" />
           
         </form>

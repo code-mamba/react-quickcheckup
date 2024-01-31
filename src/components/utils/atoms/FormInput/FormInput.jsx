@@ -1,24 +1,54 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./formInput.css";
 
 export const FormInput = (props) => {
-  const {
-    type,
-    label,
-    onChange,
-    id,
-    options,
-    rows,
-    labelkey,
-    valuekey,
-    name,
-    value,
-    min,
-    max,
-    required,
-    ...inputProps
-  } = props;
+  const { type, label, onChange, name, value, rows, min, max, required, options, labelkey, valuekey, errorMessage, image } = props;
   const [focused, setFocused] = useState(false);
+
+  const commonProps = {
+    name,
+    onChange,
+    onBlur: () => setFocused(true),
+    focused: focused.toString(),
+    required,
+  };
+
+  const renderInput = () => {
+    return (
+      <div className="formInput">
+        <label>{label}</label>
+        {type === "textarea" ? (
+          <>
+            <textarea {...commonProps} value={value} rows={rows}></textarea>
+          </>
+        ) : (
+          <>
+            <input {...commonProps} type={type} value={value} min={min} max={max} />
+          </>
+        )}
+        <span>{errorMessage}</span>
+      </div>
+    );
+  };
+
+  const renderSelect = () => {
+    return (
+      <div className="formInput">
+        <label>{label}</label>
+        <select {...commonProps}>
+        <option value="" disabled selected>
+            Select Here
+          </option>
+          {options.map((option) => (
+            <option key={option.id} value={option[valuekey]}>
+              {option[labelkey]}
+            </option>
+          ))}
+        </select>
+        <span>{errorMessage}</span>
+      </div>
+    );
+  };
 
   const renderRadioButtons = () => {
     return (
@@ -27,144 +57,26 @@ export const FormInput = (props) => {
         {options.map((option) => (
           <label key={option.label}>
             {option.label}
-            <input
-              type={type}
-              name={name}
-              value={option.value}
-              onChange={onChange}
-              required={required}
-            />
+            <input type={type} {...commonProps} value={option.value} />
           </label>
         ))}
       </div>
     );
   };
 
-  const renderSelect = () => {
-    return (
-      <>
-        <label>{label}</label>
-        <div>
-          <select name={name} onChange={onChange} required={required}>
-          <option value="" disabled selected>
-            Select Here
-          </option>
-            {options.map((option) => (
-              <option key={option.id} value={option[valuekey]}>
-                {option[labelkey]}
-              </option>
-            ))}
-          </select>
-          <span>{props.errorMessage}</span>
-        </div>
-      </>
-    );
-  };
-
   const renderRange = () => {
     return (
-      <>
-        <label>{props.label}</label>
+      <div className="formInput">
+        <label>{label}</label>
         <div className="rangeImage">
-          <img src={props.image} />
-          <input
-            type={type}
-            min={min}
-            max={max}
-            name={name}
-            onChange={onChange}
-            onBlur={() => setFocused(true)}
-            focused={focused.toString()}
-            required={required}
-          />
+          <img src={image} alt="range" />
+          <input type={type} {...commonProps} min={min} max={max} />
         </div>
-      </>
+      </div>
     );
   };
 
-  const renderInput = () => {
-    return (
-      <div className="formInput">
-        <label>{props.label}</label>
-        <input
-          name={name}
-          type={type}
-          value={value}
-          onChange={onChange}
-          onBlur={() => setFocused(true)}
-          focused={focused.toString()}
-          required={required}
-        />
-        <span>{props.errorMessage}</span>
-      </div>
-    );
-  };
-  const renderTextAreaInput = () => {
-    return (
-      <div className="formInput">
-        <label>{props.label}</label>
-        <textarea
-          name={name}
-          value={value}
-          rows={rows}
-          onChange={onChange}
-          onBlur={() => setFocused(true)}
-          focused={focused.toString()}
-          required={required}
-        ></textarea>
-        <span>{props.errorMessage}</span>
-      </div>
-    );
-  };
-  const renderTimeInput = () => {
-    return (
-      <div className="formInput">
-        <label>{props.label}</label>
-        <input
-          type={type}
-          name={name}
-          min={min}
-          max={max}
-          value={value}
-          onChange={onChange}
-          onBlur={() => setFocused(true)}
-          focused={focused.toString()}
-          required={required}
-        />
-        <span>{props.errorMessage}</span>
-      </div>
-    );
-  };
-  const renderDateInput = () => {
-    return (
-      <div className="formInput">
-        <label>{props.label}</label>
-        <input
-          type={type}
-          name={name}
-          min={min}
-          value={value}
-          onChange={onChange}
-          onBlur={() => setFocused(true)}
-          focused={focused.toString()}
-          required={required}
-        />
-        <span>{props.errorMessage}</span>
-      </div>
-    );
-  };
-  return type === "radio"
-    ? renderRadioButtons()
-    : type === "range"
-    ? renderRange()
-    : type === "select"
-    ? renderSelect()
-    : type === "textarea"
-    ? renderTextAreaInput()
-    : type === "date"
-    ? renderDateInput()
-    : type === "time"
-    ? renderTimeInput()
-    : renderInput();
+  return type === "radio" ? renderRadioButtons() : type === "range" ? renderRange() : type === "select" ? renderSelect() : renderInput();
 };
+
 export default FormInput;

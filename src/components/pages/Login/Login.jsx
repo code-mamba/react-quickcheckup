@@ -23,12 +23,11 @@ export const Login = () => {
 
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
     try{
-      const authMessage = await login(values,isAuthenticated,userData);
-    console.log(authMessage);
-    setSnackbarMessage(authMessage)
+      const authMessage = login(values,isAuthenticated,userData);
+      setSnackbarMessage(authMessage)
     }
     catch (error) {
       setSnackbarMessage("Login failed");

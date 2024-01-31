@@ -33,7 +33,6 @@ export const AppointmentPage = () => {
     setCheckupDetails(true);
   };
   const handleAppointment = () => {
-  
     setAppointmentOpen(true);
   };
   useEffect(() => {
@@ -43,17 +42,18 @@ export const AppointmentPage = () => {
   return (
     <>
       <div className="outer">
+      <Button
+            type="small"
+            label="Book Appointment"
+            onClick={handleAppointment}
+          />
         <div className="inner">
+       
           {appointments && appointments.length > 0 ? (
             <>
               <div>
                 <div className="appointmentheader">
                   <h1>Your Appointments</h1>
-                  <Button
-                    type="small"
-                    label="Book Appointment"
-                    onClick={handleAppointment}
-                  />
                 </div>
 
                 <Table
@@ -68,7 +68,9 @@ export const AppointmentPage = () => {
           <Popup
             isOpen={appointmentOpen}
             onClose={() => setAppointmentOpen(false)}
-            children={<AppointmentForm onClose={()=>setAppointmentOpen(false)}/>}
+            children={
+              <AppointmentForm onClose={() => setAppointmentOpen(false)} />
+            }
           />
 
           <Popup

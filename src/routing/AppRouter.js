@@ -15,9 +15,10 @@ import { DetailedPage } from "src/components/utils/molecule/DetailedPage/Detaile
 export const AppRouter = () =>{
 	const isAuthenticated = useSelector(authSelector.isAuthenticated);
 	const userRole = useSelector(authSelector.getUserRole);
+	
 	return(
 		<Routes>
-			<Route path="/" element={<Home/>}/>
+			{!isAuthenticated &&<Route path="/" element={<Home/>}/>}
 			{isAuthenticated && userRole === ADMIN && <Route path="/userslist" element={<UserList/>}/>}
 			{isAuthenticated && userRole === PATIENT && <Route path="/appointment" element ={<AppointmentPage/>}/>}
 			{isAuthenticated && userRole === ADMIN && <Route path="/createuser" element={<CreateUser/>}/>}

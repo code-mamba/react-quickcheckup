@@ -197,7 +197,7 @@ export const CREATE_USER_INPUT = [
   },
 ];
 
-export const APPOINTMENT_FIELDS = (user,age, doctors, min, max) => [
+export const APPOINTMENT_FIELDS = (user,age, doctors, min, max, handleUpload) => [
   {
     id: 1,
     name: user.username,
@@ -225,23 +225,24 @@ export const APPOINTMENT_FIELDS = (user,age, doctors, min, max) => [
     id: 4,
     name: "reason",
     type: "textarea",
-    label: "Reason for appointment",
+    label: "Reason For Appointment",
     errorMessage: "Please add a reason",
     required: true,
   },
   {
-    id: 4,
+    id: 5,
     label:"Select Doctor",
     name: "doctorid",
     type: "select",
     options: doctors,
     labelkey: "username",
     valuekey: "id",
+    errorMessage: "Please select doctor",
     required: true
   },
   {
     id: 6,
-    label: "schedule Time",
+    label: "Schedule Time",
     type: "time",
     name: "scheduledTime",
     min:min,
@@ -251,14 +252,23 @@ export const APPOINTMENT_FIELDS = (user,age, doctors, min, max) => [
   },
   {
     id: 7,
-    label: "Did You take corona vaccination?",
+    label: "Did You Take Corona Vaccination?",
     type: "radio",
     name: "vaccinated",
     options: [
       { value: "yes", label: "Yes" },
       { value: "no", label: "No" },
     ],
+    required: true
   },
+  // {
+  //   id:8,
+  //   label: "Upload Scan",
+  //   type: "file",
+  //   name: "file",
+  //   required: true,
+  //   onChange:(e)=>{handleUpload(e)}
+  // }
 ];
 
 export const USERS = [
@@ -380,6 +390,7 @@ export const PATIENTAPPOINTMENTINFO = [
   { label: "Diastolic Pressure", key: "checkupstatus.diastolicpressure" },
   { label: "Doctor Advice", key: "checkupstatus.doctoradvice" },
   { label: "Medical Prescription", key: "checkupstatus.medicalprescription" },
+  {label: "Scan Reports", key: "imgUrl"}
 ]
 
 export const PATIENT = "Patient";

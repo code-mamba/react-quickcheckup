@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import service from "src/services/service";
 
@@ -72,7 +73,24 @@ export const approveAppointment = createAsyncThunk(
     }
   }
 );
-
+export const changeTime = createAsyncThunk(
+  "appointments/changeTime",
+  async({appointmentId,time}) =>{
+    console.log("time2",time)
+    try{
+      const updatedTime = await service.patch("appointments", appointmentId,
+      {
+        status:"Rescheduled",
+        scheduledTime:time  
+      }
+      )
+     }
+     catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+)
 export const declineAppointment = createAsyncThunk(
   "appointments/declineAppointment",
   async ({appointmentId, declineData}) => {
@@ -134,6 +152,7 @@ const appointmentSlice = createSlice({
       ...state,
       error: error.message,
     }));
+
 
     builder.addCase(declineAppointment.fulfilled, (state, { payload }) => ({
       ...state,

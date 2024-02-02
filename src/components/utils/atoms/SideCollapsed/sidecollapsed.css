@@ -23,11 +23,11 @@
   .toggle-btn {
     top: 50%;
     position: fixed;
-    background: #d0e0f5;
+    background: #225da4;
     border: none;
-    color: black;
+    color: white;
     cursor: pointer;
-    font-size: 2em;
+    font-size: 3em;
     padding: 10px;
     margin-bottom: 10px;
   }

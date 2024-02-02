@@ -12,6 +12,7 @@ export const Navbar = () => {
   const navigate = useNavigate()
   const navLinkStyles = ({ isActive }) => {
     return {
+      color: "white",
       fontWeight: isActive ? "bold" : "normal",
     };
   };
@@ -25,29 +26,36 @@ export const Navbar = () => {
   }
 
   return (
-    <nav>
-     {!isAuthenticated && <NavLink style={navLinkStyles} to="/">
-        Home
-      </NavLink>} 
-
-      {isAuthenticated && userRole === ADMIN && (
-        <NavLink style={navLinkStyles} to="/userslist">
-          UsersList
-        </NavLink>
-      )}
-      {isAuthenticated && userRole === ADMIN &&(
-          <NavLink style={navLinkStyles} to="/createuser">
-          Create User
-        </NavLink>
-      )}
-      {isAuthenticated && userRole === PATIENT && (
-        <NavLink style={navLinkStyles} to="/appointment">Appointment</NavLink>
-      )}
-      {isAuthenticated && userRole === DOCTOR &&(
-        <NavLink style={navLinkStyles} to="/doctorDashboard">My Appointments</NavLink>
-      )}
-
-      {isAuthenticated && <NavLink style={navLinkStyles} onClick={handleLogout} to="">Logout</NavLink>}
-    </nav>
+    <>
+    {isAuthenticated &&(
+       <nav className="navbar-container">
+       {!isAuthenticated && <NavLink style={navLinkStyles} to="/">
+          Home
+        </NavLink>} 
+  
+        {isAuthenticated && userRole === ADMIN && (
+          <NavLink style={navLinkStyles} to="/userslist">
+            UsersList
+          </NavLink>
+        )}
+        {isAuthenticated && userRole === ADMIN &&(
+            <NavLink style={navLinkStyles} to="/createuser">
+            Create User
+          </NavLink>
+        )}
+        {isAuthenticated && userRole === PATIENT && (
+          <NavLink style={navLinkStyles} to="/appointment">Appointment</NavLink>
+        )}
+        {isAuthenticated && userRole === DOCTOR &&(
+          <NavLink style={navLinkStyles} to="/doctorDashboard">My Appointments</NavLink>
+        )}
+  
+        {isAuthenticated && <NavLink style={navLinkStyles} onClick={handleLogout} to="">Logout</NavLink>}
+        <div className="thinline">
+        </div>
+      </nav>
+    )}
+   
+    </>
   );
 };

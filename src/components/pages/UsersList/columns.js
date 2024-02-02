@@ -16,10 +16,6 @@ export const USERS_COLUMNS = [
         accessor: 'dob',
     },
     {
-        Header: 'Password',
-        accessor: 'password'
-    },
-    {
         Header: 'Contact',
         accessor: 'contact'
     },

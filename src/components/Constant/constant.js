@@ -138,6 +138,7 @@ export const DOCTOR_CREATION_FIELDS = [
     id: 4,
     name: "specialist",
     type: "select",
+    label: "Select Speciality",
     options: [
       { id: 1, value: "Dermatologist" },
       { id: 2, value: "Neurologist" },
@@ -152,8 +153,8 @@ export const DOCTOR_CREATION_FIELDS = [
   },
 ];
 
-export const PATIENT_DEFAULT_PWD = "Patient123";
-export const DOCTOR_DEFAULT_PWD = "Doctor123";
+export const PATIENT_DEFAULT_PWD = process.env.REACT_APP_PATIENT_DEFAULT_PWD;
+export const DOCTOR_DEFAULT_PWD = process.env.REACT_APP_DOCTOR_DEFAULT_PWD;
 
 export const BLOOD_GROUP = [
   { id: 1, value: "O+" },
@@ -165,6 +166,7 @@ export const BLOOD_GROUP = [
   { id: 7, value: "AB+" },
   { id: 8, value: "AB-" },
 ];
+
 
 export const CREATE_USER_INPUT = [
   {
@@ -261,19 +263,12 @@ export const APPOINTMENT_FIELDS = (user,age, doctors, min, max, handleUpload) =>
     ],
     required: true
   },
-  // {
-  //   id:8,
-  //   label: "Upload Scan",
-  //   type: "file",
-  //   name: "file",
-  //   required: true,
-  //   onChange:(e)=>{handleUpload(e)}
-  // }
 ];
 
 export const USERS = [
-  { id: 1, value: "Patient" },
-  { id: 2, value: "Doctor" },
+  {id:1, value: "All" },
+  { id: 2, value: "Patient" },
+  { id: 3, value: "Doctor" },
 ];
 export const DOCTOR_DETAILS = [
   {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./sidecollapsed.css";
 
 export const CollapsedSidebar = (props) => {
-  const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setSidebarCollapsed] = useState(true);
 
   const toggleSidebar = () => {
     setSidebarCollapsed(!isSidebarCollapsed);

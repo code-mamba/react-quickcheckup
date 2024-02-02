@@ -1,6 +1,6 @@
 .main-banner{
 	background: url("../../../assets/images/new.jpg");
-	height: 70vh;
+	height: 80vh;
 	background-size: cover;
 	background-position: center;
 	filter: brightness(65%);
@@ -11,13 +11,13 @@
 .banner-content {
 	text-align: left;
 	z-index: 1;
-	color: #fff; /* Text color */
+	color: #fff;
 	padding: 20px;
 
 	
   }
   .banner-content h1 {
-	font-size: 2.5em; /* Adjust the font size as needed */
+	font-size: 2.5em; 
 	margin-bottom: 10px;
   }
   .banner-content h2{

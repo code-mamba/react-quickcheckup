@@ -3,7 +3,7 @@ import axios from 'src/utils/axiosConfig'
 
 class Service {
   constructor() {
-    this.domain = "http://localhost:5000";
+    this.domain = process.env.REACT_APP_API_BASE_URL;
   }
 
   joinURL(baseURL, url) {

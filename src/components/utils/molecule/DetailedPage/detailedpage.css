@@ -1,3 +1,12 @@
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    
+}
+
 .detailedpage-content{
     position: relative;
     padding: 1rem;
@@ -8,8 +17,7 @@
 
 }
 .detailedpage{
-    margin-bottom: 5rem;
-    padding: 5rem;
+ width: 70%;
 }
 
 .detailedepage-values{

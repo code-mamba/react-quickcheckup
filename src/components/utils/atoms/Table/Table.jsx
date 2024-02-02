@@ -29,16 +29,22 @@ export const Table = ({ columns, data }) => {
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-              })}
-            </tr>
-          );
-        })}
+      {rows.length === 0 ? (
+          <tr>
+            <td colSpan={columns.length}>No Records Found</td>
+          </tr>
+        ) : (
+          rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                ))}
+              </tr>
+            );
+          })
+        )}
       </tbody>
     </table>
   );

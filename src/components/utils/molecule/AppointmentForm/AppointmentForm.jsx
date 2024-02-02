@@ -91,7 +91,7 @@ export const AppointmentForm = (props) => {
         props.onClose()
       }
     } catch (error) {
-      setSnackbarMessage("Unable to request Aappointment")
+      setSnackbarMessage("Unable to request Appointment")
     }
     
   };

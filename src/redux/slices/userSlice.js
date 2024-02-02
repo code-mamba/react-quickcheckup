@@ -25,11 +25,17 @@ export const fetchUserById = createAsyncThunk(
   }
 );
 export const addUser = createAsyncThunk("users.addUser", async (data) => {
-  try {
+  console.log(data)
+  try{
+    const existingUser = await service.get(`users?email=${data.email}`)
+    if(existingUser.length>0){
+      throw new Error("User with provided email already exists")
+    }
     const user = await service.post("users", data);
-    return user;
-  } catch (e) {
-    console.log(e);
+    return user
+  }
+   catch (e) {
+    throw e
   }
 });
 

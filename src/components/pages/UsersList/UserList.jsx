@@ -11,28 +11,45 @@ import {
 import { dispatch } from "src/redux/store/store";
 import { USERS_COLUMNS } from "./columns";
 import "./userlist.css";
+import { FormInput } from "src/components/utils/atoms";
+import { USERS } from "src/components/Constant/constant";
 
 export const UserList = () => {
-
+  const [selectedRole, setSelectedRole] = useState("All");
   const [isPopupOpen, setPopupOpen] = useState(false)
   const users = useSelector((state) => {
     return state.users.users;
   });
 
+  const filterUsersByRole = (role) => {
+    if (role === "All") {
+      return users;
+    } else {
+      return users.filter((user) => user.userrole === role);
+    }
+  };
+  const handleChangeRole = (e) => {
+    setSelectedRole(e.target.value);
+  };
+
+
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []);
+  }, [selectedRole]);
 
   const closePopup = () => {
     setPopupOpen(false);
   };
-
-  console.log(users)
+  const filteredUsers = filterUsersByRole(selectedRole);
   return (
     <>
+    <div className="userList">
+    <FormInput valuekey="value" labelkey="value"  type="select" onChange={handleChangeRole} options={USERS}></FormInput>
       <div className="container">
-      {users && <Table columns ={USERS_COLUMNS} data={users} />} 
+
+      {filteredUsers && <Table columns ={USERS_COLUMNS} data={filteredUsers} />} 
         <Popup isOpen={isPopupOpen} onClose={closePopup} children={<Edit/>}/>
+      </div>
       </div>
     </>
   );

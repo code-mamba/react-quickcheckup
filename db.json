@@ -34,22 +34,6 @@
       "id": "384b"
     },
     {
-      "id": "ef29",
-      "username": "Dinesh",
-      "email": "dinesh2000@gmail.com",
-      "dob": "",
-      "contact": "",
-      "userrole": "Patient"
-    },
-    {
-      "id": "a4d0",
-      "username": "Dinesh",
-      "email": "dinesh2000@gmail.com",
-      "dob": "",
-      "contact": "",
-      "userrole": "Patient"
-    },
-    {
       "id": "2149",
       "username": "PrashanthBaskaran",
       "email": "prashanthbaskaran007@gmail.com",
@@ -96,6 +80,22 @@
       "userrole": "Patient",
       "address": "cuddalore",
       "bloodgroup": "AB+"
+    },
+    {
+      "id": "cd84",
+      "username": "Dr Prakash",
+      "email": "prakash87@gmail.com",
+      "password": "Doctor123",
+      "contact": "9897896789",
+      "specialist": "Gynecologist"
+    },
+    {
+      "id": "c9d5",
+      "username": "Dr Kumar",
+      "email": "kumar87@gmail.com",
+      "password": "Doctor123,",
+      "contact": "8964534567",
+      "specialist": "Dermatologist"
     }
   ],
   "appointments": [
@@ -113,6 +113,7 @@
       "specialist": "cardiac specialist",
       "startTime": "10:00",
       "endTime": "17:00",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/react-firebase-storage-205af.appspot.com/o/file%2Fbone.jpeg?alt=media&token=8d999713-a795-45d4-a231-9484b5640a5f",
       "scheduledTime": "12:59",
       "vaccinated": "yes",
       "status": "Checked",
@@ -126,7 +127,6 @@
         "medicalprescription": "paracetomol -500\n\ninsuline 250ml/day"
       }
     },
-
     {
       "id": "231d",
       "patientname": "MadhanKumar",
@@ -142,6 +142,54 @@
       "startTime": "09:00",
       "endTime": "17:00",
       "imgUrl": "https://firebasestorage.googleapis.com/v0/b/react-firebase-storage-205af.appspot.com/o/file%2Fbone.jpeg?alt=media&token=8d999713-a795-45d4-a231-9484b5640a5f",
+      "scheduledTime": "12:00",
+      "vaccinated": "yes",
+      "status": "Approved",
+      "declinedreason": ""
+    },
+    {
+      "id": "9c42",
+      "patientname": "ArthiMeganathan",
+      "age": "22",
+      "gender": "Female",
+      "bloodgroup": "AB+",
+      "patientid": "58ad",
+      "appointmentdate": "2024-02-01",
+      "reason": "body pain",
+      "doctorid": "383a",
+      "doctorname": "Dr Dinesh P",
+      "specialist": "Cardiology",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/react-firebase-storage-205af.appspot.com/o/file%2Fbone.jpeg?alt=media&token=a993eda6-0413-4a51-b923-8d4e55f7a3c2",
+      "scheduledTime": "12:00",
+      "vaccinated": "yes",
+      "status": "Checked",
+      "checkupstatus": {
+        "bodytemperature": "99",
+        "systolicpressure": "96",
+        "diastolicpressure": "88",
+        "sugarlevel": "120",
+        "doctoradvice": "    Take medicines as prescribed.\n    Do exercise as suggested.\n    Follow diet as planned for you.\n    Go for review on the given date.\n    Keep a positive mind that you are in good hands.\n    Whether medicines or surgery, it will take a while to show the positive results.",
+        "medicalprescription": "20ml syrup after food coughvol\n\n2 tabs bf food"
+      }
+    },
+    {
+      "22": "2",
+      "id": "31f6",
+      "patientname": "MadhanKumar",
+      "age": "22",
+      "gender": "Male",
+      "bloodgroup": "A+",
+      "patientid": "5687",
+      "appointmentdate": "2024-02-01",
+      "reason": "Neck pain",
+      "doctorid": "384b",
+      "doctorname": "Dr DanyRaj",
+      "specialist": "cardiac specialist",
+      "startTime": "10:00",
+      "endTime": "17:00",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/react-firebase-storage-205af.appspot.com/o/file%2Fcsc-neck-xray.jpg?alt=media&token=0317b950-5160-49f9-aacc-47315a971a79",
       "scheduledTime": "12:00",
       "vaccinated": "yes",
       "status": "pending"

@@ -41,7 +41,6 @@ export const CreateUser = () => {
     e.preventDefault();
     const userData = userType === PATIENT ? values[PATIENT] : values[DOCTOR];
     dispatch(addUser(userData));
-    console.log(userData);
   };
   const onChange = (e) => {
     setValues((value) => ({

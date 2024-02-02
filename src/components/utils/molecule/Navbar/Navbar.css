@@ -1,12 +1,26 @@
 nav{
-	background-color: lightcyan;
-	padding: 2rem 32px;
+	background-color: #225da4;
+	/* padding: 2rem 32px; */
 	font-size: 1.2rem;
+	font-weight: lighter;
 	text-decoration: none;
 
 
 }
+.navbar-container{
+	position: relative;
+	padding: 2rem 0;
+}
 nav a {
+	padding-left: 2rem;
 	margin-right: 5rem;
 	text-decoration: none;
+}
+.thinline{
+	position: absolute;
+	bottom: 0;
+	height: 5px;
+	width: 100%;
+	background-color: white;
+	
 }

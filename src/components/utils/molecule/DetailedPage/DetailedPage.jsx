@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { farenheitFormatter } from "src/utils/farenheitformatter";
+import { ImageToPdfConverter } from "src/utils/imageToPdfConverter";
 import { formatTime } from "src/utils/time";
 import "./detailedpage.css";
 
-export const DetailedPage = (props) => {
+export const DetailedPage = () => {
   const location = useLocation();
   const { appointmentData, columns, header } = location.state || {};
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,12 +20,28 @@ export const DetailedPage = (props) => {
           .split(".")
           .reduce((acc, curr) => acc?.[curr], appointmentData[currentIndex])
       : undefined;
-    if(key === "imgUrl"){
-      return(<img src={value} alt="img"/>)
-    }
+  
+    if (key === "imgUrl") {
+      return (
+      <>
+      <img width={"300px"} src={value} alt="" />
+      <ImageToPdfConverter/>
+      </>);
+    } else if (key === "checkupstatus.bodytemperature") {
+      if(value){
+        return farenheitFormatter(value)
+      }
+      else{
+        return "Not available"
+      }
 
-    return value !== undefined && value !== null ? value : "Nil";
+    } else if (key === "scheduledTime") {
+      return formatTime(value);
+    }
+  
+    return value !== undefined && value !== null ? value : "Not available";
   };
+  
 
   const handleNextAppointment = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % appointmentData.length);
@@ -37,13 +54,14 @@ export const DetailedPage = (props) => {
     );
   };
 
-  console.log(appointmentData)
   return (
     <div>
-      <h1>{header}</h1>
+      
 
       {appointmentData.length > 0 ? (
         <>
+        <div className="main">
+        <h1>{header}</h1>
           <div className="detailedpage">
             {columns.map((column) => (
               <div key={column.label} className="detailedpage-content">
@@ -73,11 +91,11 @@ export const DetailedPage = (props) => {
               )}
             </div>
           </div>
+          </div>
         </>
       ) : (
         <p>Data not available</p>
       )}
-      {console.log(farenheitFormatter(100))}
     </div>
   );
 };

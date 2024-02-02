@@ -1,13 +1,12 @@
 .doctor-page{
     display: flex;
     /* background-color: aliceblue; */
-    width: 100%;
-    height: 100%;
+    margin-top: 6rem;
+    align-items: center;
+    justify-content: center;
 }
 .appointment-list {
-    height: 100%;
-    width: 100%;
-    padding: 5rem;
+ 
 }
 .doctor-detailsform{
     height: 100%;   

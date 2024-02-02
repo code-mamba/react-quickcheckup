@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import {
   Table,
   Popup,
-  CollapsedSidebar,
   Button,
 } from "src/components/utils/atoms/index";
 import {

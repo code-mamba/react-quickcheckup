@@ -19,14 +19,13 @@ export const ImageToPdfConverter = () => {
       }
     } catch (error) {
       console.error("Error converting image to Data URL:", error);
-      console.error("Error details:", error);
     }
   };
 
   const convertUrlToDataUrl = (url) => {
     return new Promise((resolve, reject) => {
       const img = new Image();
-      img.crossOrigin = "Anonymous"; // Enable cross-origin request
+      img.crossOrigin = "Anonymous";
       img.onload = () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');

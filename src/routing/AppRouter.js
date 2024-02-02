@@ -19,11 +19,11 @@ export const AppRouter = () =>{
 	return(
 		<Routes>
 			{!isAuthenticated &&<Route path="/" element={<Home/>}/>}
-			{isAuthenticated && userRole === ADMIN && <Route path="/userslist" element={<UserList/>}/>}
-			{isAuthenticated && userRole === PATIENT && <Route path="/appointment" element ={<AppointmentPage/>}/>}
-			{isAuthenticated && userRole === ADMIN && <Route path="/createuser" element={<CreateUser/>}/>}
-			{isAuthenticated && userRole === DOCTOR && <Route path="/doctorDashboard" element={<DoctorDashboard/>}/>}
-			{isAuthenticated && <Route path="/detailedpage" element={<DetailedPage/>}/>}
+			{isAuthenticated && userRole === ADMIN && <Route path="/userslist" element={<React.Suspense fallback="Loading"><UserList/></React.Suspense>}/>}
+			{isAuthenticated && userRole === PATIENT && <Route path="/appointment" element ={<React.Suspense fallback="Loading"><AppointmentPage/></React.Suspense>}/>}
+			{isAuthenticated && userRole === ADMIN && <Route path="/createuser" element={<React.Suspense fallback="Loading"><CreateUser/></React.Suspense>}/>}
+			{isAuthenticated && userRole === DOCTOR && <Route path="/doctorDashboard" element={<React.Suspense fallback="Loading"><DoctorDashboard/></React.Suspense>}/>}
+			{isAuthenticated && <Route path="/detailedpage" element={<React.Suspense fallback="Loading"><DetailedPage/></React.Suspense>}/>}
 			<Route path="/login" element={
 			<React.Suspense fallback="Loading">
 			<Login/>

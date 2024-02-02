@@ -9,24 +9,28 @@
 
 .detailedpage-content{
     position: relative;
-    padding: 1rem;
+    padding: 4rem 4rem 1rem 2rem;
     font-size: 20px;
-    display: flex;
     align-items: center;
     background-color: white;
 
 }
 .detailedpage{
- width: 70%;
+ display: grid;
+ grid-template-columns: auto auto auto;
+ padding: 20px;
+ background-color: white;
 }
 
 .detailedepage-values{
-    align-items: center;    
-    width: 700px
+    text-align: justify; 
+    max-width: 500px;   
+    
 }
 .label{
     color: brown;
     width: 500px;
+    font-weight: bold;
 }
 .prev-button{
     position: absolute;

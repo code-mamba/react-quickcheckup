@@ -56,9 +56,7 @@ export const DetailedPage = () => {
 
   return (
     <div>
-      
-
-      {appointmentData.length > 0 ? (
+        {appointmentData.length > 0 ? (
         <>
         <div className="main">
         <h1>{header}</h1>

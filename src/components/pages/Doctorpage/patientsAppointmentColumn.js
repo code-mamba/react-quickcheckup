@@ -129,7 +129,7 @@ const handleRescheduleCancel = () =>{
               </div>
             </>
           )}
-          {row.original.status === "Approved"||"Rescheduled" ? (
+          {row.original.status === "Approved"||row.original.status ==="Rescheduled" ? (
             <Button
               onClick={() => handleCheckupForm(row.original.id)}
               label="Checkup"

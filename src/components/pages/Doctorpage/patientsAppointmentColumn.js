@@ -3,13 +3,16 @@ import { formatTime } from "src/utils/time";
 import { Tag } from "src/components/utils/atoms/Tag/Tag";
 import { useNavigate } from "react-router-dom";
 import { PATIENTAPPOINTMENTINFO } from "src/components/Constant/constant";
-import Snackbar from "src/components/utils/atoms/Snackbar/Snackbar";
 
 import { authSelector } from "src/redux/slices/authSlices";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { dispatch } from "src/redux/store/store";
-import { changeTime, fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
+import {
+  changeTime,
+  fetchAppointmentsByDoctorId,
+} from "src/redux/slices/appointmentSlice";
+import Toast from "src/components/utils/atoms/Toast/Toast";
 
 export const PATIENTS_APPOINTMENTS = (
   handleMedicalHistory,
@@ -18,31 +21,32 @@ export const PATIENTS_APPOINTMENTS = (
 ) => {
   const [showReschuduleInput, setShowRescheduleInput] = useState(false);
   const [newScheduledTime, setNewScheduledTime] = useState("");
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [toastVariant, setToastVariant] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
   const user = useSelector(authSelector.getUserData);
-  const doctorId = user?.id
+  const doctorId = user?.id;
 
   const handleRescheduleClick = () => {
     setShowRescheduleInput(true);
   };
-  const handleRescheduleConfirm = (appointmentId) =>{
-    console.log("Time",newScheduledTime)
-    dispatch(changeTime({appointmentId,time:newScheduledTime}))
-    dispatch(fetchAppointmentsByDoctorId(doctorId))
-    setSnackbarMessage("Appointment rescheduled successfully");
-    setShowSnackbar(true)
-    setShowRescheduleInput(false)
-  }
-const handleRescheduleCancel = () =>{
-  setShowRescheduleInput(false);
-}
-  return[
+  const handleRescheduleConfirm = (appointmentId) => {
+    dispatch(changeTime({ appointmentId, time: newScheduledTime }));
+    dispatch(fetchAppointmentsByDoctorId(doctorId));
+    setToastMessage("Appointment rescheduled successfully");
+    setToastVariant("success");
+    setShowRescheduleInput(false);
+  };
+  const handleRescheduleCancel = () => {
+    setShowRescheduleInput(false);
+  };
+
+  
+  return [
     {
       Header: "Patient Name",
       accessor: "patientname",
     },
-  
+
     {
       Header: "Appointment Date",
       accessor: "appointmentdate",
@@ -50,29 +54,44 @@ const handleRescheduleCancel = () =>{
     {
       Header: "Requested Time",
       accessor: "scheduledTime",
-      Cell: ({ value,row }) =>(
+      Cell: ({ value, row }) => (
         <div>
-          {formatTime(value)}
-          {row.original.status === "pending" &&(
+          <div>{formatTime(value)}</div>
+          {row.original.status === "pending" && (
             <>
-            <button onClick={handleRescheduleClick}>
-              Reschedule
-            </button>
-            {showReschuduleInput && (
-              <>
-              <input
-                type="time"
-                value={newScheduledTime}
-                onChange={(e) => setNewScheduledTime(e.target.value)}
-              />
-              <button onClick={()=>handleRescheduleConfirm(row.original.id)}>Confirm</button>
-              <button onClick={handleRescheduleCancel}>Cancel</button>
-            </>
-            )}
+              {!showReschuduleInput && (
+                <Button
+                  variant="freeze"
+                  label="Reschedule"
+                  onClick={handleRescheduleClick}
+                />
+              )}
+
+              {showReschuduleInput && (
+                <>
+                  <input
+                    type="time"
+                    value={newScheduledTime}
+                    onChange={(e) => setNewScheduledTime(e.target.value)}
+                  />
+                  <div>
+                    <Button
+                      variant="success"
+                      label="Confirm"
+                      onClick={() => handleRescheduleConfirm(row.original.id)}
+                    />
+                    <Button
+                      variant="danger"
+                      label="Cancel"
+                      onClick={handleRescheduleCancel}
+                    />
+                  </div>
+                </>
+              )}
             </>
           )}
         </div>
-      )
+      ),
     },
     {
       Header: "appointment detail",
@@ -80,7 +99,9 @@ const handleRescheduleCancel = () =>{
         const navigate = useNavigate();
         return (
           <div>
-            <button
+            <Button
+              label="More Detail"
+              variant="secondaryOutlined"
               onClick={() =>
                 navigate("/detailedpage", {
                   state: {
@@ -90,9 +111,7 @@ const handleRescheduleCancel = () =>{
                   },
                 })
               }
-            >
-              More detail
-            </button>
+            />
           </div>
         );
       },
@@ -103,7 +122,7 @@ const handleRescheduleCancel = () =>{
         <Button
           label="Checkup Medical History"
           onClick={() => handleMedicalHistory(original.patientid)}
-          type="small"
+          variant="secondary"
         />
       ),
     },
@@ -113,44 +132,49 @@ const handleRescheduleCancel = () =>{
         <div className="botton-container">
           {row.original.status === "pending" && (
             <>
-              <div>
-                <Button
-                  onClick={() => handleAction(row.original.id, "approve")}
-                  type="small"
-                  label="Approve"
-                />
-              </div>
-              <div>
-                <Button
-                  onClick={() => handleAction(row.original.id, "decline")}
-                  type="small"
-                  label="Decline"
-                />
+              <div
+                style={{ display: "flex", flexDirection: "row", gap: "1rem" }}
+              >
+                <div>
+                  <Button
+                    onClick={() => handleAction(row.original.id, "approve")}
+                    variant="success"
+                    label="Approve"
+                  />
+                </div>
+                <div>
+                  <Button
+                    onClick={() => handleAction(row.original.id, "decline")}
+                    variant="danger"
+                    label="Decline"
+                  />
+                </div>
               </div>
             </>
           )}
-          {row.original.status === "Approved"||row.original.status ==="Rescheduled" ? (
+          {row.original.status === "Approved" ||
+          row.original.status === "Rescheduled" ? (
             <Button
               onClick={() => handleCheckupForm(row.original.id)}
               label="Checkup"
+              variant="primary"
             />
           ) : row.original.status === "Checked" ? (
             <div>
-              <Tag label="Checked" color="green" />
+              <Tag label="Checked" variant="success" />
             </div>
           ) : row.original.status === "Declined" ? (
-            <Tag label="Declined" color="red" />
+            <Tag label="Declined" variant="danger" />
           ) : null}
-                {showSnackbar && (
-        <Snackbar
-          message={snackbarMessage}
-          onClose={() => setShowSnackbar(false)}
-        />
-      )}
-
+          {toastMessage && (
+            <Toast
+              message={toastMessage}
+              onClose={() => setToastMessage("")}
+              variant={toastVariant}
+            />
+          )}
         </div>
       ),
     },
   ];
-   
-}
+};

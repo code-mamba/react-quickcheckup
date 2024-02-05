@@ -1,9 +1,8 @@
-import "./button.css"
+import StyledButton from "./button";
 export const Button = (props) => {
-	const buttonClass = `button-${props.type}`
   return (
-    <button className={buttonClass} onClick={props.onClick}>
+    <StyledButton variant={props.variant} onClick={props.onClick}>
       {props.label}
-    </button>
+    </StyledButton>
   );
 };

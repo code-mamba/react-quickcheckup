@@ -70,7 +70,7 @@ const [values, setValues] = useState({
             </div>
           ))}
         </div>
-        <Button type="default" label="Submit" />
+        <Button variant="default" label="Submit" />
       </form>
     </div>
   );

@@ -120,6 +120,7 @@ export const DoctorDashboard = () => {
         <DeclineForm
           appointmentId={state.selectedAppointmentId}
           doctorId={doctorId}
+          onClose={() => setState({ ...state, declineForm: false })}
         />
       </Popup>
       <Popup

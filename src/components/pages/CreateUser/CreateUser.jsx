@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button, FormInput, Select } from "src/components/utils/atoms/index";
 
-import { addUser } from "src/redux/slices/userSlice";
+import { addUser, fetchUsers } from "src/redux/slices/userSlice";
 import { dispatch } from "src/redux/store/store";
 import {
   PATIENT,
@@ -41,6 +41,7 @@ export const CreateUser = () => {
     e.preventDefault();
     const userData = userType === PATIENT ? values[PATIENT] : values[DOCTOR];
     dispatch(addUser(userData));
+    dispatch(fetchUsers())
   };
   const onChange = (e) => {
     setValues((value) => ({
@@ -51,8 +52,6 @@ export const CreateUser = () => {
   const selectChange = (e) => {
     setUserType(e.target.value);
   };
-
-  console.log(userType);
 
   return (
     <div className="createuser">
@@ -84,7 +83,7 @@ export const CreateUser = () => {
                 onChange={onChange}
               />
             ))}
-          <Button onChange={handleSubmit} type="small" label="Add User" />
+          <Button onChange={handleSubmit} variant={'default'} label="Add User" />
         </form>
       </div>
     </div>

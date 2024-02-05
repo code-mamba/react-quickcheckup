@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { ADMIN, PATIENT, DOCTOR } from "src/components/Constant/constant";
 import { authSelector, logout } from "src/redux/slices/authSlices";
 import { dispatch } from "src/redux/store/store";
-import Snackbar from "../../atoms/Snackbar/Snackbar";
+import Snackbar from "../../atoms/Toast/Toast";
 import "./Navbar.css";
 
 export const Navbar = () => {
@@ -14,6 +14,7 @@ export const Navbar = () => {
     return {
       color: "white",
       fontWeight: isActive ? "bold" : "normal",
+      fontSize: "25px"
     };
   };
 

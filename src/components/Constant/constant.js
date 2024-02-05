@@ -33,6 +33,7 @@ export const PATIENT_CREATION_FIELDS = [
     type: "text",
     placeholder: "Enter Patient Name",
     label: "Patient Name",
+    errorMessage: "Enter Patient Name",
     required: true,
   },
   {

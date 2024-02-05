@@ -7,7 +7,6 @@ export const addAppointment = createAsyncThunk(
   async (data) => {
     try {
       const appointment = await service.post("appointments", data);
-      console.log(appointment);
       return appointment;
     } catch (e) {
       console.log(e);

@@ -1,19 +1,19 @@
 import jsPDF from "jspdf";
+import { Button } from "src/components/utils/atoms";
 
-export const ImageToPdfConverter = () => {
+
+export const ImageToPdfConverter = (props) => {
   const convertImageToPdf = async () => {
-    const imageUrl = "https://firebasestorage.googleapis.com/v0/b/react-firebase-storage-205af.appspot.com/o/file%2Fbone.jpeg?alt=media&token=8d999713-a795-45d4-a231-9484b5640a5f";
+    const imageUrl = props.imgUrl;
     const doc = new jsPDF();
+    const downloadTime = new Date().toLocaleString();
 
     try {
       const dataUrl = await convertUrlToDataUrl(imageUrl);
 
       if (dataUrl) {
-        // Add the image to the PDF
         doc.addImage(dataUrl, 'JPEG', 10, 10, 180, 180);
-
-        // Save the PDF
-        doc.save('image.pdf');
+        doc.save(`${downloadTime}`);
       } else {
         console.error("Data URL is empty or undefined.");
       }
@@ -39,7 +39,9 @@ export const ImageToPdfConverter = () => {
     });
   };
 
-  return (
-    <button onClick={convertImageToPdf}>Convert image to pdf</button>
+  return (<>
+    <img src={props.imgUrl} height="500px" width="500px" alt="scanreport"/>
+    <Button label="Download Pdf" variant="success" onClick={convertImageToPdf} />
+    </>
   );
 };

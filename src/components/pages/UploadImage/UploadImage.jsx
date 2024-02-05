@@ -31,7 +31,6 @@ const handleSubmit = (e) =>{
       }
     )
 }
-console.log(imgUrl)
    return(
     <>
     <form className="form" onSubmit={handleSubmit}>

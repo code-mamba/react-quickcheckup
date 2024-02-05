@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { FormInput } from "src/components/utils/atoms/FormInput/FormInput";
 import { Button } from "src/components/utils/atoms/Button/Button";
+import Toast from "../../atoms/Toast/Toast";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import {storage} from "src/utils/firebase"
 
@@ -16,7 +17,7 @@ import { dispatch } from "src/redux/store/store";
 import { checkAppointmentConflicts } from "src/utils/appointmentUtils";
 import "./appointmentform.css";
 import { TimeRange } from "./TimeRange/TimeRange";
-import Snackbar from "../../atoms/Snackbar/Snackbar";
+
 
 export const AppointmentForm = (props) => {
   const user = useSelector(authSelector.getUserData);
@@ -24,7 +25,8 @@ export const AppointmentForm = (props) => {
   const Doctors = useSelector(userSelector.getDoctors);
 
   const [isConflict, setConflict] = useState("");
-  const [snackbarMessage, setSnackbarMessage] = useState("")
+  const [toastMessage, setToastMessage] = useState("")
+  const [toastVariant, setToastVariant] = useState("")
   const [progresspercent, setProgresspercent] = useState(0);
 
   const [values, setValues] = useState({
@@ -51,7 +53,6 @@ export const AppointmentForm = (props) => {
     setConflict("")
   };
   const fileUpload = async(e) =>{
-    console.log("changing")
     e.preventDefault();
 
       const file = e.target.files[0]
@@ -69,7 +70,6 @@ export const AppointmentForm = (props) => {
       ()=>{
         getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl)=>{
           setValues((value)=>({...value,imgUrl:downloadUrl}))
-          console.log(values)
         })
       })
     
@@ -87,11 +87,13 @@ export const AppointmentForm = (props) => {
         setConflict("conflict found! Please choose diferent time or date");
       } else {
         dispatch(addAppointment(values));
-        setSnackbarMessage("Appointment Requested")
-        props.onClose()
+        setToastMessage("Appointment Requested")
+        setToastVariant("success")
+        await props.onClose()
       }
     } catch (error) {
-      setSnackbarMessage("Unable to request Appointment")
+      setToastMessage("Unable to request Appointment");
+      setToastVariant("decline")
     }
     
   };
@@ -114,6 +116,7 @@ export const AppointmentForm = (props) => {
   }, [values.doctorid]);
 
   return (
+    <>
     <div>
       {Doctors && (
         
@@ -138,12 +141,13 @@ export const AppointmentForm = (props) => {
           {isConflict && <p className="conflict">{isConflict}</p>}
           </div>
           <FormInput type="file" onChange={(e)=>fileUpload(e)}/>
-          <Button label="Request Appointment" type="default" />
+          <Button label="Request Appointment" variant="default" />
           
         </form>
         
       )}
-      {snackbarMessage &&(<Snackbar message={snackbarMessage} onClose={()=>setSnackbarMessage("")}/>)}
     </div>
+    {toastMessage &&(<Toast message={toastMessage} variant={toastVariant} onClose={()=>setToastMessage("")}/>)}
+    </>
   );
 };

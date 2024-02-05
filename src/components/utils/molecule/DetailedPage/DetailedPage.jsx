@@ -24,8 +24,7 @@ export const DetailedPage = () => {
     if (key === "imgUrl") {
       return (
       <>
-      <img width={"300px"} src={value} alt="" />
-      <ImageToPdfConverter/>
+      {value &&<ImageToPdfConverter imgUrl={value} />}
       </>);
     } else if (key === "checkupstatus.bodytemperature") {
       if(value){

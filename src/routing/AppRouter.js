@@ -1,5 +1,5 @@
-import React from "react";
-import {Routes, Route} from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import {Routes, Route, useNavigate} from 'react-router-dom'
 import { UserList } from "src/components/pages/UsersList/UserList";
 import { Home } from "../components/pages/Home/Home";
 import { Login } from "../components/pages/Login/Login";
@@ -15,14 +15,35 @@ import { DetailedPage } from "src/components/utils/molecule/DetailedPage/Detaile
 export const AppRouter = () =>{
 	const isAuthenticated = useSelector(authSelector.isAuthenticated);
 	const userRole = useSelector(authSelector.getUserRole);
+	const [isLoggedin, setIsLoggedIn] = useState(isAuthenticated)
+	const navigate = useNavigate()
 	
+
+    
+	useEffect(() => {
+		if (isAuthenticated) {
+		  switch (userRole) {
+			case ADMIN:
+			  navigate("/userslist");
+			  break;
+			case PATIENT:
+			  navigate("/appointment");
+			  break;
+			case DOCTOR:
+			  navigate("/doctorDashboard");
+			  break;
+			default:
+			  console.log("Unknown user role");
+		  }
+		}
+	  }, [isLoggedin, userRole, isAuthenticated]);
 	return(
 		<Routes>
 			{!isAuthenticated &&<Route path="/" element={<Home/>}/>}
 			{isAuthenticated && userRole === ADMIN && <Route path="/userslist" element={<React.Suspense fallback="Loading"><UserList/></React.Suspense>}/>}
 			{isAuthenticated && userRole === PATIENT && <Route path="/appointment" element ={<React.Suspense fallback="Loading"><AppointmentPage/></React.Suspense>}/>}
 			{isAuthenticated && userRole === ADMIN && <Route path="/createuser" element={<React.Suspense fallback="Loading"><CreateUser/></React.Suspense>}/>}
-			{isAuthenticated && userRole === DOCTOR && <Route path="/doctorDashboard" element={<React.Suspense fallback="Loading"><DoctorDashboard/></React.Suspense>}/>}
+			{isAuthenticated&& userRole === DOCTOR && <Route path="/doctorDashboard" element={<React.Suspense fallback="Loading"><DoctorDashboard/></React.Suspense>}/>}
 			{isAuthenticated && <Route path="/detailedpage" element={<React.Suspense fallback="Loading"><DetailedPage/></React.Suspense>}/>}
 			<Route path="/login" element={
 			<React.Suspense fallback="Loading">

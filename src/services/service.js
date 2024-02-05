@@ -19,7 +19,6 @@ class Service {
         url,
         data: data ? { ...data } : undefined,
       });
-      // console.log("fromget",response)
       return response;
     } catch (error) {
       throw error.response ? error.response.data : error.message;
@@ -53,8 +52,6 @@ class Service {
   }
   patch(url, id, data){
     const method = "PATCH";
-    console.log("patching")
-    console.log(url,id,data)
     if(id){
       url = `${url}/${id}`
     }

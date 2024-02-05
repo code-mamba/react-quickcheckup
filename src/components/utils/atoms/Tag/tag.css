@@ -1,8 +1,8 @@
 .tag-red{
     color: red;
     /* background-color: lightcoral; */
-    /* border: 1px solid red; */
-    border-radius: 10px;
+    border: 1px solid red;
+    border-radius: px ;
     padding: 0.5rem;
     font-weight: bold;
     width: 100px;

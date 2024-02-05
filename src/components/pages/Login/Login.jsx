@@ -5,17 +5,18 @@ import { FormInput } from "src/components/utils/atoms/FormInput/FormInput";
 
 import { useSelector } from "react-redux";
 import { authSelector } from "src/redux/slices/authSlices";
-import { login } from "src/services/authService";
 import {
   LOGIN_INPUT,
 } from "src/components/Constant/constant";
 import "./login.css";
-import Snackbar from "src/components/utils/atoms/Snackbar/Snackbar";
+import Toast from "src/components/utils/atoms/Toast/Toast";
+import { login } from "src/services/authService";
 
 export const Login = () => {
   const isAuthenticated = useSelector(authSelector.isAuthenticated);
   let userData = useSelector(authSelector.getUserData);
-  const [snackbarMessage, setSnackbarMessage] = useState()
+  const [toastMessage, setToastMessage] = useState()
+  const [toastVariant, setToastVariant] = useState("")
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -23,17 +24,23 @@ export const Login = () => {
 
   });
 
-  const handleSubmit =  (e) => {
+  const handleSubmit =  async (e) => {
     e.preventDefault();
     try{
-      const authMessage = login(values,isAuthenticated,userData);
-      setSnackbarMessage(authMessage)
+      login(values, isAuthenticated, userData)
+      if(isAuthenticated){
+        setToastMessage('Successfully Logged in')
+        setToastVariant("success")
+      }
+      else{
+        setToastMessage("wrong credentials or user doesn't exist")
+        setToastVariant("decline")
+      }
+
     }
     catch (error) {
-      setSnackbarMessage("Login failed");
-    }
-    
-    
+      setToastMessage("Login failed");
+    }  
   };
 
   const onChange = (e) => {
@@ -43,7 +50,7 @@ export const Login = () => {
     }))
   };
 
-  return (
+  return (<>
     <div className="loginform">
       <form onSubmit={handleSubmit}>
       <h1>Login</h1>
@@ -51,9 +58,11 @@ export const Login = () => {
           <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
         ))}
 
-        <Button type="default" label="Submit" />
+        <Button variant={"default"} label="Submit" />
       </form>
-      {snackbarMessage && (<Snackbar message={snackbarMessage} onClose={()=>setSnackbarMessage(null)}></Snackbar>)}
+      
     </div>
+    {toastMessage && (<Toast message={toastMessage} onClose={()=>setToastMessage(null)} variant={toastVariant}></Toast>)}
+    </>
   );
 };

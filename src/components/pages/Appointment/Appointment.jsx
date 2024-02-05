@@ -6,6 +6,7 @@ import {
   Popup,
   Button,
 } from "src/components/utils/atoms/index";
+import { NoDataFound } from "src/components/utils/atoms/NoDataFound/NoDataFound";
 import {
   AppointmentForm,
   CheckupDetails,
@@ -42,13 +43,14 @@ export const AppointmentPage = () => {
     <>
       <div className="outer">
       <Button
-            type="small"
+            variant="primary"
             label="Book Appointment"
             onClick={handleAppointment}
           />
         <div className="inner">
        
-          {appointments && appointments.length > 0 ? (
+          {appointments && appointments.length > 0 ?
+           (
             <>
               <div>
                 <div className="appointmentheader">
@@ -62,7 +64,7 @@ export const AppointmentPage = () => {
               </div>
             </>
           ) : (
-            <p>No appointments available</p>
+            <NoDataFound/>
           )}
           <Popup
             isOpen={appointmentOpen}

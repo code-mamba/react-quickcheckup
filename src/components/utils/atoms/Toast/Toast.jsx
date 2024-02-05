@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import "./snackbar.css"
+import StyledToast from "./toast";
 
-const Snackbar = ({message, onClose}) => {
+
+const Toast = ({message, onClose, variant}) => {
     const[visible, setVisible] = useState(true);
 
     useEffect(()=>{
@@ -11,20 +12,17 @@ const Snackbar = ({message, onClose}) => {
         },3000)
         return()=> clearTimeout(timer)
     })
-    console.log(message)
-    console.log(message)
-    console.log(message)
+
     const handleClose = () =>{
         setVisible(false)
         onClose();
     }
     return visible ? (
-        <div className="snackbar">
-            <p>{message}</p>
-            <button onClick={handleClose}>Close</button>
-
-        </div>
+       <StyledToast variant={variant}>
+        <p>{message}</p>
+        <button onClick={handleClose}>Close</button>
+       </StyledToast>
     ):null
 }
 
-export default Snackbar
+export default Toast

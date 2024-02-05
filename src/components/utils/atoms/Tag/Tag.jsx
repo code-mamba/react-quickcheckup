@@ -1,8 +1,8 @@
-import "./tag.css"
+import StyledTag from "./tag"
 export const Tag = (props) =>{
     return(
-        <div className={`tag-${props.color}`}>
+        <StyledTag variant={props.variant}>
             {props.label}
-        </div>
+        </StyledTag>
     )
 }

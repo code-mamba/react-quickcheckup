@@ -15,8 +15,8 @@
       "dob": "1987-01-17",
       "contact": "8907656789",
       "password": "Doctor123",
-      "from": "09:00",
-      "to": "06:00",
+      "from": "15:00",
+      "to": "20:00",
       "userrole": "Doctor",
       "id": "383a"
     },
@@ -39,7 +39,7 @@
       "password": "Patient123",
       "dob": "1997-01-09",
       "contact": "9940136415",
-      "gender": "Female",
+      "gender": "Male",
       "userrole": "Patient",
       "address": "Ekkattuthangal",
       "bloodgroup": "A+"
@@ -99,13 +99,69 @@
       "password": "Patient123",
       "dob": "2002-10-25",
       "contact": "7890987678",
-      "gender": "Male",
+      "gender": "Female",
       "userrole": "Patient",
       "address": "Porur",
       "bloodgroup": "A+"
+    },
+    {
+      "id": "b2b6",
+      "username": "Prakash",
+      "email": "prakash87@gmail.com",
+      "password": "Doctor123",
+      "contact": "9887937890",
+      "specialist": "Neurologist"
     }
   ],
   "appointments": [
-    
+    {
+      "id": "cb9b",
+      "patientname": "Subash",
+      "age": "22",
+      "gender": "Male",
+      "bloodgroup": "A-",
+      "patientid": "af95",
+      "appointmentdate": "2024-02-05",
+      "reason": "fever",
+      "doctorid": "383a",
+      "doctorname": "Dr Dinesh P",
+      "startTime": "09:00",
+      "endTime": "18:00",
+      "imgUrl": "",
+      "scheduledTime": "12:00",
+      "vaccinated": "yes",
+      "status": "Approved",
+      "declinedreason": "",
+      "checkupstatus": {
+        "bodytemperature": "100",
+        "systolicpressure": "80",
+        "diastolicpressure": "85",
+        "sugarlevel": "100",
+        "doctoradvice": "Eat veggies",
+        "medicalprescription": [
+          "tablet 1 bf food",
+          "tablet 2 after food",
+          "tablet 3 after food"
+        ]
+      }
+    },
+    {
+      "id": "bb9f",
+      "patientname": "Vidhya",
+      "age": "21",
+      "gender": "Female",
+      "bloodgroup": "A+",
+      "patientid": "d2f9",
+      "appointmentdate": "2024-02-07",
+      "reason": "fever",
+      "doctorid": "383a",
+      "doctorname": "Dr Dinesh P",
+      "startTime": "15:00",
+      "endTime": "20:00",
+      "imgUrl": "",
+      "scheduledTime": "17:00",
+      "vaccinated": "yes",
+      "status": "Rescheduled"
+    }
   ]
 }

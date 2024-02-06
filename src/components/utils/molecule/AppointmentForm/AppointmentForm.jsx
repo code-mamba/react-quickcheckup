@@ -119,7 +119,6 @@ export const AppointmentForm = (props) => {
     <>
     <div>
       {Doctors && (
-        
         <form onSubmit={handleSubmit}>
           <h1>Book Appointment</h1>
           <div className="grid-container">
@@ -140,7 +139,7 @@ export const AppointmentForm = (props) => {
           )}
           {isConflict && <p className="conflict">{isConflict}</p>}
           </div>
-          <FormInput type="file" onChange={(e)=>fileUpload(e)}/>
+          <FormInput label="Upload Scan" type="file" onChange={(e)=>fileUpload(e)}/>
           <Button label="Request Appointment" variant="default" />
           
         </form>

@@ -26,16 +26,16 @@ instance.interceptors.response.use(
     (error)=>{
         switch(error.response?.status){
             case 400:
-                return Promise.reject({ message: 'Bad Request' });
+                throw Promise.reject({ message: 'Bad Request' });
             case 404:
-                return Promise.reject({ message: 'Not Found' });
+                throw Promise.reject({ message: 'Not Found' });
             case 409:
-                return Promise.reject(error.response?.data)
+                throw Promise.reject(error.response?.data)
             case 401:
-                return Promise.reject({ message: 'Conflict' });
+                throw Promise.reject({ message: 'Conflict' });
             case 500:
             case 502:
-                return Promise.reject("Something went wrong. Please Try again")
+                throw Promise.reject("Something went wrong. Please Try again")
             default:
               
         }

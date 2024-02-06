@@ -44,7 +44,9 @@ export const UserList = () => {
   return (
     <>
     <div className="userList">
+    <div className="select-users">
     <FormInput valuekey="value" labelkey="value"  type="select" onChange={handleChangeRole} options={USERS}></FormInput>
+    </div>
       <div className="container">
 
       {filteredUsers && <Table columns ={USERS_COLUMNS} data={filteredUsers} />} 

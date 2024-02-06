@@ -1,4 +1,7 @@
+import { farenheitFormatter } from "src/utils/farenheitformatter";
+import { mmHgFormatter } from "src/utils/mmHgFormatter";
 import { CONTACT_REGEX, PASSWORD_REGEX } from "src/utils/regexPatterns";
+import { sugarLevelFormatter } from "src/utils/sugarlevelFormatter";
 import { formatTime } from "src/utils/time";
 
 export const LOGIN_INPUT = [
@@ -267,8 +270,8 @@ export const APPOINTMENT_FIELDS = (user,age, doctors, min, max, handleUpload) =>
 ];
 
 export const USERS = [
-  {id:1, value: "All" },
-  { id: 2, value: "Patient" },
+ 
+  { id: 1, value: "Patient" },
   { id: 3, value: "Doctor" },
 ];
 export const DOCTOR_DETAILS = [
@@ -312,7 +315,8 @@ export const CHECKUP_INPUTS = [
     name: "bodytemperature",
     type: "number",
     step: "0.1",
-    label: "Body temperature",
+    label: `Body temperature (${farenheitFormatter("")} )`,
+    errorMessage: "Please Fill the Body Temperature",
     required: true,
   },
   {
@@ -322,23 +326,25 @@ export const CHECKUP_INPUTS = [
     type: "range",
     min: "0",
     max: "250",
-    label: "Systolic Pressure",
+    label: `Systolic Pressure (${mmHgFormatter('')} )`,
+    errorMessage: "Fill The Systolic Pressure",
     required: true,
   },
   {
     id: 3,
     name: "diastolicpressure",
     image: "https://www.askapollo.com/assets/pro-health-new/weight.svg",
-    label: "Diastolic Pressure",
+    label: `Diastolic Pressure (${mmHgFormatter('')} )`,
     type: "range",
     min: "0",
     max: "250",
+    errorMessage:"Fill The Diastolic Pressure",
     required: true,
   },
   {
     id: 4,
     type: "number",
-    label: "Sugar Level",
+    label: `Sugar Level (${sugarLevelFormatter('')} )`,
     name: "sugarlevel",
     min: "0",
   },
@@ -347,16 +353,18 @@ export const CHECKUP_INPUTS = [
     type: "textarea",
     label: "Doctor Advice",
     name: "doctoradvice",
+    errorMessage: "Please Fill Your Advice",
     required: true,
     rows: "10",
+    cols: "800"
   },
-  {
-    id: 6,
-    type: "textarea",
-    label: "Medical Prescription",
-    name: "medicalprescription",
-    rows: "10",
-  },
+  // {
+  //   id: 6,
+  //   type: "textarea",
+  //   label: "Medical Prescription",
+  //   name: "medicalprescription",
+  //   rows: "10",
+  // },
 ];
 
 export const DETAILEDAPPOINTMENT = [
@@ -366,8 +374,7 @@ export const DETAILEDAPPOINTMENT = [
     value: "appointment.username"
   }
 ]
-
-export const PATIENTAPPOINTMENTINFO = [
+export const APPOINTMENTINFO = [
   {label: "Appointment Id", key: "id"},
   { label: "Name", key: "patientname" },
   { label: "Age", key: "age" },
@@ -384,6 +391,27 @@ export const PATIENTAPPOINTMENTINFO = [
   { label: "Body Temperature", key: "checkupstatus.bodytemperature" },
   { label: "Systolic Pressure", key: "checkupstatus.systolicpressure" },
   { label: "Diastolic Pressure", key: "checkupstatus.diastolicpressure" },
+  {label: "Sugar Level", key: "checkupstatus.sugarlevel"},
+  { label: "Doctor Advice", key: "checkupstatus.doctoradvice" },
+  { label: "Medical Prescription", key: "checkupstatus.medicalprescription" },
+  {label: "Scan Reports", key: "imgUrl"}
+
+]
+
+export const PATIENTAPPOINTMENTINFO = [
+  { label: "Patient Name", key: "patientname" },
+  { label: "Patient Age", key: "age" },
+  {label: "Gender", key: "gender"},
+  {label: "Blood Group", key:"bloodgroup"},
+  { label: "Is Corona Vaccinated", key: "vaccinated" },
+  { label: "Reason", key: "reason" },
+  { label: "Doctor Name", key: "doctorname" },
+  {label: "Specialist", key:"specialist"},
+  { label: "Appointment Date", key: "appointmentdate" },
+  { label: "Body Temperature", key: "checkupstatus.bodytemperature" },
+  { label: "Systolic Pressure", key: "checkupstatus.systolicpressure" },
+  { label: "Diastolic Pressure", key: "checkupstatus.diastolicpressure" },
+  {label: "Sugar Level", key: "checkupstatus.sugarlevel"},
   { label: "Doctor Advice", key: "checkupstatus.doctoradvice" },
   { label: "Medical Prescription", key: "checkupstatus.medicalprescription" },
   {label: "Scan Reports", key: "imgUrl"}

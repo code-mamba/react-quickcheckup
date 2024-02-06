@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { farenheitFormatter } from "src/utils/farenheitformatter";
 import { ImageToPdfConverter } from "src/utils/imageToPdfConverter";
+import { mmHgFormatter } from "src/utils/mmHgFormatter";
+import { sugarLevelFormatter } from "src/utils/sugarlevelFormatter";
 import { formatTime } from "src/utils/time";
 import "./detailedpage.css";
 
@@ -22,25 +24,23 @@ export const DetailedPage = () => {
       : undefined;
   
     if (key === "imgUrl") {
-      return (
-      <>
-      {value &&<ImageToPdfConverter imgUrl={value} />}
-      </>);
+      return <>{value && <ImageToPdfConverter imgUrl={value} />}</>;
     } else if (key === "checkupstatus.bodytemperature") {
-      if(value){
-        return farenheitFormatter(value)
+      if (value) {
+        return farenheitFormatter(value);
       }
-      else{
-        return "Not available"
-      }
-
+    } else if (key === "checkupstatus.systolicpressure") {
+      return mmHgFormatter(value);
+    } else if (key === "checkupstatus.diastolicpressure") {
+      return mmHgFormatter(value);
+    } else if (key === "checkupstatus.sugarlevel") {
+      return sugarLevelFormatter(value);
     } else if (key === "scheduledTime") {
       return formatTime(value);
     }
   
     return value !== undefined && value !== null ? value : "Not available";
   };
-  
 
   const handleNextAppointment = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % appointmentData.length);

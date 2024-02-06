@@ -57,17 +57,20 @@ export const Table = ({ columns, data, pageSize = 5 }) => {
           )}
         </tbody>
       </table>
-      <div className="pagination">
-        <button className="previous" onClick={() => changePage(currentPage - 1)} disabled={currentPage === 0}>
-          Previous
-        </button>
-        <p>
-          Page {currentPage + 1} of {pages}
-        </p>
-        <button className="next" onClick={() => changePage(currentPage + 1)} disabled={currentPage === pages - 1}>
-          Next
-        </button>
-      </div>
+      {pages>1 &&(
+           <div className="pagination">
+           <button className="previous" onClick={() => changePage(currentPage - 1)} disabled={currentPage === 0}>
+             Previous
+           </button>
+           <p>
+             Page {currentPage + 1} of {pages}
+           </p>
+           <button className="next" onClick={() => changePage(currentPage + 1)} disabled={currentPage === pages - 1}>
+             Next
+           </button>
+         </div>
+      )}
+   
     </div>
   );
 };

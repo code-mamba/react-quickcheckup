@@ -13,9 +13,11 @@ export const calculateBp = (systolic, diastolic)=> {
      
       case (systolic >= 140 || diastolic >= 90):
           return 'Hypertension Stage 2';
+      case (systolic >=180 || diastolic >= 120):
+          return 'Hypertensive Crisis';
         
       default:
-          return 'Hypertensive Crisis';
+          return 'Invalid';
   }
 
   
@@ -24,9 +26,9 @@ export const calculateBp = (systolic, diastolic)=> {
     switch (true) {
       case fahrenheit <= 95:
         return 'Low (Hypothermia)';
-      case fahrenheit >= 95.1 && fahrenheit <= 96.9:
+      case fahrenheit >= 95.1 && fahrenheit <= 97.9:
         return 'Low-normal';
-      case fahrenheit >= 98.6 && fahrenheit <= 100.4:
+      case fahrenheit >= 98.0 && fahrenheit <= 100.4:
         return 'Normal-low grade fever';
       case fahrenheit > 100.4 && fahrenheit <= 103:
         return 'Fever';

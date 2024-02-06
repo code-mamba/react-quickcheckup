@@ -7,6 +7,10 @@ import "./checkupform.css";
 import { fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
 import { calculateBodyTemperature, calculateBp } from "src/utils/checkupfunctionalities";
 import { dispatch } from "src/redux/store/store";
+import DynamicList from "../../atoms/DynamicList/DynamicList";
+import { farenheitFormatter } from "src/utils/farenheitformatter";
+import { mmHgFormatter } from "src/utils/mmHgFormatter";
+import { sugarLevelFormatter } from "src/utils/sugarlevelFormatter";
 export const CheckupForm = (props) => {
   
 const [values, setValues] = useState({
@@ -15,11 +19,14 @@ const [values, setValues] = useState({
     diastolicpressure: "",
     sugarlevel: "",
     doctoradvice: "",
-    medicalprescription: "",
+    medicalprescription: [],
+    
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(values)
 
     try {
       const updatedCheckup = await service.patch(
@@ -43,20 +50,28 @@ const [values, setValues] = useState({
       [e.target.name]: e.target.value,
     }));
   };
-
+const handleMedicalPrescription = (medicineListValues) =>{
+  setValues((prevValues)=>({
+    ...prevValues,
+    medicalprescription: medicineListValues
+  }))
+}
   return (
     <div>
       <h1>Checkup</h1>
-      <p>
-        Systolic: {values.systolicpressure} Diastolic:{values.diastolicpressure}
-      </p>
-      <p>
+      <h3>
+        Systolic: {mmHgFormatter(values.systolicpressure) } Diastolic:{mmHgFormatter(values.diastolicpressure)  }
+      </h3>
+      <h3>
         Blood Pressure:{" "}
         {calculateBp(values.systolicpressure, values.diastolicpressure)}
-      </p>
-      <p>
-        Body Temp: {calculateBodyTemperature(values.bodytemperature)}
-      </p>
+      </h3>
+      <h3>
+        Body Temp: {farenheitFormatter(values.bodytemperature)}  {calculateBodyTemperature(values.bodytemperature)}
+      </h3>
+      <h3>
+        Sugar level:{sugarLevelFormatter(values.sugarlevel)}
+      </h3>
       <form onSubmit={handleSubmit}>
         <div className="grid-container">
           {CHECKUP_INPUTS.map((input) => (
@@ -70,6 +85,7 @@ const [values, setValues] = useState({
             </div>
           ))}
         </div>
+        <DynamicList label="Medical Prescription" values={values.medicalprescription} setValues={handleMedicalPrescription}/>
         <Button variant="default" label="Submit" />
       </form>
     </div>

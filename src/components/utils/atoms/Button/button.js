@@ -34,21 +34,21 @@ const StyledButton = styled.button`
       case "secondary":
         return css`
           ${commonStyles}
-          border-radius: 10px;
-          background-color: #517fef;  
+          background-color: #5686c1;  
           color: white;
         `;
       case "success":
         return css`
           ${commonStyles}
-          background-color: #4caf50;
+          background-color: #5686c1;
           color: white;
         `;
       case "danger":
         return css`
           ${commonStyles}
-          background-color: #e52a51;
-          color: white;
+          background-color: white;
+          color: #5686c1;
+          border: 1px solid #5686c1;
         `;
       case "secondaryOutlined":
         return css`

@@ -6,6 +6,10 @@ import { Button } from "../../atoms/Button/Button";
 import { FormInput } from "../../atoms/FormInput/FormInput";
 import  Toast  from "src/components/utils/atoms/Toast/Toast";
 import service from "src/services/service";
+import { doctorService } from "src/services/doctorService";
+import { dispatch } from "src/redux/store/store";
+import { fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
+
 
 export const DoctorForm = () => {
   const user = useSelector(authSelector.getUserData);
@@ -17,8 +21,9 @@ export const DoctorForm = () => {
     email: `${user.email}`,
     dob: `${user.dob}`,
     contact: `${user.contact}`,
-    from: "",
-    to: "",
+    password: `${user.password}`,
+    from:`${user.from}`,
+    to: `${user.to}`,
     userrole: `${user.userrole}`,
   });
 
@@ -30,8 +35,16 @@ export const DoctorForm = () => {
     service
       .put("users", user.id, values)
       .then((res) => {
-        setToastMessage("Updated Success Message");
+        setToastMessage("Time Updated Successfully");
         setToastVariant("success");
+        doctorService.declineAllAppointments(user.id)
+        .then(()=>{
+          dispatch(fetchAppointmentsByDoctorId(user.id))
+
+        }).catch(()=>{
+          setToastMessage("Unable to decline appointments");
+          setToastVariant('decline')
+        })
       })
       .catch((err) => {
         setToastMessage("Unable to update");

@@ -1,4 +1,6 @@
 import { farenheitFormatter } from "src/utils/farenheitformatter";
+import { mmHgFormatter } from "src/utils/mmHgFormatter";
+import { sugarLevelFormatter } from "src/utils/sugarlevelFormatter";
 
 export const CHECKUPDETAILSCOLUMN =[
     {
@@ -8,15 +10,18 @@ export const CHECKUPDETAILSCOLUMN =[
     },
     {
         Header: "Systolic Pressure",
-        accessor: "systolicpressure"
+        accessor: "systolicpressure",
+        Cell:({value}) =>mmHgFormatter(value)
     },
     {
         Header: "Diastolic Pressure",
-        accessor: "diastolicpressure"
+        accessor: "diastolicpressure",
+        Cell:({value}) =>mmHgFormatter(value)
     },
     {
         Header: "Sugar Level",
-        accessor: "sugarlevel"
+        accessor: "sugarlevel",
+        Cell:({value}) => sugarLevelFormatter(value)
     },
    
 ]

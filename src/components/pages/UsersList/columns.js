@@ -4,7 +4,7 @@ export const USERS_COLUMNS = [
         accessor: 'id'
     },
     {
-        Header: 'Username',
+        Header: 'Name',
         accessor: 'username',
     },
     {

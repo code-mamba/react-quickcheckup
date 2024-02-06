@@ -8,11 +8,9 @@ import { authSelector } from "src/redux/slices/authSlices";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { dispatch } from "src/redux/store/store";
-import {
-  changeTime,
-  fetchAppointmentsByDoctorId,
-} from "src/redux/slices/appointmentSlice";
+import { fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
 import Toast from "src/components/utils/atoms/Toast/Toast";
+import { doctorService } from "src/services/doctorService";
 
 export const PATIENTS_APPOINTMENTS = (
   handleMedicalHistory,
@@ -30,17 +28,22 @@ export const PATIENTS_APPOINTMENTS = (
     setShowRescheduleInput(true);
   };
   const handleRescheduleConfirm = (appointmentId) => {
-    dispatch(changeTime({ appointmentId, time: newScheduledTime }));
-    dispatch(fetchAppointmentsByDoctorId(doctorId));
-    setToastMessage("Appointment rescheduled successfully");
-    setToastVariant("success");
+    doctorService
+      .rescheduleAppointment({ appointmentId, time: newScheduledTime })
+      .then(() => {
+        dispatch(fetchAppointmentsByDoctorId(doctorId));
+      })
+      .then(() => {
+        setToastMessage("Appointment rescheduled successfully");
+        setToastVariant("success");
+      });
     setShowRescheduleInput(false);
   };
+
   const handleRescheduleCancel = () => {
     setShowRescheduleInput(false);
   };
 
-  
   return [
     {
       Header: "Patient Name",
@@ -61,7 +64,7 @@ export const PATIENTS_APPOINTMENTS = (
             <>
               {!showReschuduleInput && (
                 <Button
-                  variant="freeze"
+                  variant="secondary"
                   label="Reschedule"
                   onClick={handleRescheduleClick}
                 />
@@ -94,13 +97,13 @@ export const PATIENTS_APPOINTMENTS = (
       ),
     },
     {
-      Header: "appointment detail",
+      Header: "Appointment Details",
       Cell: ({ row }) => {
         const navigate = useNavigate();
         return (
           <div>
             <Button
-              label="More Detail"
+              label="More Details"
               variant="secondaryOutlined"
               onClick={() =>
                 navigate("/detailedpage", {
@@ -136,17 +139,18 @@ export const PATIENTS_APPOINTMENTS = (
                 style={{ display: "flex", flexDirection: "row", gap: "1rem" }}
               >
                 <div>
-                  <Button
-                    onClick={() => handleAction(row.original.id, "approve")}
-                    variant="success"
-                    label="Approve"
-                  />
-                </div>
-                <div>
-                  <Button
+                <Button
                     onClick={() => handleAction(row.original.id, "decline")}
                     variant="danger"
                     label="Decline"
+                  />
+                 
+                </div>
+                <div>
+                <Button
+                    onClick={() => handleAction(row.original.id, "approve")}
+                    variant="success"
+                    label="Approve"
                   />
                 </div>
               </div>

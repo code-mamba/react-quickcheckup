@@ -2,7 +2,23 @@ import React, { useState } from "react";
 import "./formInput.css";
 
 export const FormInput = (props) => {
-  const { type, label, onChange, name, value, rows, min, max, required, options, labelkey, valuekey, errorMessage, image } = props;
+  const {
+    type,
+    label,
+    onChange,
+    name,
+    value,
+    rows,
+    cols,
+    min,
+    max,
+    required,
+    options,
+    labelkey,
+    valuekey,
+    errorMessage,
+    image,
+  } = props;
   const [focused, setFocused] = useState(false);
 
   const commonProps = {
@@ -16,14 +32,28 @@ export const FormInput = (props) => {
   const renderInput = () => {
     return (
       <div className="formInput">
-        <label>{label}</label>
+        <div className="label-container">
+          <label>{label}</label>
+          {required && <div className="required-element">*</div>}
+        </div>
         {type === "textarea" ? (
           <>
-            <textarea {...commonProps} value={value} rows={rows}></textarea>
+            <textarea
+              {...commonProps}
+              value={value}
+              rows={rows}
+              cols={cols}
+            ></textarea>
           </>
         ) : (
           <>
-            <input {...commonProps} type={type} value={value} min={min} max={max} />
+            <input
+              {...commonProps}
+              type={type}
+              value={value}
+              min={min}
+              max={max}
+            />
           </>
         )}
         <span>{errorMessage}</span>
@@ -34,9 +64,12 @@ export const FormInput = (props) => {
   const renderSelect = () => {
     return (
       <div className="formInput">
-        <label>{label}</label>
+        <div className="label-container">
+          <label>{label}</label>
+          {required && <div className="required-element">*</div>}
+        </div>
         <select {...commonProps}>
-        <option value="" disabled selected>
+          <option value="" disabled selected>
             Select Here
           </option>
           {options.map((option) => (
@@ -53,13 +86,17 @@ export const FormInput = (props) => {
   const renderRadioButtons = () => {
     return (
       <div className="formInput">
-        <label>{label}</label>
+        <div className="label-container">
+          <label>{label}</label>
+          {required && <div className="required-element">*</div>}
+        </div>
         {options.map((option) => (
           <label key={option.label}>
             {option.label}
             <input type={type} {...commonProps} value={option.value} />
           </label>
         ))}
+        <span>{errorMessage}</span>
       </div>
     );
   };
@@ -71,12 +108,20 @@ export const FormInput = (props) => {
         <div className="rangeImage">
           <img src={image} alt="range" />
           <input type={type} {...commonProps} min={min} max={max} />
+          <span>{errorMessage}</span>
         </div>
       </div>
     );
   };
 
-  return type === "radio" ? renderRadioButtons() : type === "range" ? renderRange() : type === "select" ? renderSelect() : renderInput();
+  console.log(cols);
+  return type === "radio"
+    ? renderRadioButtons()
+    : type === "range"
+    ? renderRange()
+    : type === "select"
+    ? renderSelect()
+    : renderInput();
 };
 
 export default FormInput;

@@ -24,6 +24,13 @@ span{
 	color: red;
 	display: none;
 }
+textarea:invalid[focused = "true"] ~ span{
+	display: block;
+}
+
+select:invalid[focuse = "true"] ~ span{
+	display: block;
+}
 input:invalid[focused = "true"]{
 	border: 1px solid red;
 }
@@ -40,4 +47,12 @@ textarea{
 	display: flex;
   flex-direction: column;
   
+}
+.required-element{
+	color: red;
+}
+.label-container{
+	display: flex;
+	width: 300px;
+	
 }

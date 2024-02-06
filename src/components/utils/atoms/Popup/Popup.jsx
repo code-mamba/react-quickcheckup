@@ -4,9 +4,9 @@ export const Popup = (props) =>{
         return(
             <div className="popup-overlay" onClick={props.onClose}>
       <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-        <span className="popup-close" onClick={props.onClose}>
+        <div className="popup-close" onClick={props.onClose}>
           &times;
-        </span>
+        </div>
         {props.children}
       </div>
     </div>

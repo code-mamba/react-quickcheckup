@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { PATIENTAPPOINTMENTINFO } from "src/components/Constant/constant";
+import {PATIENTAPPOINTMENTINFO} from "./constant"
 import {
   Table,
   Popup,
   CollapsedSidebar,
-} from "src/components/utils/atoms/index";
+} from "src/components/atoms/index";
 
 import {
   DeclineForm,
   DoctorForm,
   CheckupForm,
   Medicalhistory,
-} from "src/components/utils/molecule/index";
+} from "src/components/molecule/index";
 
-import { authSelector } from "src/redux/slices/authSlices";
+import { authSelector } from "src/redux/slices/authSlice";
 import {
   appointmentSelector,
   fetchAppointmentsByDoctorId,
@@ -23,7 +23,6 @@ import {
 import { dispatch } from "src/redux/store/store";
 import { PATIENTS_APPOINTMENTS } from "./patientsAppointmentColumn";
 import "./doctordashboard.css";
-import service from "src/services/service";
 import { useNavigate } from "react-router-dom";
 
 export const DoctorDashboard = () => {
@@ -60,25 +59,13 @@ export const DoctorDashboard = () => {
       isCheckupFormOpen: true,
       selectedAppointmentId: appointmentId,
     });
-
+ 
     const handleMedicalHistory = async (patientId) => {
-      try {
-        const allAppointments = await service.get(`appointments?patientid=${patientId}`)
-        const checkedAppointment = await allAppointments.filter((appointment)=>appointment.status === "Checked")
-        if(checkedAppointment.length>0){
-          navigate('/detailedpage',{
-            state:{
-              appointmentData: checkedAppointment,
-              columns: PATIENTAPPOINTMENTINFO,
-              header: "Patient's Medical History"
-
-            }
-          })
-        }
-      }
-      catch(error){
-        console.error("Error fetching data:", error);
-      }
+       setState({
+        ...state,
+        selectedPatientId: patientId,
+        isMedicalHistoryOpen: true
+       })
     }
   useEffect(() => {
     dispatch(fetchAppointmentsByDoctorId(doctorId));

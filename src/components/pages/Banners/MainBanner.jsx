@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Login } from "../Login/Login";
 
-import { authSelector } from "src/redux/slices/authSlices";
+import { authSelector } from "src/redux/slices/authSlice";
 import "./MainBanner.css";
 
 export const MainBanner = () => {

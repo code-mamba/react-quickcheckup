@@ -1,16 +1,16 @@
-import { Button } from "src/components/utils/atoms/Button/Button";
+import { Button } from "src/components/atoms/Button/Button";
 import { formatTime } from "src/utils/time";
-import { Tag } from "src/components/utils/atoms/Tag/Tag";
+import { Tag } from "src/components/atoms/Tag/Tag";
 import { useNavigate } from "react-router-dom";
-import { PATIENTAPPOINTMENTINFO } from "src/components/Constant/constant";
+import { PATIENTAPPOINTMENTINFO } from "./constant";
 
-import { authSelector } from "src/redux/slices/authSlices";
+import { authSelector } from "src/redux/slices/authSlice";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { dispatch } from "src/redux/store/store";
 import { fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
-import Toast from "src/components/utils/atoms/Toast/Toast";
-import { doctorService } from "src/services/doctorService";
+import Toast from "src/components/atoms/Toast/Toast";
+import DoctorSevice from "src/services/doctorService";
 
 export const PATIENTS_APPOINTMENTS = (
   handleMedicalHistory,
@@ -28,8 +28,10 @@ export const PATIENTS_APPOINTMENTS = (
     setShowRescheduleInput(true);
   };
   const handleRescheduleConfirm = (appointmentId) => {
-    doctorService
-      .rescheduleAppointment({ appointmentId, time: newScheduledTime })
+    DoctorSevice.rescheduleAppointment({
+      appointmentId,
+      time: newScheduledTime,
+    })
       .then(() => {
         dispatch(fetchAppointmentsByDoctorId(doctorId));
       })
@@ -139,15 +141,14 @@ export const PATIENTS_APPOINTMENTS = (
                 style={{ display: "flex", flexDirection: "row", gap: "1rem" }}
               >
                 <div>
-                <Button
+                  <Button
                     onClick={() => handleAction(row.original.id, "decline")}
                     variant="danger"
                     label="Decline"
                   />
-                 
                 </div>
                 <div>
-                <Button
+                  <Button
                     onClick={() => handleAction(row.original.id, "approve")}
                     variant="success"
                     label="Approve"

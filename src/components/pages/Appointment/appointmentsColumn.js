@@ -1,7 +1,7 @@
 import { formatTime } from "src/utils/time";
 import { useNavigate } from "react-router-dom";
-import { PATIENTAPPOINTMENTINFO } from "src/components/Constant/constant";
-import { Button } from "src/components/utils/atoms";
+import {APPOINTMENTINFO} from './constant'
+import { Button } from "src/components/atoms";
 export const APPOINTMENTS = (handleCheckup) => [
   {
     Header: "Doctor Name",
@@ -33,7 +33,7 @@ export const APPOINTMENTS = (handleCheckup) => [
               navigate("/detailedpage", {
                 state: {
                   appointmentData: [row.original],
-                  columns: PATIENTAPPOINTMENTINFO,
+                  columns: APPOINTMENTINFO,
                 },
               })
             }

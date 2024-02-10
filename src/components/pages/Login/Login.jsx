@@ -1,15 +1,14 @@
 import { useState } from "react";
 
-import { Button } from "src/components/utils/atoms/Button/Button";
-import { FormInput } from "src/components/utils/atoms/FormInput/FormInput";
+import { Button } from "src/components/atoms/Button/Button";
+import { FormInput } from "src/components/atoms/FormInput/FormInput";
 
 import { useSelector } from "react-redux";
-import { authSelector } from "src/redux/slices/authSlices";
-import {
-  LOGIN_INPUT,
-} from "src/components/Constant/constant";
+import { authSelector } from "src/redux/slices/authSlice";
+
+import { LOGIN_INPUT } from "./constant";
 import "./login.css";
-import Toast from "src/components/utils/atoms/Toast/Toast";
+import Toast from "src/components/atoms/Toast/Toast";
 import { login } from "src/services/authService";
 
 export const Login = () => {
@@ -62,7 +61,7 @@ export const Login = () => {
       </form>
       
     </div>
-    {toastMessage && (<Toast message={toastMessage} onClose={()=>setToastMessage(null)} variant={toastVariant}></Toast>)}
+    {toastMessage && (<Toast message={toastMessage} onClose={()=>setToastMessage(null)} variant={toastVariant}/>)}
     </>
   );
 };

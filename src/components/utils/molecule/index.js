@@ -1,7 +1,0 @@
-export {AppointmentForm} from "src/components/utils/molecule/AppointmentForm/AppointmentForm"
-export {CheckupDetails} from "src/components/utils/molecule/CheckupDetails/CheckupDetails"
-export {CheckupForm} from "src/components/utils/molecule/CheckupForm/CheckupForm"
-export {DeclineForm} from "src/components/utils/molecule/DeclineForm/DeclineForm"
-export {DoctorForm} from "src/components/utils/molecule/DoctorForm/DoctorForm"
-export {Medicalhistory} from "src/components/utils/molecule/MedicalHistory/MedicalHistory"
-export {Navbar} from "src/components/utils/molecule/Navbar/Navbar"

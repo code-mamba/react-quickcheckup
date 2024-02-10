@@ -1,4 +1,4 @@
-import { doAuth } from "src/redux/slices/authSlices"
+import { doAuth } from "src/redux/slices/authSlice"
 import { dispatch } from "src/redux/store/store"
 
 

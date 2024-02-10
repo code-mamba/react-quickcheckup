@@ -5,16 +5,16 @@ import {
   Table,
   Popup,
   Button,
-} from "src/components/utils/atoms/index";
-import { NoDataFound } from "src/components/utils/atoms/NoDataFound/NoDataFound";
+} from "src/components/atoms/index";
+import { NoDataFound } from "src/components/atoms/NoDataFound/NoDataFound";
 import {
   AppointmentForm,
   CheckupDetails,
-} from "src/components/utils/molecule/index";
+} from "src/components/molecule/index";
 
 import { appointmentSelector } from "src/redux/slices/appointmentSlice";
 import { fetchAppointmentsByPatientId } from "src/redux/slices/appointmentSlice";
-import { authSelector } from "src/redux/slices/authSlices";
+import { authSelector } from "src/redux/slices/authSlice";
 import { dispatch } from "src/redux/store/store";
 
 import "./appointment.css";

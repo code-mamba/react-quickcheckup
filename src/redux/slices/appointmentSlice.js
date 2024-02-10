@@ -1,6 +1,5 @@
-import { async } from "@firebase/util";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import service from "src/services/service";
+import service from "src/services/apiService";
 
 export const addAppointment = createAsyncThunk(
   "appintments.addAppointment",
@@ -75,7 +74,6 @@ export const approveAppointment = createAsyncThunk(
 export const changeTime = createAsyncThunk(
   "appointments/changeTime",
   async({appointmentId,time}) =>{
-    console.log("time2",time)
     try{
       const updatedTime = await service.patch("appointments", appointmentId,
       {

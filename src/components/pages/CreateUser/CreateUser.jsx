@@ -1,18 +1,19 @@
 import { useState } from "react";
 
-import { Button, FormInput, Select } from "src/components/utils/atoms/index";
+import { Button, FormInput, Select } from "src/components/atoms/index";
 
 import { addUser, fetchUsers } from "src/redux/slices/userSlice";
 import { dispatch } from "src/redux/store/store";
+
 import {
   PATIENT,
+  DOCTOR,
   USERS,
   PATIENT_CREATION_FIELDS,
-  DOCTOR,
   DOCTOR_CREATION_FIELDS,
   DOCTOR_DEFAULT_PWD,
   PATIENT_DEFAULT_PWD,
-} from "src/components/Constant/constant";
+} from "./constant";
 import "./createuser.css";
 
 export const CreateUser = () => {
@@ -37,18 +38,21 @@ export const CreateUser = () => {
       specialist: "",
     },
   });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = userType === PATIENT ? values[PATIENT] : values[DOCTOR];
     dispatch(addUser(userData));
-    dispatch(fetchUsers())
+    dispatch(fetchUsers());
   };
+
   const onChange = (e) => {
     setValues((value) => ({
       ...value,
       [userType]: { ...value[userType], [e.target.name]: e.target.value },
     }));
   };
+
   const selectChange = (e) => {
     setUserType(e.target.value);
   };
@@ -61,7 +65,7 @@ export const CreateUser = () => {
             options={USERS}
             valuekey={"value"}
             labelKey={"value"}
-            label="User Type"
+            label="Users"
             onChange={selectChange}
           />
           {userType === PATIENT &&
@@ -83,7 +87,11 @@ export const CreateUser = () => {
                 onChange={onChange}
               />
             ))}
-          <Button onChange={handleSubmit} variant={'default'} label="Add User" />
+          <Button
+            onChange={handleSubmit}
+            variant={"default"}
+            label="Add User"
+          />
         </form>
       </div>
     </div>

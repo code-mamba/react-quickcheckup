@@ -1,0 +1,7 @@
+.label-container{
+    display: flex;
+    width: 300px;
+}
+.required-element{
+    color: red;
+}

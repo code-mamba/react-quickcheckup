@@ -1,0 +1,7 @@
+.radio-button-content{
+    display: flex;
+    flex-direction: column;
+}
+.radio-button-content input{
+    margin: 0.934rem 1rem;
+}

@@ -1,53 +1,32 @@
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import{useState} from "react"
-import {storage} from "src/utils/firebase"
+import { useState } from "react";
+import { storage } from "src/utils/firebase";
 
-export const UploadImage =() =>{
-const [imgUrl, setImgUrl] = useState(null);
-const [progresspercent, setProgresspercent] = useState(0)
+export const UploadImage = () => {
+  const [imgUrl, setImgUrl] = useState(null);
 
-
-const handleSubmit = (e) =>{
-    e.preventDefault()
-    const file = e.target[0]?.files[0]
-    if(!file) return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const file = e.target[0]?.files[0];
+    if (!file) return;
 
     const storageRef = ref(storage, `files/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file)
+    const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on("state_changed",
-    (snapshot) =>{
-        const progress = 
-        Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        setProgresspercent(progress);
-    },
-    (error) => {
-        alert(error);
-      },
-      ()=>{
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
-            setImgUrl(downloadURL)
-        })
-      }
-    )
-}
-   return(
-    <>
-    <form className="form" onSubmit={handleSubmit}>
-        <input type="file"/>
-        <button type="submit">Upload</button>
-
-    </form>
-    {
-        !imgUrl &&
-        <div className='outerbar'>
-          <div className='innerbar' style={{ width: `${progresspercent}%` }}>{progresspercent}%</div>
-        </div>
+    try {
+      const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+      setImgUrl(downloadUrl);
+    } catch (error) {
+      alert("Unable to upload");
     }
-    {
-        imgUrl &&
-        <img src={imgUrl} alt='uploaded file' height={200} />
-      }
+  };
+  return (
+    <>
+      <form className="form" onSubmit={handleSubmit}>
+        <input type="file" />
+        <button type="submit">Upload</button>
+      </form>
+      {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
     </>
-   )
-}
+  );
+};

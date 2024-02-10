@@ -1,10 +1,13 @@
 import "./App.css";
-import { Navbar } from "src/components/utils/molecule/index";
+import { Navbar } from "src/components/molecule/index";
 import { AppRouter } from "./routing/AppRouter";
 import { useEffect } from "react";
-import { setUser } from "./redux/slices/authSlices";
+import { setUser } from "./redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { fetchUsers } from "./redux/slices/userSlice";
+import Calendar from "./components/molecule/Scheduler/BasicCalender";
+import { CalendarComponent } from "./components/molecule/CalendarComponent/CalendarComponent";
+
 
 function App() {
   const dispatch = useDispatch()
@@ -24,8 +27,10 @@ function App() {
 
   return (
     <>
-      <Navbar/>
-      <AppRouter/>
+
+        <Navbar/>
+      <AppRouter/> 
+     
     </>
   );
 }

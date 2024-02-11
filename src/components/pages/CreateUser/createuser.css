@@ -10,5 +10,6 @@
   left: 44%;
   width: 294px;
   padding: 1rem;
+  display: grid;
 
 }

@@ -1,53 +1,50 @@
 import service from "./apiService";
 
 class DoctorService {
-  async declineAllAppointments(doctorId){
-    try{
-      const appointments = await service.get(`appointments?doctorid=${doctorId}`)
-      const pendingAppointments = appointments.filter((appointment)=>appointment.status !== "Checked" || appointment.status !== "declined")
+  async declineAllAppointments(doctorId) {
+    try {
+      const appointments = await service.get(
+        `appointments?doctorid=${doctorId}`
+      );
+      const pendingAppointments = appointments.filter(
+        (appointment) =>
+          appointment.status !== "Checked" || appointment.status !== "declined"
+      );
       await Promise.all(
-        pendingAppointments.map(async(appointment)=>{
-          await service.patch("appointments", appointment.id,{
+        pendingAppointments.map(async (appointment) => {
+          await service.patch("appointments", appointment.id, {
             status: "declined",
-            declinedreason: "Doctor Changed The Available Time"
-          })
+            declinedreason: "Doctor Changed The Available Time",
+          });
         })
-      )
-    }
-    catch(error){
-      throw error
+      );
+    } catch (error) {
+      throw error;
     }
   }
 
-  async rescheduleAppointment ({appointmentId, time}) {
-    try{
-      await service.patch("appointments", appointmentId,{
+  async rescheduleAppointment({ appointmentId, time }) {
+    try {
+      await service.patch("appointments", appointmentId, {
         status: "Rescheduled",
-        scheduledTime: time
-      })
-    }
-    catch(error){
-      throw error
+        scheduledTime: time,
+      });
+    } catch (error) {
+      throw error;
     }
   }
-  async updateCheckup (appointmentId, doctorName, values){
-    try{
-      await service.patch("appointments", appointmentId,{
+  async updateCheckup(appointmentId, doctorName, values) {
+    try {
+      await service.patch("appointments", appointmentId, {
         checkupstatus: values,
         status: "Checked",
-        doctorname: doctorName
-      })
+        doctorname: doctorName,
+      });
+    } catch (error) {
+      throw error;
     }
-    catch(error){
-      throw error
-    }
-
+  }
 }
-
-
-
-}
-
 
 // export const doctorService = {
 //   declineAllAppointments: async (doctorId) => {
@@ -85,4 +82,4 @@ class DoctorService {
 //   },
 // };
 
-export default new DoctorService()
+export default new DoctorService();

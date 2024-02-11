@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Button, FormInput } from "src/components/atoms/index";
-import Toast from "src/components/atoms/Toast/Toast";
+import { Button, FormInput, Toast } from "src/components/atom/index";
 import { fetchUsers } from "src/redux/slices/userSlice";
 import { dispatch } from "src/redux/store/store";
 import { AdminService } from "src/services/adminService";

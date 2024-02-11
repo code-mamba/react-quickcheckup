@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Popup } from "src/components/atoms/index";
-import { Table } from "src/components/atoms/Table/Table";
+import { Popup, Table, Toast } from "src/components/atom/index";
 import { Edit } from "./edit";
 
 import { fetchUsers } from "src/redux/slices/userSlice";
@@ -9,11 +8,11 @@ import { fetchUsers } from "src/redux/slices/userSlice";
 import { dispatch } from "src/redux/store/store";
 import { USERS_COLUMNS } from "./columns";
 import "./userlist.css";
-import { FormInput } from "src/components/atoms";
+import { FormInput } from "src/components/atom";
 import { USERS } from "src/components/Constant/constant";
-import { Delete } from "src/components/molecule/Delete/Delete";
+import { Delete } from "src/components/molecule/delete-form/delete-form";
 import { AdminService } from "src/services/adminService";
-import Toast from "src/components/atoms/Toast/Toast";
+
 
 export const UserList = () => {
   const [selectedRole, setSelectedRole] = useState("All");

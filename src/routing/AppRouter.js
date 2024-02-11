@@ -10,8 +10,8 @@ import { useSelector } from "react-redux";
 import { CreateUser } from "src/components/pages/CreateUser/CreateUser";
 import { ADMIN, DOCTOR, PATIENT } from "src/components/Constant/constant";
 import { DoctorDashboard } from "src/components/pages/Doctorpage/DoctorDashboard";
-import { DetailedPage } from "src/components/molecule/DetailedPage/DetailedPage";
-import Calendar from "src/components/molecule/Scheduler/BasicCalender";
+import {DetailedPage} from "src/components/molecule/detailed-page/detailed-page"
+import Calendar from "src/components/molecule/scheduler/scheduler";
 
 export const AppRouter = () =>{
 	const isAuthenticated = useSelector(authSelector.isAuthenticated);

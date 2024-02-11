@@ -25,7 +25,6 @@ export const fetchUserById = createAsyncThunk(
   }
 );
 export const addUser = createAsyncThunk("users.addUser", async (data) => {
-  console.log(data)
   try{
     const existingUser = await service.get(`users?email=${data.email}`)
     if(existingUser.length>0){

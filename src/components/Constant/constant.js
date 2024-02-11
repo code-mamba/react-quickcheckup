@@ -187,7 +187,7 @@
 export const USERS = [
  
   { id: 1, value: "Patient" },
-  { id: 3, value: "Doctor" },
+  { id: 2, value: "Doctor" },
 ];
 
 

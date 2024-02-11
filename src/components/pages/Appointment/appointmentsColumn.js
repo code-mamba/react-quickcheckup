@@ -1,7 +1,7 @@
 import { formatTime } from "src/utils/time";
 import { useNavigate } from "react-router-dom";
 import {APPOINTMENTINFO} from './constant'
-import { Button } from "src/components/atoms";
+import { Button } from "src/components/atom";
 export const APPOINTMENTS = (handleCheckup) => [
   {
     Header: "Doctor Name",

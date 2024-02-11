@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Button, FormInput, Select } from "src/components/atoms/index";
+import { Button, FormInput, Select } from "src/components/atom/index";
 
 import { addUser, fetchUsers } from "src/redux/slices/userSlice";
 import { dispatch } from "src/redux/store/store";
@@ -60,10 +60,11 @@ export const CreateUser = () => {
   return (
     <div className="createuser">
       <div className="createuser-form">
-        <form onSubmit={handleSubmit}>
+        <form className="" onSubmit={handleSubmit}>
           <Select
             options={USERS}
             valuekey={"value"}
+            optionValue={'value'}
             labelKey={"value"}
             label="Users"
             onChange={selectChange}

@@ -5,7 +5,8 @@ import {
   Table,
   Popup,
   CollapsedSidebar,
-} from "src/components/atoms/index";
+  Toast,
+} from "src/components/atom/index";
 
 import {
   DeclineForm,
@@ -30,7 +31,6 @@ export const DoctorDashboard = () => {
   const doctorId = user?.id;
   const doctorName = user?.username;
   const appointments = useSelector(appointmentSelector.getMyAppointments);
-  const navigate = useNavigate()
 
   const [state, setState] = useState({
     isCheckupFormOpen: false,
@@ -38,12 +38,24 @@ export const DoctorDashboard = () => {
     selectedAppointmentId: "",
     isMedicalHistoryOpen: false,
     selectedPatientId: "",
+    toastMessage: "",
+    toastVariant: ""
   });
 
-  const handleAction = (appointmentId, actionType) => {
+  const handleAction = async(appointmentId, actionType) => {
     if (actionType == "approve") {
-      dispatch(approveAppointment(appointmentId));
-      dispatch(fetchAppointmentsByDoctorId(user.id));
+      Promise.all([
+        await dispatch(approveAppointment(appointmentId)),
+        await dispatch(fetchAppointmentsByDoctorId(user.id)),
+      ]).then(() => {
+        setState({
+          ...state,
+          toastMessage:"Approved Successfully",
+          toastVariant: "success"
+        })
+      });
+      // await dispatch(approveAppointment(appointmentId));
+      // await dispatch(fetchAppointmentsByDoctorId(user.id));
     } else if (actionType == "decline") {
       setState({
         ...state,
@@ -115,6 +127,7 @@ export const DoctorDashboard = () => {
         onClose={() => setState({ ...state, isMedicalHistoryOpen: false })}
         children={<Medicalhistory patientId={state.selectedPatientId} />}
       />
+      {state.toastMessage &&<Toast message={state.toastMessage} variant={state.toastVariant} onClose={()=>setState({toastMessage:""})}/>}
     </div>
   );
 };

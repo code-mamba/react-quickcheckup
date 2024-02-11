@@ -1,4 +1,4 @@
-import { Button } from "src/components/atoms";
+import { Button } from "src/components/atom";
 
  
 

@@ -1,14 +1,11 @@
 import { useState } from "react";
 
-import { Button } from "src/components/atoms/Button/Button";
-import { FormInput } from "src/components/atoms/FormInput/FormInput";
-
+import {Button, FormInput, Toast} from "src/components/atom/index"
 import { useSelector } from "react-redux";
 import { authSelector } from "src/redux/slices/authSlice";
 
 import { LOGIN_INPUT } from "./constant";
 import "./login.css";
-import Toast from "src/components/atoms/Toast/Toast";
 import { login } from "src/services/authService";
 
 export const Login = () => {

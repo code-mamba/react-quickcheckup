@@ -1,5 +1,5 @@
 import jsPDF from "jspdf";
-import { Button } from "src/components/atoms";
+import { Button } from "src/components/atom";
 
 
 export const ImageToPdfConverter = (props) => {

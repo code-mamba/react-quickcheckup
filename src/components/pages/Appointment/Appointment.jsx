@@ -5,8 +5,8 @@ import {
   Table,
   Popup,
   Button,
-} from "src/components/atoms/index";
-import { NoDataFound } from "src/components/atoms/NoDataFound/NoDataFound";
+} from "src/components/atom/index";
+import { NoDataFound } from "src/components/atom/no-data-found/no-data-found";
 import {
   AppointmentForm,
   CheckupDetails,

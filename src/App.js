@@ -5,8 +5,8 @@ import { useEffect } from "react";
 import { setUser } from "./redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { fetchUsers } from "./redux/slices/userSlice";
-import Calendar from "./components/molecule/Scheduler/BasicCalender";
-import { CalendarComponent } from "./components/molecule/CalendarComponent/CalendarComponent";
+import Calendar from "./components/molecule/scheduler/scheduler";
+
 
 
 function App() {

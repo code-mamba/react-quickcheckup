@@ -77,7 +77,47 @@
       "imgUrl": "https://firebasestorage.googleapis.com/v0/b/react-firebase-storage-205af.appspot.com/o/file%2Fleg.jpg?alt=media&token=a6d23a8d-2cad-409a-be61-6d5134421f46",
       "scheduledTime": "12:00",
       "vaccinated": "yes",
-      "status": "pending"
+      "status": "Checked",
+      "declinedreason": "",
+      "checkupstatus": {
+        "bodytemperature": "100",
+        "systolicpressure": "90",
+        "diastolicpressure": "133",
+        "sugarlevel": "100",
+        "doctoradvice": "dscc",
+        "medicalprescription": [
+          "crocine"
+        ]
+      }
+    },
+    {
+      "id": "8786",
+      "patientname": "ArthiMeganathan",
+      "age": "22",
+      "gender": "Female",
+      "bloodgroup": "AB+",
+      "patientid": "58ad",
+      "appointmentdate": "2024-02-12",
+      "reason": "fever",
+      "doctorid": "383a",
+      "doctorname": "Dr Dinesh P",
+      "startTime": "09:00",
+      "endTime": "16:00",
+      "imgUrl": "",
+      "scheduledTime": "12:00",
+      "vaccinated": "yes",
+      "status": "Checked",
+      "declinedreason": "",
+      "checkupstatus": {
+        "bodytemperature": "120",
+        "systolicpressure": "108",
+        "diastolicpressure": "97",
+        "sugarlevel": "120",
+        "doctoradvice": "kdcmcs",
+        "medicalprescription": [
+          "dde"
+        ]
+      }
     }
   ]
 }

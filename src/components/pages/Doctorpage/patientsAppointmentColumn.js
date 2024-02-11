@@ -1,6 +1,6 @@
-import { Button } from "src/components/atoms/Button/Button";
+import {Button, Toast} from "src/components/atom/index"
 import { formatTime } from "src/utils/time";
-import { Tag } from "src/components/atoms/Tag/Tag";
+import { Tag } from "src/components/atom/index";
 import { useNavigate } from "react-router-dom";
 import { PATIENTAPPOINTMENTINFO } from "./constant";
 
@@ -9,7 +9,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { dispatch } from "src/redux/store/store";
 import { fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
-import Toast from "src/components/atoms/Toast/Toast";
 import DoctorSevice from "src/services/doctorService";
 
 export const PATIENTS_APPOINTMENTS = (

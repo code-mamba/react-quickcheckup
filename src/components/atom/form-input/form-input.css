@@ -1,0 +1,56 @@
+.formInput {
+	display: flex;
+	flex-direction: column;
+	width: 280px;
+}
+
+input[type='range'] {
+	margin: 0;
+	padding: 0;
+}
+
+input {
+	padding: 0.938rem;
+	margin: 0.938rem 0rem;
+	border-radius: 5px;
+	border: 1px solid grey;
+}
+label {
+	margin-top: 10px;
+	font-size: 18px;
+}
+span {
+	font-size: 15px;
+	color: red;
+	display: none;
+}
+textarea:invalid[focused='true'] ~ span {
+	display: block;
+}
+
+select:invalid[focused='true'] ~ span {
+	display: block;
+}
+input:invalid[focused='true'] {
+	border: 1px solid red;
+}
+input:invalid[focused='true'] ~ span {
+	display: block;
+}
+textarea {
+	padding: 0.938rem;
+	margin: 0.938rem 0rem;
+	border-radius: 5px;
+	border: 1px solid grey;
+}
+.rangeImage {
+	display: flex;
+	flex-direction: column;
+}
+.required-element {
+	color: red;
+}
+.label-container {
+	display: flex;
+	width: 300px;
+}

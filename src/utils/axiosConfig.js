@@ -1,73 +1,67 @@
-import axios from 'axios';
-import LoadingIndicator from 'src/components/utils/atoms/LoadingIndicator/LoadingIndicator';
-import ReactDOM  from 'react-dom';
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import axios from 'axios'
+import LoadingIndicator from 'src/components/atom/loading-indicator/loading-indicator'
 
+let loadingIndicator = false
+const showLoadingIndicator = () => {
+	if (!loadingIndicator) {
+		loadingIndicator = document.createElement('div')
 
-let requestsCounter = 0;
-
-const showLoadingIndicator = () =>{
-    if(requestsCounter === 0){
-        const indicator = document.createElement('div');
-        indicator.id = 'loading-indicator';
-        document.body.appendChild(indicator)
-        ReactDOM.render(<LoadingIndicator/>,indicator)
-    }
-    requestsCounter+=1
+		document.body.appendChild(loadingIndicator)
+		createRoot(loadingIndicator).render(<LoadingIndicator />)
+	}
 }
 const hideLoadingIndicator = () => {
-    requestsCounter -= 1;
-    if (requestsCounter <= 0) {
-      const indicator = document.getElementById('loading-indicator');
-      if (indicator) {
-        ReactDOM.unmountComponentAtNode(indicator);
-        indicator.remove();
-      }
-      requestsCounter = 0;
-    }
-  };
+	if (loadingIndicator) {
+		createRoot(loadingIndicator).unmount()
+		document.body.removeChild(loadingIndicator)
+		loadingIndicator = null
+	}
+}
+
 const instance = axios.create({
-    baseURL: 'http://localhost:5000',
-    timeout: 5000,
-    headers:{
-        'Content-type': 'application/json'
-    }
+	baseURL: process.env.REACT_APP_BASE_URL,
+	timeout: 5000,
+	headers: {
+		'Content-type': 'application/json'
+	}
 })
 
 instance.interceptors.request.use(
-    (config)=>{
-        showLoadingIndicator()
-        return config;
-    },
-    (error) =>{
-        hideLoadingIndicator()
-        return Promise.reject(error)
-    }
+	(config) => {
+		showLoadingIndicator()
+		return config
+	},
+	(error) => {
+		hideLoadingIndicator()
+		return Promise.reject(error)
+	}
 )
 
 instance.interceptors.response.use(
-    (response)=>{
-       hideLoadingIndicator()
-        return response.data
-    },
-    (error)=>{
-        hideLoadingIndicator()
-        switch(error.response?.status){
-            case 400:
-                return Promise.reject({ message: 'Bad Request' });
-            case 404:
-                return Promise.reject({ message: 'Not Found' });
-            case 409:
-                return Promise.reject(error.response?.data)
-            case 401:
-                return Promise.reject({ message: 'Conflict' });
-            case 500:
-            case 502:
-                return Promise.reject("Something went wrong. Please Try again")
-            default:
-              
-        }
-        
-    }
+	(response) => {
+		hideLoadingIndicator()
+		return response.data
+	},
+	(error) => {
+		hideLoadingIndicator()
+		switch (error.response?.status) {
+			case 400:
+				throw Promise.reject({ message: 'Bad Request' })
+			case 404:
+				throw Promise.reject({ message: 'Not Found' })
+			case 409:
+				throw Promise.reject({ message: 'Conflict' })
+			case 401:
+				throw Promise.reject({ message: 'Unauthorized' })
+			case 500:
+			case 502:
+				throw Promise.reject('Something went wrong. Please Try again')
+			default:
+				throw Promise.reject(error.response?.data)
+		}
+	}
 )
 
 export default instance

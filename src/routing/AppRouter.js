@@ -1,33 +1,65 @@
-import React from "react";
-import {Routes, Route} from 'react-router-dom'
-import { UserList } from "src/components/pages/UsersList/UserList";
-import { Home } from "../components/pages/Home/Home";
-import { Login } from "../components/pages/Login/Login";
-import { NoMatch } from "../components/pages/NoMatch/NoMatch";
-import { AppointmentPage } from "src/components/pages/Appointment/Appointment";
-import { authSelector } from "src/redux/slices/authSlices";
-import { useSelector } from "react-redux";
-import { CreateUser } from "src/components/pages/CreateUser/CreateUser";
-import { ADMIN, DOCTOR, PATIENT } from "src/components/Constant/constant";
-import { DoctorDashboard } from "src/components/pages/Doctorpage/DoctorDashboard";
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { ADMIN, DOCTOR, PATIENT } from 'src/components/Constant/constant'
+import { DetailedPage } from 'src/components/molecule/detailed-page/detailed-page'
+import Calendar from 'src/components/molecule/scheduler/scheduler'
+import { AppointmentPage } from 'src/components/pages/appointments/appointments'
+import { CreateUser } from 'src/components/pages/create-user/create-user'
+import { DoctorDashboard } from 'src/components/pages/doctor-dashboard/doctor-dashboard'
+import { Home } from 'src/components/pages/home/home'
+import { Login } from 'src/components/pages/login/login'
+import { NoMatch } from 'src/components/pages/no-Match/no-match'
+import { UserList } from 'src/components/pages/user-list/user-list'
 
-export const AppRouter = () =>{
-	const isAuthenticated = useSelector(authSelector.isAuthenticated);
-	const userRole = useSelector(authSelector.getUserRole);
-	return(
+import { PrivateRoute } from './PrivateRouter'
+
+export const AppRouter = () => {
+	return (
 		<Routes>
-			<Route path="/" element={<Home/>}/>
-			{isAuthenticated && userRole === ADMIN && <Route path="/userslist" element={<UserList/>}/>}
-			{isAuthenticated && userRole === PATIENT && <Route path="/appointment" element ={<AppointmentPage/>}/>}
-			{isAuthenticated && userRole === ADMIN && <Route path="/createuser" element={<CreateUser/>}/>}
-			{isAuthenticated && userRole === DOCTOR && <Route path="/doctorDashboard" element={<DoctorDashboard/>}/>}
-			<Route path="/login" element={
-			<React.Suspense fallback="Loading">
-			<Login/>
-			</React.Suspense>
-			}/>
-			<Route path="*" element={<NoMatch/>}/>
+			<Route path="/" element={<Home />} />
+			<Route
+				path="/userslist"
+				element={
+					<PrivateRoute requiredRoles={[ADMIN]}>
+						<UserList />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/createuser"
+				element={
+					<PrivateRoute requiredRoles={[ADMIN]}>
+						<CreateUser />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/appointment"
+				element={
+					<PrivateRoute requiredRoles={[PATIENT]}>
+						<AppointmentPage />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/doctorDashboard"
+				element={
+					<PrivateRoute requiredRoles={[DOCTOR]}>
+						<DoctorDashboard />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/mySchedule"
+				element={
+					<PrivateRoute requiredRoles={[DOCTOR]}>
+						<Calendar />
+					</PrivateRoute>
+				}
+			/>
+			<Route path="/login" element={<Login />} />
+			<Route path="/detailedpage" element={<DetailedPage />} />
+			<Route path="*" element={<NoMatch />} />
 		</Routes>
 	)
-
 }

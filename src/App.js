@@ -1,33 +1,31 @@
-import "./App.css";
-import { Navbar } from "src/components/utils/molecule/index";
-import { AppRouter } from "./routing/AppRouter";
-import { useEffect } from "react";
-import { setUser } from "./redux/slices/authSlices";
-import { useDispatch } from "react-redux";
-import { fetchUsers } from "./redux/slices/userSlice";
+import React from 'react'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { Navbar } from 'src/components/molecule/index'
+import { setUser } from 'src/redux/slices/authSlice'
+import { fetchUsers } from 'src/redux/slices/userSlice'
+import { AppRouter } from 'src/routing/AppRouter'
+
+import './App.css'
 
 function App() {
-  const dispatch = useDispatch()
-  dispatch(fetchUsers())
+	const dispatch = useDispatch()
+	dispatch(fetchUsers())
 
-  useEffect(() => {
-    const storedUserData = localStorage.getItem("user");
-    if (storedUserData) {
-      try {
-        const parsedUserData = JSON.parse(storedUserData);
-        dispatch(setUser(parsedUserData));
-      } catch (error) {
-        console.error("Error parsing JSON:", error);
-      }
-    }
-  }, [dispatch]);
+	useEffect(() => {
+		const storedUserData = localStorage.getItem('user')
+		if (storedUserData) {
+			const parsedUserData = JSON.parse(storedUserData)
+			dispatch(setUser(parsedUserData))
+		}
+	}, [dispatch])
 
-  return (
-    <>
-      <Navbar/>
-      <AppRouter/>
-    </>
-  );
+	return (
+		<>
+			<Navbar />
+			<AppRouter />
+		</>
+	)
 }
 
-export default App;
+export default App

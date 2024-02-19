@@ -1,7 +1,7 @@
 {
-    "compilerOptions": {
-      "baseUrl": "./"
-    },
-    "include": ["./"],
-    "exclude":["node_modules","build"]
+	"compilerOptions": {
+		"baseUrl": "./"
+	},
+	"include": ["./"],
+	"exclude": ["node_modules", "build"]
 }

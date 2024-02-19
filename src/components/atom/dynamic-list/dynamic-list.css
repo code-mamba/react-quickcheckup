@@ -1,0 +1,43 @@
+.dynamic-list {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.input-container {
+	flex: 0 0 calc(30% - 10px);
+	margin: 5px;
+	padding: 10px;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+.input-container input {
+	width: 280px;
+	border-width: 0 0 3px;
+	border-color: #ccc;
+	outline: none;
+}
+.input-container input::placeholder {
+	font-size: 16px;
+	color: dark grey;
+}
+
+.delete-btn {
+	padding: 11px;
+	border: none;
+	font-size: 30px;
+	cursor: pointer;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.add-btn {
+	margin-top: 2rem;
+	width: auto;
+	border: none;
+	padding: 11px;
+	background-color: #225da4;
+	font-size: 15px;
+	color: white;
+}

@@ -1,8 +1,8 @@
-select{
-    padding: 0.938rem;
-	margin:  0.938rem 0rem;
+select {
+	padding: 0.938rem;
+	margin: 0.938rem 0rem;
 	border-radius: 5px;
 	border: 1px solid grey;
-    background-color: white;   
-    width: 280px;
+	background-color: white;
+	width: 280px;
 }

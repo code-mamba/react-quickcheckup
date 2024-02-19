@@ -1,76 +1,81 @@
-import { useState } from "react";
-import { CHECKUP_INPUTS } from "./constant";
-import { Button, FormInput } from "src/components/atom/index";
-// import FormInput from "src/components/atom/FormInput/FormInput";
-import "./checkup-form.css";
-import { fetchAppointmentsByDoctorId } from "src/redux/slices/appointmentSlice";
-import { Toast } from "src/components/atom/index";
-import { dispatch } from "src/redux/store/store";
-import DynamicList from "../../atom/dynamic-list/dynamic-list";
-import DoctorService from "src/services/doctorService"
-import CheckupSummary from "../../atom/checkup-summary/checkup-summary";
+import React from 'react'
+import { useState } from 'react'
+import {
+	Button,
+	CheckupSummary,
+	DynamicList,
+	FormInput
+} from 'src/components/atom/index'
+import { useToast } from 'src/context/toast-context'
+import { fetchAppointmentsByDoctorId } from 'src/redux/slices/appointmentSlice'
+import { dispatch } from 'src/redux/store/store'
+import DoctorService from 'src/services/doctor-service'
 
-export const CheckupForm = (props) => {
+import { CHECKUP_INPUTS } from './constant'
 
-const [toastMessage, setToastMessage] = useState("")
-const [toastVariant, setToastVariant] = useState("")  
-const [values, setValues] = useState({
-    bodytemperature: "",
-    systolicpressure: "",
-    diastolicpressure: "",
-    sugarlevel: "",
-    doctoradvice: "",
-    medicalprescription: [],
-    
-  });
+import './checkup-form.css'
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try{
-      DoctorService.updateCheckup(props.appointmentId, props.doctorName,values)
-      dispatch(fetchAppointmentsByDoctorId(props.doctorId))
-      setToastMessage("Checkup updated Successfully")
-      setToastVariant("success")
-  
-    }
-    catch(error){
-      setToastMessage("Unable to Update Checkup")
-      setToastVariant("decline")
-    }
+export const CheckupForm = ({appointmentId, doctorName, doctorId, onClose}) => {
+	const [values, setValues] = useState({
+		bodytemperature: '',
+		systolicpressure: '',
+		diastolicpressure: '',
+		sugarlevel: '',
+		doctoradvice: '',
+		medicalprescription: []
+	})
+	const { showToast } = useToast()
 
- };
-  const onChange = (e) => {
-    setValues((value) => ({
-      ...value,
-      [e.target.name]: e.target.value,
-    }));
-  };
-const handleMedicalPrescription = (medicineListValues) =>{
-  setValues((prevValues)=>({
-    ...prevValues,
-    medicalprescription: medicineListValues
-  }))
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		try {
+			await DoctorService.updateCheckup(
+				appointmentId,
+				doctorName,
+				values
+			)
+			await dispatch(fetchAppointmentsByDoctorId(doctorId))
+			showToast('Checkup updated Successfully', 'success')
+			onClose()
+		} catch (error) {
+			showToast('Unable to Update Checkup', 'decline')
+		}
+	}
+	const onChange = (e) => {
+		setValues((value) => ({
+			...value,
+			[e.target.name]: e.target.value
+		}))
+	}
+	const handleMedicalPrescription = (medicineListValues) => {
+		setValues((prevValues) => ({
+			...prevValues,
+			medicalprescription: medicineListValues
+		}))
+	}
+	return (
+		<div>
+			<CheckupSummary values={values} />
+			<form onSubmit={handleSubmit}>
+				<div className="grid-container">
+					{CHECKUP_INPUTS.map((input, index) => (
+						<div key={index} className="grid-item">
+							<FormInput
+								key={input.id}
+								value={values[input.name]}
+								{...input}
+								onChange={onChange}
+							/>
+						</div>
+					))}
+				</div>
+				<DynamicList
+					label="Medical Prescription"
+					values={values.medicalprescription}
+					setValues={handleMedicalPrescription}
+				/>
+				<Button variant="default" label="Submit" />
+			</form>
+		</div>
+	)
 }
-  return (
-    <div>
-     <CheckupSummary values={values}/>
-      <form onSubmit={handleSubmit}>
-        <div className="grid-container">
-          {CHECKUP_INPUTS.map((input) => (
-            <div className="grid-item">
-              <FormInput
-                key={input.id}
-                value={values[input.name]}
-                {...input}
-                onChange={onChange}
-              />
-            </div>
-          ))}
-        </div>
-        <DynamicList label="Medical Prescription" values={values.medicalprescription} setValues={handleMedicalPrescription}/>
-        <Button variant="default" label="Submit" />
-      </form>
-      {toastMessage && <Toast message={toastMessage} onClose={()=>setToastMessage(null)} variant={toastVariant}/>}
-    </div>
-  );
-};

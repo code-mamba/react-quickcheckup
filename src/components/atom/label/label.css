@@ -1,7 +1,7 @@
-.label-container{
-    display: flex;
-    width: 300px;
+.label-container {
+	display: flex;
+	width: 300px;
 }
-.required-element{
-    color: red;
+.required-element {
+	color: red;
 }

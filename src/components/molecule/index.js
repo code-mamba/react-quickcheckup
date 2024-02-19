@@ -1,7 +1,7 @@
-export {AppointmentForm} from "src/components/molecule/appointment-form/appointment-form"
-export {CheckupDetails} from "src/components/molecule/checkup-detail/checkup-detail"
-export {CheckupForm} from "src/components/molecule/checkup-form/checkup-form"
-export {DeclineForm} from "src/components/molecule/decline-form/decline-form"
-export {DoctorForm} from "src/components/molecule/doctor-form/doctor-form"
-export {Medicalhistory} from "src/components/molecule/medical-history/medical-history"
-export {Navbar} from "src/components/molecule/navbar/navbar"
+export { AppointmentForm } from 'src/components/molecule/appointment-form/appointment-form'
+export { CheckupDetails } from 'src/components/molecule/checkup-detail/checkup-detail'
+export { CheckupForm } from 'src/components/molecule/checkup-form/checkup-form'
+export { DeclineForm } from 'src/components/molecule/decline-form/decline-form'
+export { DoctorForm } from 'src/components/molecule/doctor-form/doctor-form'
+export { Medicalhistory } from 'src/components/molecule/medical-history/medical-history'
+export { Navbar } from 'src/components/molecule/navbar/navbar'

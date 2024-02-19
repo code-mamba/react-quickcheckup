@@ -1,73 +1,66 @@
-import { useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import { ADMIN, PATIENT, DOCTOR } from "src/components/Constant/constant";
-import { authSelector, logout } from "src/redux/slices/authSlice";
-import { dispatch } from "src/redux/store/store";
-import Snackbar from "../../atom/toast/toast.sc";
-import "./navbar.css";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { ADMIN, DOCTOR, PATIENT } from 'src/components/Constant/constant'
+import { useLogout } from 'src/components/hook/useLogout'
+
+import './navbar.css'
 
 export const Navbar = () => {
-  const isAuthenticated = useSelector(authSelector.isAuthenticated);
-  const userRole = useSelector(authSelector.getUserRole);
-  const navigate = useNavigate();
-  const navLinkStyles = ({ isActive }) => {
-    return {
-      color: "white",
-      fontWeight: isActive ? "bold" : "normal",
-      fontSize: "25px",
-    };
-  };
+	const user = JSON.parse(localStorage.getItem('user'))
+	const isAuthenticated = !!user // Check if user is authenticated
+	const userRole = user ? user.userrole : null
+	const { handleLogout } = useLogout()
 
-  const handleLogout = () => {
-    navigate("/");
-    dispatch(logout());
-    localStorage.clear();
-    <Snackbar message={"Successfully Logged Out"} />;
-  };
+	const navLinkStyles = ({ isActive }) => {
+		return {
+			color: 'white',
+			fontWeight: isActive ? 'bold' : 'normal',
+			fontSize: '25px'
+		}
+	}
+	return (
+		<>
+			{isAuthenticated && (
+				<nav className="navbar-container">
+					{!isAuthenticated && (
+						<NavLink style={navLinkStyles} to="/">
+							Home
+						</NavLink>
+					)}
 
-  return (
-    <>
-      {isAuthenticated && (
-        <nav className="navbar-container">
-          {!isAuthenticated && (
-            <NavLink style={navLinkStyles} to="/">
-              Home
-            </NavLink>
-          )}
-
-          {isAuthenticated && userRole === ADMIN && (
-            <NavLink style={navLinkStyles} to="/userslist">
-              UsersList
-            </NavLink>
-          )}
-          {isAuthenticated && userRole === ADMIN && (
-            <NavLink style={navLinkStyles} to="/createuser">
-              Create User
-            </NavLink>
-          )}
-          {isAuthenticated && userRole === PATIENT && (
-            <NavLink style={navLinkStyles} to="/appointment">
-              Appointment
-            </NavLink>
-          )}
-          {isAuthenticated && userRole === DOCTOR && (
-            <NavLink style={navLinkStyles} to="/doctorDashboard">
-              My Appointments
-            </NavLink>
-          )}
-          {isAuthenticated && userRole === DOCTOR && (
-            <NavLink style={navLinkStyles} to="/mySchedule">
-              My Schedule
-            </NavLink>
-          )}
-          {isAuthenticated && (
-            <NavLink style={navLinkStyles} onClick={handleLogout} to="">
-              Logout
-            </NavLink>
-          )}
-          <div className="thinline"></div>
-        </nav>
-      )}
-    </>
-  );
-};
+					{isAuthenticated && userRole === ADMIN && (
+						<NavLink style={navLinkStyles} to="/userslist">
+							Users List
+						</NavLink>
+					)}
+					{isAuthenticated && userRole === ADMIN && (
+						<NavLink style={navLinkStyles} to="/createuser">
+							Create User
+						</NavLink>
+					)}
+					{isAuthenticated && userRole === PATIENT && (
+						<NavLink style={navLinkStyles} to="/appointment">
+							Appointment
+						</NavLink>
+					)}
+					{isAuthenticated && userRole === DOCTOR && (
+						<NavLink style={navLinkStyles} to="/doctorDashboard">
+							My Appointments
+						</NavLink>
+					)}
+					{isAuthenticated && userRole === DOCTOR && (
+						<NavLink style={navLinkStyles} to="/mySchedule">
+							My Schedule
+						</NavLink>
+					)}
+					{isAuthenticated && (
+						<NavLink style={navLinkStyles} onClick={handleLogout} to="">
+							Logout
+						</NavLink>
+					)}
+					<div className="thinline" />
+				</nav>
+			)}
+		</>
+	)
+}

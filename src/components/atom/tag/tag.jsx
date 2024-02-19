@@ -1,9 +1,7 @@
-import StyledTag from "./tag.sc"
+import React from 'react'
 
-export const Tag = (props) =>{
-    return(
-        <StyledTag variant={props.variant}>
-            {props.label}
-        </StyledTag>
-    )
+import StyledTag from './tag.sc'
+
+export const Tag = (props) => {
+	return <StyledTag variant={props.variant}>{props.label}</StyledTag>
 }

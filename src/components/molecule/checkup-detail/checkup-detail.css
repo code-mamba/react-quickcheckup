@@ -1,20 +1,18 @@
-.checkupdetails{
-
-    border: 1px solid purple;
-    
+.checkupdetails {
+	border: 1px solid purple;
 }
-.checkuplists{
-    margin-bottom: 1rem;
-    color: purple;
-    display: flex;
+.checkuplists {
+	margin-bottom: 1rem;
+	color: purple;
+	display: flex;
 }
-.heading{
-    color: black;
+.heading {
+	color: black;
 }
-.value{
-    padding-left: 1rem;
-    width: 300px;
+.value {
+	padding-left: 1rem;
+	width: 300px;
 }
-.no-data-found{
-    padding: 10rem;
+.no-data-found {
+	padding: 10rem;
 }

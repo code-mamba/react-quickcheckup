@@ -1,10 +1,10 @@
-.conflict{
-    color: red
+.conflict {
+	color: red;
 }
-.grid-container{
-    display: grid;
-    grid-template-columns: auto auto auto;
+.grid-container {
+	display: grid;
+	grid-template-columns: auto auto auto;
 }
-.grid-item{
-    text-align: left;
+.grid-item {
+	text-align: left;
 }

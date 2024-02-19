@@ -1,27 +1,25 @@
-.medical-histor{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.medical-histor {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .medicalHistory-content {
-    text-align: center;
-    width: 700px;
-  }
-  
-.list-of-links{
-    color: #5686c1;
-    margin-top: 10px;
-    font-size: 25px;
-    padding: 2rem ;
-    cursor: pointer;
-    text-align: center;
-    border: none;
-    
+	text-align: center;
+	width: 700px;
 }
-.list-of-links:hover{
-    box-shadow: 0px 7px 26px 11px rgba(0,0,0,0.1);
+
+.list-of-links {
+	color: #5686c1;
+	margin-top: 10px;
+	font-size: 25px;
+	padding: 2rem;
+	cursor: pointer;
+	text-align: center;
+	border: none;
+}
+.list-of-links:hover {
+	box-shadow: 0px 7px 26px 11px rgba(0, 0, 0, 0.1);
 }
 .list-of-links:active {
-    color: red;
-
+	color: red;
 }
